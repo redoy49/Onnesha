@@ -17,8 +17,8 @@ interface NextPostCountdownProps {
 const FULL_DASH_ARRAY = 283; // 2 * PI * 45 ≈ 282.74
 
 export function NextPostCountdown({
-  scheduleTime = "09:00",
-  timezone = "UTC",
+  scheduleTime = "06:00",
+  timezone = "Asia/Dhaka",
   isEnabled = true,
   isExecuting = false,
   lastRunAt = null,
@@ -33,15 +33,22 @@ export function NextPostCountdown({
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date();
-      const [hoursStr, minutesStr] = (scheduleTime || "09:00").split(":");
-      const targetHours = parseInt(hoursStr || "9", 10);
+      const [hoursStr, minutesStr] = (scheduleTime || "06:00").split(":");
+      const targetHours = parseInt(hoursStr || "6", 10);
       const targetMinutes = parseInt(minutesStr || "0", 10);
 
-      // Determine today's target time in UTC (or local)
-      const target = new Date(now);
-      target.setUTCHours(targetHours, targetMinutes, 0, 0);
+      // Determine target UTC hour:
+      // If timezone is Dhaka/BST (UTC+6), 6:00 AM Dhaka is 00:00 UTC
+      let targetUtcHour = targetHours;
+      if (timezone === "Asia/Dhaka" || timezone === "BST" || timezone === "GMT+6" || timezone === "UTC+6") {
+        targetUtcHour = (targetHours - 6 + 24) % 24;
+      }
 
-      // If today's target has already passed, schedule for tomorrow
+      // Determine target in UTC
+      const target = new Date(now);
+      target.setUTCHours(targetUtcHour, targetMinutes, 0, 0);
+
+      // If target has already passed today, schedule for tomorrow
       if (target.getTime() <= now.getTime()) {
         target.setUTCDate(target.getUTCDate() + 1);
       }
@@ -54,6 +61,7 @@ export function NextPostCountdown({
         target.toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
+          timeZone: timezone === "Asia/Dhaka" ? "Asia/Dhaka" : undefined,
           timeZoneName: "short",
         })
       );
@@ -151,7 +159,9 @@ export function NextPostCountdown({
             <div className="p-3 rounded-2xl bg-slate-800/60 border border-slate-700/60">
               <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400">Target Time</div>
               <div className="text-sm sm:text-base font-bold text-slate-100 mt-0.5">
-                {scheduleTime} UTC
+                {timezone === "Asia/Dhaka" || timezone === "BST"
+                  ? `${scheduleTime} AM Dhaka (BST)`
+                  : `${scheduleTime} ${timezone}`}
               </div>
             </div>
             <div className="p-3 rounded-2xl bg-slate-800/60 border border-slate-700/60">

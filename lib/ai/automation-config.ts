@@ -35,8 +35,8 @@ const LOGS_FILE = path.join(DATA_DIR, "automation-logs.json");
 
 const DEFAULT_CONFIG: AutomationConfig = {
   enabled: true,
-  scheduleTime: "09:00",
-  timezone: "UTC",
+  scheduleTime: "06:00",
+  timezone: "Asia/Dhaka",
   language: "bn",
   niche: "Next-Gen Web Architecture, AI Engineering, Fullstack Performance, High-Contrast UI",
   targetKeywords: [

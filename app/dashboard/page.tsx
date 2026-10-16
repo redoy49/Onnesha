@@ -1371,8 +1371,8 @@ export default function AdminDashboardPage() {
           <div className="space-y-8">
             {/* SVG Circular Countdown Clock Widget */}
             <NextPostCountdown
-              scheduleTime={automationConfig?.scheduleTime || "09:00"}
-              timezone={automationConfig?.timezone || "UTC"}
+              scheduleTime={automationConfig?.scheduleTime || "06:00"}
+              timezone={automationConfig?.timezone || "Asia/Dhaka"}
               isEnabled={automationConfig?.enabled ?? true}
               isExecuting={isRunningAutomation}
               lastRunAt={automationLogs[0]?.timestamp || null}
@@ -1457,7 +1457,7 @@ export default function AdminDashboardPage() {
                       </span>
                     ) : automationConfig?.enabled ? (
                       <span className="text-emerald-700 font-extrabold flex items-center gap-1">
-                        <FaCircleCheck className="text-xs" /> Enabled (Next Run: {automationConfig.scheduleTime || "09:00"} {automationConfig.timezone || "UTC"})
+                        <FaCircleCheck className="text-xs" /> Enabled (Next Run: {automationConfig.scheduleTime || "06:00"} {automationConfig.timezone || "Asia/Dhaka"})
                       </span>
                     ) : (
                       <span className="text-amber-700 font-extrabold flex items-center gap-1">
@@ -1706,7 +1706,7 @@ export default function AdminDashboardPage() {
                   {automationConfig?.enabled ? "Active Daily" : "Paused"}
                 </div>
                 <div className="text-[11px] text-slate-600 font-mono">
-                  {automationConfig?.scheduleTime || "09:00"} {automationConfig?.timezone || "UTC"} (Server-side)
+                  {automationConfig?.scheduleTime || "06:00"} {automationConfig?.timezone || "Asia/Dhaka"} (Server-side)
                 </div>
               </div>
 
