@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   ONNESHA GLOBAL LIGHT THEME & SOFT LIME SYSTEM
+   Clean editorial typography + Soft Lime (#84CC16 / #A3E635) Accents
+   ========================================================================== */
+:root {
+  /* Soft Lime Primary Palette */
+  --color-primary: #84CC16;
+  --color-primary-soft: #A3E635;
+  --color-primary-hover: #65A30D;
+  --color-primary-active: #4D7C0F;
+  --color-primary-tint: #ECFCCB;
+  --color-primary-subtle: #F7FEE7;
+  --color-primary-deep: #365314;
+
+  --shadow-lime-soft: 0 4px 20px -2px rgba(132, 204, 22, 0.25);
+  --shadow-lime-glow: 0 0 25px -4px rgba(132, 204, 22, 0.35);
+  --shadow-lime-pill: 0 8px 20px -4px rgba(132, 204, 22, 0.2);
+
+  /* Light Editorial Canvas */
+  --color-bg-canvas: #F8FAFC;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+  --color-muted: #64748B;
+  --color-text: #0F172A;
+  --color-text-muted: #475569;
+
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(226, 232, 240, 0.9);
+}
+
+/* Base Body Setup: Clean, Crisp Light Editorial Theme */
+body {
+  background-color: #F8FAFC;
+  color: #0F172A;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A3E635;
+}
+
+/* Text Selection */
+::selection {
+  background-color: #D9F99D;
+  color: #1A2E05;
+}
+
+/* Ambient Radial Mesh Glow */
+.bg-mesh-glow {
+  background: 
+    radial-gradient(circle at 12% 10%, rgba(163, 230, 53, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 88% 50%, rgba(132, 204, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(241, 245, 249, 0.8) 0%, transparent 60%);
+}
+
+/* Signature Soft Lime Gradient Button */
+.lime-gradient-btn {
+  background: linear-gradient(135deg, #A3E635 0%, #84CC16 100%);
+  color: #1A2E05;
+  font-weight: 800;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lime-gradient-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -3px rgba(132, 204, 22, 0.4);
+  filter: brightness(1.02);
+}
+.lime-gradient-btn:active {
+  transform: translateY(0px);
+}
+
+/* Glassmorphism Capsule & Card Pill */
+.glass-pill {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Fluid Typography */
+.hero-title {
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+  appearance: none;
+  background-color: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.custom-checkbox:hover {
+  border-color: #84CC16;
+}
+.custom-checkbox:checked {
+  background-color: #84CC16;
+  border-color: #84CC16;
+}
+.custom-checkbox:checked::before {
+  content: "✓";
+  color: #FFFFFF;
+  font-weight: 900;
+  font-size: 11px;
+}

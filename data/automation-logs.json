@@ -1,0 +1,228 @@
+[
+  {
+    "id": "job-1792153563411",
+    "timestamp": "2026-10-16T12:26:03.411Z",
+    "topic": "আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও এআই আর্কিটেকচার: পর্ব 14",
+    "slug": "modern-web-engineering-ai-architecture-part-14",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 836,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও এআই আর্কিটেকচার: পর্ব 14 Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=%E0%A6%86%E0%A6%A7%E0%A7%81%E0%A6%A8%E0%A6%BF%E0%A6%95%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%20%E0%A6%87%E0%A6%9E%E0%A7%8D%E0%A6%9C%E0%A6%BF%E0%A6%A8%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%82%20%E0%A6%93%20%E0%A6%8F%E0%A6%86%E0%A6%87%20%E0%A6%86%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%9F%E0%A7%87%E0%A6%95%E0%A6%9A%E0%A6%BE%E0%A6%B0%3A%20%E0%A6%AA%E0%A6%B0%E0%A7%8D%E0%A6%AC%2014"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 5
+  },
+  {
+    "id": "job-1792153562610",
+    "timestamp": "2026-10-16T12:26:02.610Z",
+    "topic": "জিরো-রানটাইম সিএসএস এবং আধুনিক হাই-কনট্রাস্ট ইউজার ইন্টারফেস ডিজাইন",
+    "slug": "zero-runtime-css-high-contrast-ui-bangla",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 836,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "জিরো-রানটাইম সিএসএস এবং আধুনিক হাই-কনট্রাস্ট ইউজার ইন্টারফেস ডিজাইন Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=%E0%A6%9C%E0%A6%BF%E0%A6%B0%E0%A7%8B-%E0%A6%B0%E0%A6%BE%E0%A6%A8%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%AE%20%E0%A6%B8%E0%A6%BF%E0%A6%8F%E0%A6%B8%E0%A6%8F%E0%A6%B8%20%E0%A6%8F%E0%A6%AC%E0%A6%82%20%E0%A6%86%E0%A6%A7%E0%A7%81%E0%A6%A8%E0%A6%BF%E0%A6%95%20%E0%A6%B9%E0%A6%BE%E0%A6%87-%E0%A6%95%E0%A6%A8%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%87%E0%A6%89%E0%A6%9C%E0%A6%BE%E0%A6%B0%20%E0%A6%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A7%87%E0%A6%B8%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 4
+  },
+  {
+    "id": "job-1792153561389",
+    "timestamp": "2026-10-16T12:26:01.389Z",
+    "topic": "ওয়েবঅ্যাসেম্বলি এবং WebGPU: ব্রাউজারে উচ্চগতির মেশিন লার্নিং কম্পিউটিং",
+    "slug": "webassembly-webgpu-browser-compute-bangla-guide",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 837,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "ওয়েবঅ্যাসেম্বলি এবং WebGPU: ব্রাউজারে উচ্চগতির মেশিন লার্নিং কম্পিউটিং Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%E0%A7%87%E0%A6%AE%E0%A7%8D%E0%A6%AC%E0%A6%B2%E0%A6%BF%20%E0%A6%8F%E0%A6%AC%E0%A6%82%20WebGPU%3A%20%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%89%E0%A6%9C%E0%A6%BE%E0%A6%B0%E0%A7%87%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%97%E0%A6%A4%E0%A6%BF%E0%A6%B0%20%E0%A6%AE%E0%A7%87%E0%A6%B6%E0%A6%BF%E0%A6%A8%20%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A8%E0%A6%BF%E0%A6%82%20%E0%A6%95%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A6%BF%E0%A6%82"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 5
+  },
+  {
+    "id": "job-1792153556083",
+    "timestamp": "2026-10-16T12:25:56.083Z",
+    "topic": "ওয়েব প্ল্যাটফর্মে অটোনোমাস এআই এজেন্টস: ২০২৬ সালের প্রডাকশন আর্কিটেকচার",
+    "slug": "autonomous-ai-agents-production-architecture-bangla",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 844,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "ওয়েব প্ল্যাটফর্মে অটোনোমাস এআই এজেন্টস: ২০২৬ সালের প্রডাকশন আর্কিটেকচার Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%20%E0%A6%AA%E0%A7%8D%E0%A6%B2%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%9F%E0%A6%AB%E0%A6%B0%E0%A7%8D%E0%A6%AE%E0%A7%87%20%E0%A6%85%E0%A6%9F%E0%A7%8B%E0%A6%A8%E0%A7%8B%E0%A6%AE%E0%A6%BE%E0%A6%B8%20%E0%A6%8F%E0%A6%86%E0%A6%87%20%E0%A6%8F%E0%A6%9C%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%B8%3A%20%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AC%20%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A7%87%E0%A6%B0%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A1%E0%A6%BE%E0%A6%95%E0%A6%B6%E0%A6%A8%20%E0%A6%86%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%9F%E0%A7%87%E0%A6%95%E0%A6%9A%E0%A6%BE%E0%A6%B0"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 4
+  },
+  {
+    "id": "job-1792153539915",
+    "timestamp": "2026-10-16T12:25:39.915Z",
+    "topic": "ডিপসিক R1 বনাম ক্লড ৩.৫ সনেট: এন্টারপ্রাইজ রিজনিং ও পারফরম্যান্স বেঞ্চমার্ক",
+    "slug": "deepseek-r1-vs-claude-35-sonnet-reasoning-benchmarks-bangla",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 852,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "ডিপসিক R1 বনাম ক্লড ৩.৫ সনেট: এন্টারপ্রাইজ রিজনিং ও পারফরম্যান্স বেঞ্চমার্ক Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=%E0%A6%A1%E0%A6%BF%E0%A6%AA%E0%A6%B8%E0%A6%BF%E0%A6%95%20R1%20%E0%A6%AC%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%95%E0%A7%8D%E0%A6%B2%E0%A6%A1%20%E0%A7%A9.%E0%A7%AB%20%E0%A6%B8%E0%A6%A8%E0%A7%87%E0%A6%9F%3A%20%E0%A6%8F%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%87%E0%A6%9C%20%E0%A6%B0%E0%A6%BF%E0%A6%9C%E0%A6%A8%E0%A6%BF%E0%A6%82%20%E0%A6%93%20%E0%A6%AA%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A6%B0%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%B8%20%E0%A6%AC%E0%A7%87%E0%A6%9E%E0%A7%8D%E0%A6%9A%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%95"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 5
+  },
+  {
+    "id": "job-1792152936273",
+    "timestamp": "2026-10-16T12:15:36.273Z",
+    "topic": "নেক্সট.জেএস ১৫ সার্ভার অ্যাকশন এবং ডিস্ট্রিবিউটেড স্টেট ম্যানেজমেন্ট গাইড",
+    "slug": "nextjs-15-server-actions-distributed-state-bangla",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 843,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "নেক্সট.জেএস ১৫ সার্ভার অ্যাকশন এবং ডিস্ট্রিবিউটেড স্টেট ম্যানেজমেন্ট গাইড Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=%E0%A6%A8%E0%A7%87%E0%A6%95%E0%A7%8D%E0%A6%B8%E0%A6%9F.%E0%A6%9C%E0%A7%87%E0%A6%8F%E0%A6%B8%20%E0%A7%A7%E0%A7%AB%20%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AD%E0%A6%BE%E0%A6%B0%20%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%95%E0%A6%B6%E0%A6%A8%20%E0%A6%8F%E0%A6%AC%E0%A6%82%20%E0%A6%A1%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A7%87%E0%A6%A1%20%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%87%E0%A6%9F%20%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%87%E0%A6%9C%E0%A6%AE%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%20%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%A1"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 4
+  },
+  {
+    "id": "job-1792148425134",
+    "timestamp": "2026-10-16T11:00:25.134Z",
+    "topic": "Zero-Runtime CSS and High-Contrast Color Science for Modern Web Apps",
+    "slug": "zero-runtime-css-and-high-contrast-color-science-for-modern-web-apps",
+    "status": "published",
+    "engine": "Gemini (smart-offline)",
+    "wordCount": 864,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "Zero-Runtime CSS and High-Contrast Color Science for Modern Web Apps Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=Zero-Runtime%20CSS%20and%20High-Contrast%20Color%20Science%20for%20Modern%20Web%20Apps"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 4
+  },
+  {
+    "id": "job-1792148001382",
+    "timestamp": "2026-10-16T10:53:21.382Z",
+    "topic": "DeepSeek-R1 vs Claude 3.5 Sonnet: Enterprise Reasoning Benchmarks",
+    "slug": "deepseek-r1-vs-claude-35-sonnet-enterprise-reasoning-benchmarks",
+    "status": "published",
+    "engine": "Gemini (smart-offline)",
+    "wordCount": 854,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "DeepSeek-R1 vs Claude 3.5 Sonnet: Enterprise Reasoning Benchmarks Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=DeepSeek-R1%20vs%20Claude%203.5%20Sonnet%3A%20Enterprise%20Reasoning%20Benchmarks"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 4
+  },
+  {
+    "id": "job-1792147930394",
+    "timestamp": "2026-10-16T10:52:10.394Z",
+    "topic": "Distributed State & Server Actions in Next.js 15 App Router",
+    "slug": "distributed-state-server-actions-in-nextjs-15-app-router",
+    "status": "draft",
+    "engine": "Gemini (smart-offline)",
+    "wordCount": 665,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "Distributed State & Server Actions in Next.js 15 App Router Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=Distributed%20State%20%26%20Server%20Actions%20in%20Next.js%2015%20App%20Router"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 5,
+    "error": "Word count (665) below target threshold (minimum 800 words)."
+  }
+]

@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techtime :: Next Generation Editorial</title>
+     
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        lime: {
+                            DEFAULT: '#D1FE17',
+                            50: '#FAFFE5',
+                            100: '#F4FEBF',
+                            200: '#E8FE8A',
+                            300: '#DCFE54',
+                            400: '#D1FE17',
+                            500: '#B5E202',
+                            600: '#8FB301',
+                            700: '#688301',
+                            800: '#425300',
+                            900: '#212A00',
+                        },
+                        obsidian: {
+                            DEFAULT: '#070A08',
+                            surface: '#0E1310',
+                            card: '#141B16',
+                            border: '#202B23',
+                            muted: '#2E3D32'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'lime-glow': '0 0 30px -5px rgba(209, 254, 23, 0.4)',
+                        'lime-glow-lg': '0 0 60px -10px rgba(209, 254, 23, 0.6)',
+                        'lime-pill': '0 10px 25px -5px rgba(209, 254, 23, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070A08;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #202B23;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D1FE17;
+        }
+
+        ::selection {
+            background-color: #D1FE17;
+            color: #070A08;
+        }
+
+        /* Ambient Lime Gradients & Glass Effects */
+        .bg-mesh-glow {
+            background: 
+                radial-gradient(circle at 15% 15%, rgba(209, 254, 23, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 65%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(209, 254, 23, 0.08) 0%, transparent 60%);
+        }
+
+        .light .bg-mesh-glow {
+            background: 
+                radial-gradient(circle at 15% 15%, rgba(209, 254, 23, 0.35) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(52, 211, 153, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(243, 244, 246, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .lime-gradient-btn {
+            background: linear-gradient(135deg, #D1FE17 0%, #9EE302 100%);
+            color: #070A08;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .lime-gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -5px rgba(209, 254, 23, 0.5);
+            filter: brightness(1.05);
+        }
+
+        .glass-pill {
+            background: rgba(20, 27, 22, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(209, 254, 23, 0.15);
+        }
+
+        .light .glass-pill {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(7, 10, 8, 0.1);
+        }
+
+        /* Checkbox styling */
+        .custom-checkbox {
+            appearance: none;
+            background-color: rgba(32, 43, 35, 0.5);
+            border: 1px solid rgba(209, 254, 23, 0.3);
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            display: inline-grid;
+            place-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .custom-checkbox:checked {
+            background-color: #D1FE17;
+            border-color: #D1FE17;
+        }
+        .custom-checkbox:checked::before {
+            content: "✓";
+            color: #070A08;
+            font-weight: 900;
+            font-size: 11px;
+        }
+
+        /* Fluid Typography */
+        .hero-title {
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+        }
+
+        /* Reading Progress Bar */
+        #readingProgress {
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-obsidian text-gray-100 font-sans antialiased min-h-screen flex flex-col bg-mesh-glow transition-colors duration-300 light:bg-slate-50 light:text-slate-900 selection:bg-lime selection:text-obsidian">
+
+    <!-- FLOATING HEADER -->
+    <div class="sticky top-4 z-40 max-w-7xl mx-auto px-4 w-full pointer-events-none">
+        <header class="glass-pill rounded-full px-5 py-3 flex items-center justify-between shadow-2xl pointer-events-auto">
+            
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-lime to-emerald-400 flex items-center justify-center font-extrabold text-obsidian text-base shadow-lime-glow">
+                    ⚡
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl tracking-tight text-white light:text-slate-900">TECH<span class="text-lime"> // </span>TIME</span>
+                </div>
+            </div>
+
+            <!-- Central Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold tracking-wide uppercase text-gray-300 light:text-slate-700">
+                <a href="#heroSection" class="hover:text-lime transition-colors">Home</a>
+                <a href="#feedSection" onclick="filterCategory('All')" class="hover:text-lime transition-colors">Stories</a>
+                <a href="#feedSection" onclick="filterCategory('AI & Prompts')" class="hover:text-lime transition-colors">AI & Prompts</a>
+                <a href="#feedSection" onclick="filterCategory('Web Development')" class="hover:text-lime transition-colors">Web Dev</a>
+                <a href="#membershipSection" class="hover:text-lime transition-colors">Membership</a>
+            </nav>
+
+            <!-- Actions Right -->
+            <div class="flex items-center gap-3">
+                
+                <!-- Search Trigger -->
+                <div class="relative hidden sm:block">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        onkeyup="handleSearch(event)"
+                        placeholder="Search articles..." 
+                        class="w-40 md:w-52 bg-obsidian-surface/80 border border-obsidian-border rounded-full py-2 pl-9 pr-3 text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-lime transition-all light:bg-slate-100 light:border-slate-300 light:text-slate-900"
+                    >
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                </div>
+
+                <!-- Bookmarks -->
+                <button onclick="toggleBookmarksView()" class="relative w-10 h-10 rounded-full bg-obsidian-surface hover:bg-obsidian-border text-gray-300 hover:text-lime border border-obsidian-border transition-all flex items-center justify-center light:bg-slate-100 light:border-slate-300 light:text-slate-700" title="Saved Posts">
+                    <i class="fa-regular fa-bookmark text-base"></i>
+                    <span id="bookmarkBadge" class="hidden absolute -top-1 -right-1 bg-lime text-obsidian text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-lime-glow">0</span>
+                </button>
+
+                <!-- Palette Specs Modal -->
+                <button onclick="togglePaletteModal()" class="hidden lg:flex px-3.5 py-2 rounded-full bg-lime/10 text-lime border border-lime/30 text-[11px] font-mono font-bold items-center gap-1.5 hover:bg-lime hover:text-obsidian transition-all" title="Color Specs">
+                    <span class="w-2.5 h-2.5 rounded-full bg-lime"></span>
+                    <span>#D1FE17</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-obsidian-surface hover:bg-obsidian-border text-gray-300 hover:text-lime border border-obsidian-border transition-all flex items-center justify-center light:bg-slate-100 light:border-slate-300 light:text-slate-700" title="Toggle Theme">
+                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+                </button>
+
+                <!-- Publish Button -->
+                <button onclick="openWriteModal()" class="lime-gradient-btn px-4 py-2 rounded-full text-xs flex items-center gap-2 shadow-lime-glow">
+                    <i class="fa-solid fa-plus text-sm"></i>
+                    <span class="hidden sm:inline">Write</span>
+                </button>
+
+            </div>
+        </header>
+    </div>
+
+    <!-- TOP FEATURED HERO BANNER -->
+    <section id="heroSection" class="pt-8 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div class="max-w-3xl space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime/10 border border-lime/30 text-lime text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+                    FEATURED TECH DISPATCH
+                </div>
+                <h1 onclick="openPostModal(1)" class="hero-title font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white light:text-slate-900 tracking-tight cursor-pointer hover:text-lime transition-colors">
+                    How to Stay Cool While Waiting for Your AC Repair
+                </h1>
+            </div>
+
+            <!-- Top Right Author Snippet -->
+            <div class="flex items-center gap-4 border-l border-lime/30 pl-4 py-1 light:border-slate-300">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" class="w-12 h-12 rounded-full object-cover border-2 border-lime" alt="Elena Rostova">
+                <div class="text-xs space-y-0.5">
+                    <p class="text-gray-400 light:text-slate-500 font-mono">A limited Techtime pop up</p>
+                    <p class="font-bold text-white light:text-slate-900">By Elena Rostova • 12 September 2026</p>
+                    <button onclick="openPostModal(1)" class="text-lime font-bold text-xs hover:underline flex items-center gap-1">
+                        Read full story <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wide Curved Hero Visual Banner -->
+        <div class="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden group cursor-pointer border border-lime/20 shadow-2xl" onclick="openPostModal(1)">
+            <div class="aspect-[21/9] min-h-[280px] sm:min-h-[380px] w-full bg-obsidian-card relative overflow-hidden">
+                <img 
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop" 
+                    alt="Hero Architecture Visual" 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                >
+                <!-- Subtle Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent light:from-slate-900/80"></div>
+                
+                <!-- Floating Glass Overlay Bar on Image -->
+                <div class="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-4 py-1.5 rounded-full bg-lime text-obsidian text-xs font-bold uppercase tracking-wider shadow-lime-glow">
+                            Home & Living
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full glass-pill text-white text-xs font-medium border border-white/20">
+                            HVAC Maintenance
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full glass-pill text-white text-xs font-medium border border-white/20">
+                            Summer Tips
+                        </span>
+                    </div>
+
+                    <div class="hidden sm:flex items-center gap-2 text-white text-xs font-mono bg-obsidian/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-lime/30">
+                        <i class="fa-regular fa-clock text-lime"></i> 6 MIN READ
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <main id="feedSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <!-- LEFT COLUMN: QUICK FILTERS & SOCIAL LINKS -->
+            <aside class="lg:col-span-3 space-y-8">
+                
+                <!-- Quick Filters Widget -->
+                <div class="bg-obsidian-surface/60 border border-obsidian-border rounded-3xl p-6 space-y-5 light:bg-white light:border-slate-200">
+                    <h3 class="font-extrabold text-sm uppercase tracking-wider text-lime flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-xs"></i> Quick Filters
+                    </h3>
+
+                    <div class="space-y-3 text-xs" id="quickFilterList">
+                        <label class="flex items-center gap-3 text-gray-300 light:text-slate-700 cursor-pointer hover:text-lime transition-colors">
+                            <input type="checkbox" class="custom-checkbox" checked onchange="toggleFilterTag('UX Design', this)">
+                            <span class="font-medium">UX Design</span>
+                        </label>
+                        <label class="flex items-center gap-3 text-gray-300 light:text-slate-700 cursor-pointer hover:text-lime transition-colors">
+                            <input type="checkbox" class="custom-checkbox" onchange="toggleFilterTag('Branding', this)">
+                            <span class="font-medium">Branding</span>
+                        </label>
+                        <label class="flex items-center gap-3 text-gray-300 light:text-slate-700 cursor-pointer hover:text-lime transition-colors">
+                            <input type="checkbox" class="custom-checkbox" onchange="toggleFilterTag('Web Development', this)">
+                            <span class="font-medium">Web Development</span>
+                        </label>
+                        <label class="flex items-center gap-3 text-gray-300 light:text-slate-700 cursor-pointer hover:text-lime transition-colors">
+                            <input type="checkbox" class="custom-checkbox" onchange="toggleFilterTag('Design System', this)">
+                            <span class="font-medium">Design System</span>
+                        </label>
+                        <label class="flex items-center gap-3 text-gray-300 light:text-slate-700 cursor-pointer hover:text-lime transition-colors">
+                            <input type="checkbox" class="custom-checkbox" onchange="toggleFilterTag('Marketing', this)">
+                            <span class="font-medium">Marketing</span>
+                        </label>
+                    </div>
+
+                    <!-- Follow Us Section -->
+                    <div class="space-y-3 pt-2 border-t border-obsidian-border light:border-slate-200">
+                        <h4 class="font-bold text-xs uppercase text-gray-400 light:text-slate-500">Follow us on</h4>
+                        <div class="flex items-center gap-2.5">
+                            <a href="#" class="w-10 h-10 rounded-full bg-obsidian-card border border-obsidian-border flex items-center justify-center text-gray-300 hover:bg-lime hover:text-obsidian hover:border-lime transition-all light:bg-slate-100 light:border-slate-300" title="Dribbble">
+                                <i class="fa-brands fa-dribbble text-base"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-obsidian-card border border-obsidian-border flex items-center justify-center text-gray-300 hover:bg-lime hover:text-obsidian hover:border-lime transition-all light:bg-slate-100 light:border-slate-300" title="X Social Network">
+                                <i class="fa-brands fa-x-twitter text-base"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-obsidian-card border border-obsidian-border flex items-center justify-center text-gray-300 hover:bg-lime hover:text-obsidian hover:border-lime transition-all light:bg-slate-100 light:border-slate-300" title="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in text-base"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-obsidian-card border border-obsidian-border flex items-center justify-center text-gray-300 hover:bg-lime hover:text-obsidian hover:border-lime transition-all light:bg-slate-100 light:border-slate-300" title="Instagram">
+                                <i class="fa-brands fa-instagram text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gradient Spotlight Card -->
+                <div class="rounded-3xl p-6 bg-gradient-to-br from-lime/20 via-lime/5 to-transparent border border-lime/30 space-y-3 text-left">
+                    <span class="px-3 py-1 rounded-full bg-lime text-obsidian text-[10px] font-black uppercase">DISPATCH DIGEST</span>
+                    <h4 class="font-bold text-base text-white light:text-slate-900">Get Weekly Techtime Insights</h4>
+                    <p class="text-xs text-gray-400 light:text-slate-600 leading-relaxed">Pure AI, web development, and code dispatches straight to your inbox.</p>
+                    <button onclick="openWriteModal()" class="w-full py-2 rounded-full border border-lime text-lime font-bold text-xs hover:bg-lime hover:text-obsidian transition-all">
+                        Subscribe Free
+                    </button>
+                </div>
+
+            </aside>
+
+            <!-- RIGHT COLUMN: ARTICLE FEED & LIST VIEW -->
+            <div class="lg:col-span-9 space-y-6">
+                
+                <!-- Category Pills Bar -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-obsidian-border light:border-slate-200">
+                    
+                    <!-- Category Scroll Pills -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none whitespace-nowrap" id="categoryContainer">
+                        <button onclick="filterCategory('All')" class="category-btn active px-4 py-2 rounded-full text-xs font-extrabold whitespace-nowrap transition-all bg-lime text-obsidian shadow-lime-glow" data-category="All">
+                            All Stories
+                        </button>
+                        <button onclick="filterCategory('AI & Prompts')" class="category-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-lime hover:border-lime/40 light:bg-slate-100 light:border-slate-300 light:text-slate-700" data-category="AI & Prompts">
+                            AI & Prompts
+                        </button>
+                        <button onclick="filterCategory('Coding & Tech')" class="category-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-lime hover:border-lime/40 light:bg-slate-100 light:border-slate-300 light:text-slate-700" data-category="Coding & Tech">
+                            Coding & Tech
+                        </button>
+                        <button onclick="filterCategory('UX Design')" class="category-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-lime hover:border-lime/40 light:bg-slate-100 light:border-slate-300 light:text-slate-700" data-category="UX Design">
+                            UX Design
+                        </button>
+                        <button onclick="filterCategory('Web Development')" class="category-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-lime hover:border-lime/40 light:bg-slate-100 light:border-slate-300 light:text-slate-700" data-category="Web Development">
+                            Web Development
+                        </button>
+                        <button onclick="filterCategory('Saved')" class="category-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-lime hover:border-lime/40 flex items-center gap-1.5 light:bg-slate-100 light:border-slate-300 light:text-slate-700" data-category="Saved">
+                            <i class="fa-solid fa-bookmark text-lime"></i> Saved
+                        </button>
+                    </div>
+
+                    <!-- Layout Toggle -->
+                    <div class="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                        <span class="text-xs text-gray-400 light:text-slate-500 font-mono">View:</span>
+                        <button onclick="setLayoutView('list')" id="viewListBtn" class="p-2 rounded-full bg-lime text-obsidian transition-all" title="List View">
+                            <i class="fa-solid fa-list-ul text-xs"></i>
+                        </button>
+                        <button onclick="setLayoutView('grid')" id="viewGridBtn" class="p-2 rounded-full bg-obsidian-surface text-gray-400 border border-obsidian-border hover:text-lime transition-all light:bg-slate-100 light:border-slate-300 light:text-slate-700" title="Grid View">
+                            <i class="fa-solid fa-border-all text-xs"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ARTICLES CONTAINER -->
+                <div id="postsContainer" class="space-y-4">
+                    <!-- JS Dynamic Articles Rendered Here -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden py-16 text-center space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-lime/10 text-lime border border-lime/30 flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <h3 class="font-extrabold text-xl text-white light:text-slate-900">No matching articles found</h3>
+                    <p class="text-gray-400 text-xs max-w-md mx-auto">Try clearing search keywords or switching category filters.</p>
+                    <button onclick="resetFilters()" class="lime-gradient-btn px-6 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider">
+                        Reset All Filters
+                    </button>
+                </div>
+
+                <!-- LOAD MORE BUTTON -->
+                <div class="pt-8 text-center">
+                    <button onclick="loadMoreArticles()" class="lime-gradient-btn px-8 py-3 rounded-full text-xs uppercase tracking-widest font-black shadow-lime-glow hover:scale-105 transition-transform inline-flex items-center gap-2">
+                        <span>See more articles</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MEMBERSHIP & CALLOUT BANNER -->
+    <section id="membershipSection" class="py-16 my-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-obsidian-border/60 light:border-slate-200">
+        
+        <div class="text-center space-y-3 mb-10">
+            <h2 class="font-extrabold text-3xl sm:text-4xl text-white light:text-slate-900 tracking-tight">
+                Become a Techtime member <br class="hidden sm:inline">any way you prefer
+            </h2>
+            <p class="text-gray-400 light:text-slate-600 text-xs sm:text-sm max-w-xl mx-auto">
+                Join our exclusive circle of engineers, UI architects, and brand strategists.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Tier 1: Reader Tier -->
+            <div class="bg-obsidian-surface/80 border border-lime/20 rounded-3xl p-8 space-y-6 relative overflow-hidden group hover:border-lime/50 transition-all light:bg-white light:border-slate-200 light:shadow-sm">
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-lime/10 rounded-full blur-2xl pointer-events-none group-hover:bg-lime/20 transition-all"></div>
+                
+                <span class="px-3.5 py-1 rounded-full bg-lime/10 text-lime border border-lime/30 text-[11px] font-mono font-bold uppercase">
+                    READER TIER
+                </span>
+
+                <h3 class="font-extrabold text-2xl text-white light:text-slate-900">
+                    Award winning guides and articles to explore at your own pace
+                </h3>
+
+                <ul class="space-y-3 text-xs text-gray-300 light:text-slate-600">
+                    <li class="flex items-center gap-2.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+                        Access expert analysis lessons, guides, and podcasts.
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+                        Bookmark, comment and engage with lead writers.
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-lime"></span>
+                        Full dark mode theme specs and code snippet access.
+                    </li>
+                </ul>
+
+                <button onclick="showToast('Welcome aboard as a Reader Member!')" class="lime-gradient-btn px-6 py-2.5 rounded-full text-xs uppercase tracking-wider font-extrabold shadow-lime-glow w-full sm:w-auto">
+                    Join as a Reader
+                </button>
+
+                <div class="pt-4 aspect-[21/9] rounded-2xl overflow-hidden bg-obsidian-card border border-obsidian-border">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800" class="w-full h-full object-cover" alt="Reader preview">
+                </div>
+            </div>
+
+            <!-- Tier 2: Creator Tier -->
+            <div class="bg-obsidian-surface/80 border border-lime/20 rounded-3xl p-8 space-y-6 relative overflow-hidden group hover:border-lime/50 transition-all light:bg-white light:border-slate-200 light:shadow-sm">
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/20 transition-all"></div>
+                
+                <span class="px-3.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[11px] font-mono font-bold uppercase">
+                    CREATOR TIER
+                </span>
+
+                <h3 class="font-extrabold text-2xl text-white light:text-slate-900">
+                    Publish your own articles and gain global reader reach
+                </h3>
+
+                <ul class="space-y-3 text-xs text-gray-300 light:text-slate-600">
+                    <li class="flex items-center gap-2.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        Publish stories directly through our live studio modal.
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        Earn community applause, feedback, and direct readership.
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        Feature in top weekly dispatches and social spotlights.
+                    </li>
+                </ul>
+
+                <button onclick="openWriteModal()" class="bg-gradient-to-r from-emerald-400 to-lime text-obsidian font-extrabold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider shadow-lime-glow w-full sm:w-auto">
+                    Join as a Creator
+                </button>
+
+                <div class="pt-4 aspect-[21/9] rounded-2xl overflow-hidden bg-obsidian-card border border-obsidian-border">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800" class="w-full h-full object-cover" alt="Creator preview">
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FULL BLEED ARTICLE READER PAGE -->
+    <div id="readerPage" onscroll="updateReadingProgress()" class="fixed inset-0 z-50 hidden bg-obsidian/95 backdrop-blur-3xl overflow-y-auto light:bg-slate-50/95 transition-all">
+        
+        <!-- Top Reading Progress Indicator Bar -->
+        <div class="fixed top-0 left-0 right-0 h-1 bg-obsidian-border z-50">
+            <div id="readingProgress" class="h-full bg-lime shadow-lime-glow"></div>
+        </div>
+
+        <!-- Ambient Glow -->
+        <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-lime/10 via-lime/5 to-transparent pointer-events-none"></div>
+
+        <div class="min-h-screen py-6 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8 relative z-10">
+            
+            <!-- Reader Action Header Capsule -->
+            <div class="sticky top-4 z-30 glass-pill rounded-full px-6 py-3 flex items-center justify-between shadow-2xl">
+                
+                <!-- Back Button -->
+                <button onclick="closeReaderModal()" class="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-lime transition-colors light:text-slate-700">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                    <span>Back to stories</span>
+                </button>
+
+                <!-- Action Controls -->
+                <div class="flex items-center gap-3">
+                    
+                    <!-- Applause Clap Button -->
+                    <button onclick="addClap()" class="px-3.5 py-1.5 rounded-full bg-obsidian-surface hover:bg-obsidian-border border border-obsidian-border text-xs flex items-center gap-1.5 text-gray-300 hover:text-lime transition light:bg-slate-100 light:border-slate-300 light:text-slate-800" title="Give Claps">
+                        <i class="fa-solid fa-hands-clapping text-lime"></i>
+                        <span id="readerClapCount" class="font-bold">0</span>
+                    </button>
+
+                    <!-- Heart Like Button -->
+                    <button onclick="toggleReaderLike()" class="px-3.5 py-1.5 rounded-full bg-obsidian-surface hover:bg-obsidian-border border border-obsidian-border text-xs flex items-center gap-1.5 text-gray-300 hover:text-lime transition light:bg-slate-100 light:border-slate-300 light:text-slate-800" title="Like Article">
+                        <i class="fa-regular fa-heart text-lime"></i>
+                        <span id="readerLikeCount" class="font-bold">0</span>
+                    </button>
+
+                    <!-- Bookmark Button -->
+                    <button onclick="toggleReaderBookmark()" id="readerBookmarkBtn" class="p-2 rounded-full bg-obsidian-surface hover:bg-obsidian-border border border-obsidian-border text-xs text-gray-300 hover:text-lime transition light:bg-slate-100 light:border-slate-300 light:text-slate-800" title="Save Bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+
+                    <!-- Share Link -->
+                    <button onclick="copyArticleLink()" class="p-2 rounded-full bg-obsidian-surface hover:bg-obsidian-border border border-obsidian-border text-xs text-gray-300 hover:text-lime transition light:bg-slate-100 light:border-slate-300 light:text-slate-800" title="Share Link">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+
+                    <!-- Close Button -->
+                    <button onclick="closeReaderModal()" class="w-8 h-8 rounded-full bg-lime text-obsidian flex items-center justify-center font-black hover:scale-110 transition shadow-lime-glow" title="Close Reader">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Article Reader Main Content -->
+            <article class="space-y-8 pt-4">
+                
+                <!-- Article Header Meta -->
+                <div class="space-y-4 text-center sm:text-left">
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                        <span id="readerCategory" class="px-4 py-1 rounded-full bg-lime text-obsidian text-xs font-black uppercase tracking-wider shadow-lime-glow">
+                            CATEGORY
+                        </span>
+                        <span id="readerReadTime" class="text-xs font-mono text-gray-400 light:text-slate-500">
+                            5 MIN READ
+                        </span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 id="readerTitle" class="hero-title font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white light:text-slate-900 tracking-tight leading-tight">
+                        Title Placeholder
+                    </h1>
+
+                    <!-- Author Info Row -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-obsidian-border/50 light:border-slate-200">
+                        
+                        <div class="flex items-center gap-3">
+                            <img id="readerAuthorAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" class="w-12 h-12 rounded-full object-cover border-2 border-lime shrink-0" alt="Author">
+                            <div class="flex flex-col justify-center text-left">
+                                <div id="readerAuthorName" class="font-bold text-white light:text-slate-900 text-sm leading-snug">Author Name</div>
+                                <div id="readerDate" class="text-xs font-mono text-gray-400 light:text-slate-500 leading-snug">Published 12 September 2026</div>
+                            </div>
+                        </div>
+
+                        <!-- Share Row -->
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-share-nodes text-lime text-base mr-1" title="Share Article"></i>
+                            <button onclick="copyArticleLink()" class="w-10 h-10 rounded-full bg-obsidian-surface border border-obsidian-border flex items-center justify-center text-lime hover:bg-lime hover:text-obsidian transition light:bg-slate-200" title="Share on X">
+                                <i class="fa-brands fa-x-twitter text-base"></i>
+                            </button>
+                            <button onclick="copyArticleLink()" class="w-10 h-10 rounded-full bg-obsidian-surface border border-obsidian-border flex items-center justify-center text-lime hover:bg-lime hover:text-obsidian transition light:bg-slate-200" title="Share on LinkedIn">
+                                <i class="fa-brands fa-linkedin-in text-base"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cover Image -->
+                <div class="rounded-3xl overflow-hidden aspect-[16/9] w-full bg-obsidian-card relative shadow-2xl border border-lime/20">
+                    <img id="readerCoverImage" src="" class="w-full h-full object-cover" alt="Article Cover">
+                </div>
+
+                <!-- Article Body -->
+                <div id="readerBody" class="prose prose-invert max-w-none text-gray-200 light:text-slate-800 text-base sm:text-lg leading-relaxed space-y-6 pt-4">
+                    <!-- Injected Content -->
+                </div>
+
+                <!-- Tags Section -->
+                <div class="pt-6 border-t border-obsidian-border light:border-slate-200 space-y-3">
+                    <span class="text-xs font-mono uppercase text-gray-400">Article Index Tags:</span>
+                    <div id="readerTags" class="flex flex-wrap gap-2">
+                        <!-- Injected tags -->
+                    </div>
+                </div>
+
+                <!-- Comment Section -->
+                <section class="pt-10 border-t border-obsidian-border light:border-slate-200 space-y-6">
+                    <h3 class="font-extrabold text-2xl text-white light:text-slate-900 flex items-center gap-2">
+                        <i class="fa-regular fa-comments text-lime"></i> Discussion (<span id="commentCount">0</span>)
+                    </h3>
+
+                    <!-- Comment Input Box -->
+                    <div class="space-y-3">
+                        <textarea id="newCommentInput" rows="3" placeholder="Join the discussion... Share your thoughts or feedback." class="w-full bg-obsidian-surface/80 border border-obsidian-border rounded-2xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900"></textarea>
+                        <div class="flex justify-end">
+                            <button onclick="postComment()" class="lime-gradient-btn px-6 py-2.5 rounded-full text-xs font-extrabold shadow-lime-glow">
+                                Post Comment
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comments List Container -->
+                    <div id="commentsList" class="space-y-4 pt-2">
+                        <!-- Comments JS rendered -->
+                    </div>
+                </section>
+
+            </article>
+
+        </div>
+    </div>
+
+    <!-- PUBLISH / WRITE ARTICLE MODAL -->
+    <div id="writeModal" class="fixed inset-0 z-50 hidden bg-obsidian/90 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-obsidian-card border border-lime/30 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl light:bg-white light:border-slate-300 my-8">
+            <div class="flex items-center justify-between border-b border-obsidian-border pb-4 light:border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-lime shadow-lime-glow"></span>
+                    <h2 class="font-extrabold text-xl text-white light:text-slate-900">Publish New Story</h2>
+                </div>
+                <button onclick="closeWriteModal()" class="w-8 h-8 rounded-full bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <form id="createPostForm" onsubmit="handleCreatePost(event)" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 mb-1">ARTICLE TITLE *</label>
+                    <input type="text" id="postTitleInput" required placeholder="e.g. Design Systems with Electric Lime Palette" class="w-full bg-obsidian-surface border border-obsidian-border rounded-full px-5 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-400 mb-1">CATEGORY *</label>
+                        <select id="postCategoryInput" required class="w-full bg-obsidian-surface border border-obsidian-border rounded-full px-5 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900">
+                            <option value="UX Design">UX Design</option>
+                            <option value="Brand Strategy">Brand Strategy</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Coding & Tech">Coding & Tech</option>
+                            <option value="AI & Prompts">AI & Prompts</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-gray-400 mb-1">ESTIMATED READ TIME *</label>
+                        <input type="text" id="postReadTimeInput" required placeholder="e.g. 5 MIN READ" class="w-full bg-obsidian-surface border border-obsidian-border rounded-full px-5 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 mb-1">COVER IMAGE URL</label>
+                    <input type="url" id="postImageInput" placeholder="https://images.unsplash.com/..." class="w-full bg-obsidian-surface border border-obsidian-border rounded-full px-5 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 mb-1">EXCERPT *</label>
+                    <input type="text" id="postExcerptInput" required placeholder="Short preview teaser..." class="w-full bg-obsidian-surface border border-obsidian-border rounded-full px-5 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 mb-1">STORY CONTENT *</label>
+                    <textarea id="postBodyInput" rows="5" required placeholder="Write your full story here..." class="w-full bg-obsidian-surface border border-obsidian-border rounded-2xl p-4 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 mb-1">TAGS (Comma separated)</label>
+                    <input type="text" id="postTagsInput" placeholder="UX Design, Brand Strategy, Lime" class="w-full bg-obsidian-surface border border-obsidian-border rounded-full px-5 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-lime light:bg-slate-100 light:border-slate-300 light:text-slate-900">
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-obsidian-border light:border-slate-200">
+                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2 rounded-full border border-obsidian-border text-xs text-gray-300 hover:text-white">Cancel</button>
+                    <button type="submit" class="lime-gradient-btn px-6 py-2 rounded-full text-xs font-extrabold shadow-lime-glow">
+                        Publish Live
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- COLOR PALETTE SPECIFICATION MODAL -->
+    <div id="paletteModal" class="fixed inset-0 z-50 hidden bg-obsidian/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-obsidian-card border border-lime/30 rounded-3xl max-w-2xl w-full p-6 space-y-6 shadow-lime-glow light:bg-white light:border-slate-300">
+            <div class="flex items-center justify-between border-b border-obsidian-border pb-4 light:border-slate-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-lime flex items-center justify-center text-obsidian font-black">#</div>
+                    <div>
+                        <h2 class="font-extrabold text-lg text-white light:text-slate-900">Electric Lime Color System</h2>
+                        <p class="text-xs font-mono text-lime">Core Accent: #D1FE17</p>
+                    </div>
+                </div>
+                <button onclick="togglePaletteModal()" class="text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Swatches Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                <div class="p-3 rounded-2xl bg-[#D1FE17] text-obsidian space-y-1">
+                    <span class="block text-[10px] font-mono font-bold uppercase opacity-80">Primary Accent</span>
+                    <span class="block text-sm font-black">#D1FE17</span>
+                </div>
+                <div class="p-3 rounded-2xl bg-[#070A08] text-white space-y-1 border border-white/10">
+                    <span class="block text-[10px] font-mono font-bold uppercase opacity-80">Obsidian Canvas</span>
+                    <span class="block text-sm font-black">#070A08</span>
+                </div>
+                <div class="p-3 rounded-2xl bg-[#141B16] text-white space-y-1 border border-white/10">
+                    <span class="block text-[10px] font-mono font-bold uppercase opacity-80">Surface Card</span>
+                    <span class="block text-sm font-black">#141B16</span>
+                </div>
+                <div class="p-3 rounded-2xl bg-gradient-to-r from-lime to-emerald-400 text-obsidian space-y-1">
+                    <span class="block text-[10px] font-mono font-bold uppercase opacity-80">Gradient Blend</span>
+                    <span class="block text-xs font-black">Lime to Emerald</span>
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button onclick="togglePaletteModal()" class="lime-gradient-btn px-6 py-2 rounded-full text-xs font-extrabold">
+                    Close Specs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-lime text-obsidian font-bold px-5 py-3 rounded-full shadow-lime-glow flex items-center gap-2.5 text-xs pointer-events-none">
+        <i class="fa-solid fa-circle-check text-sm"></i>
+        <span id="toastMessage">Notification</span>
+    </div>
+
+    <script>
+        // GLOBAL ARTICLES DATABASE
+        let articles = [
+            {
+                id: 1,
+                title: "How to Stay Cool While Waiting for Your AC Repair",
+                category: "UX Design",
+                readTime: "6 MIN READ",
+                author: "Elena Rostova",
+                authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200",
+                date: "12 September 2026",
+                coverImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200",
+                excerpt: "A limited Techtime pop up guide on surviving summer heat waves while waiting for HVAC maintenance.",
+                body: `
+                    <p class="text-xl font-medium text-lime leading-relaxed">When temperatures surge, waiting for HVAC repair technicians can feel like an eternity. Here is our emergency survival guide designed for home comfort and thermal efficiency.</p>
+                    <h3 class="text-2xl font-bold text-white light:text-slate-900 mt-8 mb-4">1. Cross Ventilation and Radiant Heat Blocking</h3>
+                    <p>Keep all blinds closed on south facing windows during peak solar hours from 10:00 AM to 4:00 PM. Utilize ceiling fans running counter clockwise to generate a gentle wind chill effect across living spaces.</p>
+                    <blockquote class="border-l-4 border-lime pl-6 italic text-lime/90 my-8 py-3 bg-lime/5 rounded-r-2xl">
+                        "Optimizing airflow and reducing solar gain can reduce ambient temperature perception significantly."
+                    </blockquote>
+                    <h3 class="text-2xl font-bold text-white light:text-slate-900 mt-8 mb-4">2. Hydration and Cooling Pulse Points</h3>
+                    <p>Apply cool damp cloths to arterial pulse points on wrists, neck, and ankles. Hydrate regularly with electrolyte enriched fluids to maintain core thermal equilibrium.</p>
+                `,
+                tags: ["UX Design", "Home", "Summer Tips"],
+                likes: 324,
+                claps: 128,
+                bookmarked: false,
+                comments: [
+                    { name: "Sophia Martinez", time: "2 hours ago", text: "Extremely helpful tips! The radiant barrier advice made a noticeable difference." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Prompt Engineering Playbook: Crafting Production Ready LLM Prompts",
+                category: "AI & Prompts",
+                readTime: "7 MIN READ",
+                author: "Dr. Aris Vance",
+                authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200",
+                date: "10 September 2026",
+                coverImage: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200",
+                excerpt: "Learn structural prompt templates, few shot conditioning, and guardrails to optimize LLM outputs for modern software.",
+                body: `
+                    <p class="text-xl font-medium text-lime leading-relaxed">Systematic prompt engineering is the foundation of dependable AI software. Below are battle tested strategies and code snippet examples for reliable LLM output parsing.</p>
+                    
+                    <h3 class="text-2xl font-bold text-white light:text-slate-900 mt-8 mb-4">1. The System Prompt Architecture</h3>
+                    <p class="mb-4">To ensure clean JSON responses without markdown syntax wrapping, utilize structured schema constraints in your system prompt:</p>
+                    
+                    <div class="bg-obsidian-surface border border-lime/30 rounded-2xl p-5 font-mono text-xs text-lime space-y-2 overflow-x-auto shadow-inner">
+                        <div class="text-gray-400 font-bold">// SYSTEM PROMPT TEMPLATE</div>
+                        <pre class="text-gray-200"><code>You are Techtime AI Assistant. Always respond ONLY in valid JSON matching this schema:
+{
+  "status": "success",
+  "summary": string,
+  "actionable_steps": string[]
+}
+Do not include markdown code wrapping or extra narrative.</code></pre>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white light:text-slate-900 mt-8 mb-4">2. Async Structured Generation Implementation</h3>
+                    <p>Enforce structural guardrails using standard schema enforcement libraries alongside your completion pipeline.</p>
+                `,
+                tags: ["AI & Prompts", "LLM", "Python", "GPT"],
+                likes: 512,
+                claps: 340,
+                bookmarked: true,
+                comments: []
+            },
+            {
+                id: 3,
+                title: "Mastering Modern TypeScript: Clean Code & Advanced Generics",
+                category: "Coding & Tech",
+                readTime: "8 MIN READ",
+                author: "Lucas Croft",
+                authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200",
+                date: "8 September 2026",
+                coverImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200",
+                excerpt: "Explore TypeScript utility types, type narrowing, and resilient API data fetching patterns for production web applications.",
+                body: `
+                    <p class="text-xl font-medium text-lime leading-relaxed">TypeScript type safety guarantees runtime safety and developer velocity. Here is how to write clean generic handlers for API responses.</p>
+                    <h3 class="text-2xl font-bold text-white light:text-slate-900 mt-8 mb-4">Generic Async Wrapper</h3>
+                    <p>Always return predictable payload objects wrapping data and error parameters for clean frontend error handling.</p>
+                `,
+                tags: ["Coding & Tech", "TypeScript", "Web Dev"],
+                likes: 289,
+                claps: 95,
+                bookmarked: false,
+                comments: []
+            },
+            {
+                id: 4,
+                title: "Staying Cool During Blackouts: The Lifesaving Protocol",
+                category: "Web Development",
+                readTime: "4 MIN READ",
+                author: "Devon Vance",
+                authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200",
+                date: "5 September 2026",
+                coverImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800",
+                excerpt: "Essential steps to maintain safe indoor conditions during severe grid blackouts and power failures.",
+                body: `<p class="text-lg text-gray-200">Grid reliability issues require active home management strategies during hot seasonal peaks. Establish battery powered airflow units early and isolate shaded interior spaces.</p>`,
+                tags: ["Web Development", "Safety"],
+                likes: 142,
+                claps: 42,
+                bookmarked: false,
+                comments: []
+            },
+            {
+                id: 5,
+                title: "Esther Howard on Designing High Contrast Neon Dashboards",
+                category: "UX Design",
+                readTime: "7 MIN READ",
+                author: "Esther Howard",
+                authorAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200",
+                date: "2 September 2026",
+                coverImage: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800",
+                excerpt: "Mastering electric lime (#D1FE17) typography contrast ratios on deep obsidian surfaces.",
+                body: `<p class="text-lg text-gray-200">High contrast digital UI requires balance between bright neon focal points and deep obsidian surfaces. Use subtle glows and soft glassmorphism borders to reduce optic fatigue.</p>`,
+                tags: ["UX Design", "Design System"],
+                likes: 415,
+                claps: 210,
+                bookmarked: false,
+                comments: []
+            }
+        ];
+
+        // State Management
+        let currentLayout = 'list';
+        let currentCategory = 'All';
+        let currentSearchQuery = '';
+        let selectedQuickTags = ['UX Design'];
+        let activeReaderPostId = null;
+
+        function initApp() {
+            renderPosts();
+            updateBookmarkBadge();
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('postsContainer');
+            const emptyState = document.getElementById('emptyState');
+            if (!container) return;
+
+            // Filter logic
+            let filtered = articles.filter(post => {
+                if (currentCategory === 'Saved' && !post.bookmarked) return false;
+                if (currentCategory !== 'All' && currentCategory !== 'Saved' && post.category !== currentCategory) return false;
+
+                if (currentSearchQuery) {
+                    const q = currentSearchQuery.toLowerCase();
+                    const matchesTitle = post.title.toLowerCase().includes(q);
+                    const matchesExcerpt = post.excerpt.toLowerCase().includes(q);
+                    const matchesAuthor = post.author.toLowerCase().includes(q);
+                    if (!matchesTitle && !matchesExcerpt && !matchesAuthor) return false;
+                }
+
+                if (selectedQuickTags.length > 0) {
+                    const hasTag = post.tags.some(tag => selectedQuickTags.includes(tag));
+                    if (!hasTag && currentCategory === 'All') return false;
+                }
+
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            if (currentLayout === 'grid') {
+                container.className = 'grid grid-cols-1 md:grid-cols-2 gap-6 space-y-0';
+            } else {
+                container.className = 'space-y-4';
+            }
+
+            container.innerHTML = filtered.map(post => {
+                const isBookmarked = post.bookmarked;
+                if (currentLayout === 'grid') {
+                    return `
+                        <div class="bg-obsidian-surface/70 border border-obsidian-border rounded-3xl p-5 hover:border-lime/40 transition-all flex flex-col justify-between group light:bg-white light:border-slate-200">
+                            <div class="space-y-4">
+                                <div class="aspect-[16/9] rounded-2xl overflow-hidden relative cursor-pointer" onclick="openPostModal(${post.id})">
+                                    <img src="${post.coverImage}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Cover">
+                                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-lime text-obsidian text-[10px] font-extrabold uppercase shadow-lime-glow">
+                                        ${post.category}
+                                    </span>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2 text-xs text-gray-400 font-mono mb-2 light:text-slate-500">
+                                        <span>${post.date}</span> • <span>${post.readTime}</span>
+                                    </div>
+                                    <h3 onclick="openPostModal(${post.id})" class="font-extrabold text-lg text-white group-hover:text-lime transition-colors cursor-pointer line-clamp-2 light:text-slate-900">
+                                        ${post.title}
+                                    </h3>
+                                    <p class="text-xs text-gray-400 mt-2 line-clamp-2 light:text-slate-600">${post.excerpt}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 mt-4 border-t border-obsidian-border/50 light:border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <img src="${post.authorAvatar}" class="w-7 h-7 rounded-full border border-lime object-cover" alt="Avatar">
+                                    <span class="text-xs font-bold text-gray-200 light:text-slate-800">${post.author}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleBookmark(${post.id}, event)" class="p-2 rounded-full hover:bg-obsidian-border text-gray-400 hover:text-lime transition">
+                                        <i class="${isBookmarked ? 'fa-solid text-lime' : 'fa-regular'} fa-bookmark text-sm"></i>
+                                    </button>
+                                    <button onclick="openPostModal(${post.id})" class="text-xs font-bold text-lime flex items-center gap-1 hover:underline">
+                                        Read <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="bg-obsidian-surface/60 border border-obsidian-border rounded-3xl p-5 hover:border-lime/40 transition-all flex flex-col sm:flex-row items-center gap-6 group light:bg-white light:border-slate-200">
+                            <div class="w-full sm:w-48 h-36 shrink-0 rounded-2xl overflow-hidden relative cursor-pointer" onclick="openPostModal(${post.id})">
+                                <img src="${post.coverImage}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Cover">
+                                <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-lime text-obsidian text-[10px] font-extrabold uppercase shadow-lime-glow">
+                                    ${post.category}
+                                </span>
+                            </div>
+                            <div class="flex-1 space-y-2 w-full">
+                                <div class="flex items-center justify-between text-xs text-gray-400 font-mono light:text-slate-500">
+                                    <div class="flex items-center gap-2">
+                                        <span>${post.date}</span> • <span>${post.readTime}</span>
+                                    </div>
+                                    <button onclick="toggleBookmark(${post.id}, event)" class="hover:text-lime transition p-1">
+                                        <i class="${isBookmarked ? 'fa-solid text-lime' : 'fa-regular'} fa-bookmark text-sm"></i>
+                                    </button>
+                                </div>
+                                <h3 onclick="openPostModal(${post.id})" class="font-extrabold text-xl text-white group-hover:text-lime transition-colors cursor-pointer line-clamp-1 light:text-slate-900">
+                                    ${post.title}
+                                </h3>
+                                <p class="text-xs text-gray-400 line-clamp-2 light:text-slate-600">${post.excerpt}</p>
+                                <div class="flex items-center justify-between pt-2">
+                                    <div class="flex items-center gap-2">
+                                        <img src="${post.authorAvatar}" class="w-6 h-6 rounded-full border border-lime object-cover" alt="Author">
+                                        <span class="text-xs font-bold text-gray-300 light:text-slate-800">${post.author}</span>
+                                    </div>
+                                    <button onclick="openPostModal(${post.id})" class="text-xs font-extrabold text-lime flex items-center gap-1.5 hover:underline">
+                                        <span>Read article</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+        }
+
+        function openPostModal(id) {
+            const post = articles.find(a => a.id === id);
+            if (!post) return;
+            activeReaderPostId = id;
+
+            document.getElementById('readerTitle').innerText = post.title;
+            document.getElementById('readerCategory').innerText = post.category;
+            document.getElementById('readerReadTime').innerText = post.readTime;
+            document.getElementById('readerAuthorName').innerText = post.author;
+            document.getElementById('readerAuthorAvatar').src = post.authorAvatar;
+            document.getElementById('readerDate').innerText = `Published ${post.date}`;
+            document.getElementById('readerCoverImage').src = post.coverImage;
+            document.getElementById('readerBody').innerHTML = post.body;
+            document.getElementById('readerLikeCount').innerText = post.likes;
+            document.getElementById('readerClapCount').innerText = post.claps || 0;
+
+            const tagsContainer = document.getElementById('readerTags');
+            if (tagsContainer) {
+                tagsContainer.innerHTML = post.tags.map(t => `<span class="px-3 py-1 rounded-full bg-obsidian-surface border border-obsidian-border text-xs text-lime font-mono">#${t}</span>`).join('');
+            }
+
+            const bmBtn = document.getElementById('readerBookmarkBtn');
+            if (bmBtn) {
+                bmBtn.innerHTML = `<i class="${post.bookmarked ? 'fa-solid text-lime' : 'fa-regular'} fa-bookmark"></i>`;
+            }
+
+            renderComments();
+
+            const readerPage = document.getElementById('readerPage');
+            readerPage.classList.remove('hidden');
+            readerPage.scrollTop = 0;
+            updateReadingProgress();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReaderModal() {
+            const readerPage = document.getElementById('readerPage');
+            readerPage.classList.add('hidden');
+            document.body.style.overflow = '';
+            activeReaderPostId = null;
+        }
+
+        function updateReadingProgress() {
+            const readerPage = document.getElementById('readerPage');
+            if (!readerPage || readerPage.classList.contains('hidden')) return;
+
+            const totalHeight = readerPage.scrollHeight - readerPage.clientHeight;
+            const progress = totalHeight > 0 ? (readerPage.scrollTop / totalHeight) * 100 : 0;
+            const bar = document.getElementById('readingProgress');
+            if (bar) {
+                bar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+            }
+        }
+
+        function addClap() {
+            if (!activeReaderPostId) return;
+            const post = articles.find(a => a.id === activeReaderPostId);
+            if (post) {
+                post.claps = (post.claps || 0) + 1;
+                document.getElementById('readerClapCount').innerText = post.claps;
+                showToast("Applauded story!");
+            }
+        }
+
+        function toggleReaderLike() {
+            if (!activeReaderPostId) return;
+            const post = articles.find(a => a.id === activeReaderPostId);
+            if (post) {
+                post.likes += 1;
+                document.getElementById('readerLikeCount').innerText = post.likes;
+                showToast("Liked story!");
+            }
+        }
+
+        function toggleReaderBookmark() {
+            if (!activeReaderPostId) return;
+            toggleBookmark(activeReaderPostId);
+            const post = articles.find(a => a.id === activeReaderPostId);
+            const bmBtn = document.getElementById('readerBookmarkBtn');
+            if (bmBtn && post) {
+                bmBtn.innerHTML = `<i class="${post.bookmarked ? 'fa-solid text-lime' : 'fa-regular'} fa-bookmark"></i>`;
+            }
+        }
+
+        function openWriteModal() {
+            document.getElementById('writeModal').classList.remove('hidden');
+        }
+
+        function closeWriteModal() {
+            document.getElementById('writeModal').classList.add('hidden');
+        }
+
+        function handleCreatePost(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('postTitleInput').value.trim();
+            const category = document.getElementById('postCategoryInput').value;
+            const readTime = document.getElementById('postReadTimeInput').value.trim();
+            let coverImage = document.getElementById('postImageInput').value.trim();
+            const excerpt = document.getElementById('postExcerptInput').value.trim();
+            const body = document.getElementById('postBodyInput').value.trim();
+            const tagsRaw = document.getElementById('postTagsInput').value;
+
+            if (!coverImage) {
+                coverImage = "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200";
+            }
+
+            const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()) : [category];
+
+            const newPost = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                readTime: readTime || "5 MIN READ",
+                author: "Community Writer",
+                authorAvatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+                date: getFormattedToday(),
+                coverImage: coverImage,
+                excerpt: excerpt,
+                body: `<p class="text-xl font-medium text-lime leading-relaxed">${excerpt}</p><div class="text-lg text-gray-200 mt-4">${body.replace(/\n/g, '<br>')}</div>`,
+                tags: tags,
+                likes: 0,
+                claps: 0,
+                bookmarked: false,
+                comments: []
+            };
+
+            articles.unshift(newPost);
+            renderPosts();
+            closeWriteModal();
+            document.getElementById('createPostForm').reset();
+            showToast("Article published successfully!");
+        }
+
+        function setLayoutView(mode) {
+            currentLayout = mode;
+            const listBtn = document.getElementById('viewListBtn');
+            const gridBtn = document.getElementById('viewGridBtn');
+
+            if (mode === 'list') {
+                listBtn.className = "p-2 rounded-full bg-lime text-obsidian transition-all";
+                gridBtn.className = "p-2 rounded-full bg-obsidian-surface text-gray-400 border border-obsidian-border hover:text-lime transition-all light:bg-slate-100 light:border-slate-300 light:text-slate-700";
+            } else {
+                gridBtn.className = "p-2 rounded-full bg-lime text-obsidian transition-all";
+                listBtn.className = "p-2 rounded-full bg-obsidian-surface text-gray-400 border border-obsidian-border hover:text-lime transition-all light:bg-slate-100 light:border-slate-300 light:text-slate-700";
+            }
+            renderPosts();
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = "category-btn active px-4 py-2 rounded-full text-xs font-extrabold whitespace-nowrap transition-all bg-lime text-obsidian shadow-lime-glow";
+                } else {
+                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-obsidian-surface border border-obsidian-border text-gray-400 hover:text-lime hover:border-lime/40 light:bg-slate-100 light:border-slate-300 light:text-slate-700";
+                }
+            });
+            renderPosts();
+        }
+
+        function handleSearch(event) {
+            currentSearchQuery = event.target.value;
+            renderPosts();
+        }
+
+        function toggleFilterTag(tag, checkbox) {
+            if (checkbox.checked) {
+                if (!selectedQuickTags.includes(tag)) selectedQuickTags.push(tag);
+            } else {
+                selectedQuickTags = selectedQuickTags.filter(t => t !== tag);
+            }
+            renderPosts();
+        }
+
+        function toggleBookmark(id, event) {
+            if (event) event.stopPropagation();
+            const post = articles.find(a => a.id === id);
+            if (post) {
+                post.bookmarked = !post.bookmarked;
+                updateBookmarkBadge();
+                renderPosts();
+                showToast(post.bookmarked ? "Saved to bookmarks" : "Removed from bookmarks");
+            }
+        }
+
+        function updateBookmarkBadge() {
+            const count = articles.filter(a => a.bookmarked).length;
+            const badge = document.getElementById('bookmarkBadge');
+            if (badge) {
+                if (count > 0) {
+                    badge.innerText = count;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+        }
+
+        function toggleBookmarksView() {
+            filterCategory('Saved');
+        }
+
+        function renderComments() {
+            if (!activeReaderPostId) return;
+            const post = articles.find(a => a.id === activeReaderPostId);
+            const list = document.getElementById('commentsList');
+            const count = document.getElementById('commentCount');
+
+            if (!list || !post) return;
+
+            count.innerText = post.comments.length;
+
+            if (post.comments.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-500 italic">No comments yet. Be the first to share your thoughts!</p>`;
+                return;
+            }
+
+            list.innerHTML = post.comments.map(c => `
+                <div class="bg-obsidian-surface/60 border border-obsidian-border rounded-2xl p-4 space-y-1 light:bg-slate-100 light:border-slate-200">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="font-bold text-lime">${c.name}</span>
+                        <span class="text-[10px] font-mono text-gray-500">${c.time}</span>
+                    </div>
+                    <p class="text-xs text-gray-300 light:text-slate-800">${c.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function postComment() {
+            if (!activeReaderPostId) return;
+            const input = document.getElementById('newCommentInput');
+            const val = input.value.trim();
+            if (!val) return;
+
+            const post = articles.find(a => a.id === activeReaderPostId);
+            if (post) {
+                post.comments.unshift({
+                    name: "You (Reader)",
+                    time: "Just now",
+                    text: val
+                });
+                input.value = '';
+                renderComments();
+                showToast("Comment posted!");
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                icon.className = "fa-solid fa-sun text-base text-amber-400";
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                icon.className = "fa-solid fa-moon text-base";
+            }
+        }
+
+        function togglePaletteModal() {
+            document.getElementById('paletteModal').classList.toggle('hidden');
+        }
+
+        function resetFilters() {
+            currentCategory = 'All';
+            currentSearchQuery = '';
+            document.getElementById('searchInput').value = '';
+            filterCategory('All');
+        }
+
+        function loadMoreArticles() {
+            showToast("Loaded latest dispatches!");
+        }
+
+        function copyArticleLink() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("Article link copied to clipboard!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            if (!toast || !toastMsg) return;
+
+            toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function getFormattedToday() {
+            const date = new Date();
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+        }
+
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
