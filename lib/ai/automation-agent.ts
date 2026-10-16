@@ -431,10 +431,10 @@ Return STRICT JSON matching this schema:
       targetStatus = "draft";
     }
 
-    // Quality Rule 1: Word Count Check (target ~1200, minimum acceptable: 700)
-    if (wordCount < 700) {
+    // Quality Rule 1: Word Count Check (target 1,000 - 1,200 words, strict minimum: 1,000)
+    if (wordCount < 1000) {
       targetStatus = "draft";
-      failureReason = `Word count (${wordCount}) below target threshold (minimum 700 words).`;
+      failureReason = `Word count (${wordCount}) below target threshold (minimum 1,000 words required).`;
     }
 
     // Quality Rule 2: Duplicate Check
@@ -855,7 +855,7 @@ export async function processPipeline&lt;T, R&gt;(
   ৩. মেমরি প্রোফাইলিং এবং স্টেট রিকনসিলিয়েশন মেকানিক্স
 </h2>
 <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-4">
-  কনকারেন্ট রিকোয়েস্ট পরিচালনার সময় প্রথাগত অবজেক্ট স্প্রেডিং এবং অস্থায়ী ক্লোজার অ্যালোকেশন নোড.জেএস (Node.js) এবং ব্রাউজার মেমোরিতে অতিরিক্ত গারবেজ কালেক্টর (GC) চাপ সৃষ্টি করে। এর ফলে অ্যাপ্লিকেশন ক্ষণিকের জন্য ফ্রিজ হতে পারে।
+  কনকারেন্ট রিকোয়েস্ট পরিচালনার সময় প্রথাগত অবজেক্ট স্প্রেডিং এবং অস্থায়ী ক্লোজার অ্যালোকেশন নোড.জেএস (Node.js) এবং ব্রাউজার মেমোরিতে অতিরিক্ত গারবেজ কালেক্টর (GC) চাপ সৃষ্টি করে। V8 ইঞ্জিনের Scavenge এবং Mark-Sweep সাইকেল চলার সময় সিপিইউ স্পাইক হতে পারে এবং সার্ভার ড্রপড কানেকশন তৈরি করতে পারে।
 </p>
 <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-4">
   স্ট্রাকচার্ড টাইপড বাফার এবং পারসিস্টেন্ট রেকর্ডস ব্যবহার করে মেমরি ফুটপ্রিন্ট প্রায় ৬৩% পর্যন্ত কমানো সম্ভব। নিচে বিভিন্ন আর্কিটেকচার মডেলের একটি বাস্তব তুলনা তুলে ধরা হলো:
@@ -919,6 +919,32 @@ export async function processPipeline&lt;T, R&gt;(
   </li>
 </ol>
 
+<p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-4">
+  রানটাইমে টাইপ নিরাপত্তা এবং স্কিমা ড্রিফ্ট প্রতিহত করতে নিচের মতো আইসোলেশন প্যাটার্ন ব্যবহার করা অত্যন্ত কার্যকর, যা ভুল পে-লোডকে সার্ভারে ক্র্যাশ ঘটাতে দেয় না:
+</p>
+
+<div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 font-mono text-xs text-lime-300 space-y-2 overflow-x-auto shadow-md my-6">
+  <div class="text-slate-400 font-bold">// FAULT-TOLERANT RUNTIME VALIDATION PATTERN</div>
+  <pre class="text-slate-100"><code>import { z } from "zod";
+
+export const IngestionSchema = z.object({
+  topicId: z.string().min(1),
+  timestamp: z.number().int().positive(),
+  payload: z.record(z.unknown()),
+  retryCount: z.number().int().min(0).max(5).default(0),
+});
+
+export type IngestionPayload = z.infer&lt;typeof IngestionSchema&gt;;
+
+export function validateIncomingEvent(data: unknown): { ok: true; value: IngestionPayload } | { ok: false; error: string } {
+  const result = IngestionSchema.safeParse(data);
+  if (!result.success) {
+    return { ok: false, error: result.error.issues.map(i =&gt; i.message).join(", ") };
+  }
+  return { ok: true, value: result.data };
+}</code></pre>
+</div>
+
 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-10 mb-4 tracking-tight">
   ৫. কৌশলগত সুপারিশ ও প্রোডাকশন রোলআউট চেকলিস্ট
 </h2>
@@ -931,6 +957,7 @@ export async function processPipeline&lt;T, R&gt;(
   <li class="leading-relaxed">শুধু সিন্থেটিক বেঞ্চমার্কের ওপর নির্ভর না করে রিয়েল ইউজার মনিটরিং (RUM) p99 ল্যাটেন্সি ট্র্যাক করুন।</li>
   <li class="leading-relaxed">ক্যানারি রিলিজ এবং ইনস্ট্যান্ট রোলব্যাক সিস্টেম নিশ্চিত করুন।</li>
   <li class="leading-relaxed">লোড বেশি হলে ক্যাস্কেডিং ফেইলিউর এড়াতে স্বয়ংক্রিয় লোড-শেডিং (Load Shedding) চালু রাখুন।</li>
+  <li class="leading-relaxed">ওপেনটেলিমেট্রি (OpenTelemetry) ট্রেস হেডার প্রতিটি অ্যাসিনক্রোনাস কল এবং সাব-সার্ভিসে প্রবাহিত করুন।</li>
 </ul>
 
 <div class="my-8 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
@@ -950,6 +977,9 @@ export async function processPipeline&lt;T, R&gt;(
     </div>
     <div class="flex items-center gap-2">
       <span class="text-lime-700 font-bold">[✓]</span> ড্রপড ইভেন্টের জন্য অটোমেটেড ডেড-লেটার কিউ (DLQ) সফলভাবে কনফিগার করা আছে।
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-lime-700 font-bold">[✓]</span> মেমরি প্রোফাইলিং এবং V8 হিপ ডাম্প অ্যানালাইসিসে মেমরি লিক মুক্ত প্রমাণিত।
     </div>
   </div>
 </div>

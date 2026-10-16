@@ -41,6 +41,7 @@ import { AutomationConfig, AutomationLog } from "@/lib/ai/automation-config";
 import { Article } from "@/types/article";
 import { initialArticles } from "@/lib/data/articles";
 import { slugify, getFormattedToday, calculateReadingTime } from "@/lib/utils";
+import { NextPostCountdown } from "@/components/next-post-countdown";
 
 type ActiveTab = "studio" | "articles" | "engines" | "automation";
 
@@ -78,6 +79,7 @@ export default function AdminDashboardPage() {
   const [isRunningAutomation, setIsRunningAutomation] = useState(false);
   const [automationRunStatus, setAutomationRunStatus] = useState("");
   const [automationProgressStep, setAutomationProgressStep] = useState<number>(0); // 0=idle, 1=research, 2=analysis, 3=writing, 4=quality, 5=ready
+  const [automationElapsedSec, setAutomationElapsedSec] = useState<number>(0);
   const [isSavingConfig, setIsSavingConfig] = useState(false);
   const [customTestTopic, setCustomTestTopic] = useState("How to Create Motion Graphics Videos Using Claude Code");
   const [testAsDraft, setTestAsDraft] = useState(true);
@@ -153,6 +155,20 @@ export default function AdminDashboardPage() {
     loadArticles();
     loadAutomationData();
   }, []);
+
+  // Track elapsed seconds while automation pipeline is executing
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined;
+    if (isRunningAutomation) {
+      setAutomationElapsedSec(0);
+      interval = setInterval(() => {
+        setAutomationElapsedSec((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isRunningAutomation]);
 
   const saveArticles = (updated: Article[]) => {
     setArticles(updated);
@@ -1353,6 +1369,17 @@ export default function AdminDashboardPage() {
         {/* ============================================================== */}
         {activeTab === "automation" && (
           <div className="space-y-8">
+            {/* SVG Circular Countdown Clock Widget */}
+            <NextPostCountdown
+              scheduleTime={automationConfig?.scheduleTime || "09:00"}
+              timezone={automationConfig?.timezone || "UTC"}
+              isEnabled={automationConfig?.enabled ?? true}
+              isExecuting={isRunningAutomation}
+              lastRunAt={automationLogs[0]?.timestamp || null}
+              onRunNow={() => handleRunAutomationNow()}
+              onToggleSchedule={handleToggleScheduler}
+            />
+
             {/* Top Automation Banner with Status Controls */}
             <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -1461,62 +1488,94 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
 
-              {/* Live Multi-Step Progress Tracker */}
+              {/* Live Multi-Step Progress Tracker with Real-Time Percentage & Elapsed Timer */}
               {(isRunningAutomation || automationProgressStep > 0) && (
-                <div className="p-5 rounded-2xl bg-lime-50/70 border border-lime-300 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="font-mono text-xs font-bold text-lime-950 flex items-center gap-2">
-                      <FaBolt className="text-lime-700 animate-bounce" />
-                      <span>{automationRunStatus || "Executing pipeline..."}</span>
+                <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 text-white shadow-xl space-y-5 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-2xl bg-lime-400 text-slate-950 flex items-center justify-center font-bold text-sm shadow-md shrink-0">
+                        {isRunningAutomation ? (
+                          <FaSpinner className="animate-spin text-base" />
+                        ) : (
+                          <FaCheck className="text-base" />
+                        )}
+                      </div>
+                      <div>
+                        <div className="text-[11px] font-mono uppercase tracking-wider text-lime-400 font-bold flex items-center gap-1.5">
+                          <span className={`w-2 h-2 rounded-full ${isRunningAutomation ? "bg-amber-400 animate-ping" : "bg-emerald-400"}`}></span>
+                          <span>{isRunningAutomation ? "Autonomous Pipeline Active" : "Execution Finished"}</span>
+                        </div>
+                        <h4 className="text-sm sm:text-base font-bold text-slate-100 mt-0.5">
+                          {automationRunStatus || "Executing pipeline..."}
+                        </h4>
+                      </div>
                     </div>
-                    <span className="text-xs font-mono font-black text-lime-900">
-                      Step {automationProgressStep}/5
-                    </span>
+
+                    <div className="flex items-center gap-3 text-xs font-mono">
+                      {isRunningAutomation && (
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 shadow-inner">
+                          <FaClock className="text-lime-400 text-[11px]" />
+                          <span>Elapsed: <strong className="text-white font-bold">{automationElapsedSec}s</strong></span>
+                        </div>
+                      )}
+                      <div className="px-3.5 py-1.5 rounded-full bg-lime-400/20 border border-lime-400/40 text-lime-300 font-extrabold shadow-sm">
+                        {automationProgressStep === 5
+                          ? "100% Complete"
+                          : `${Math.min(96, Math.max(15, automationProgressStep * 20 + Math.min(15, automationElapsedSec)))}%`}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Step Progress Bar */}
-                  <div className="w-full bg-lime-200/80 rounded-full h-2.5 overflow-hidden">
+                  {/* Animated Continuous Progress Bar */}
+                  <div className="relative w-full bg-slate-800 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-700/80 shadow-inner">
                     <div
-                      className="bg-lime-500 h-2.5 rounded-full transition-all duration-500 ease-out"
-                      style={{ width: `${Math.min(100, Math.max(10, automationProgressStep * 20))}%` }}
-                    ></div>
+                      className="h-full rounded-full bg-gradient-to-r from-lime-500 via-emerald-400 to-lime-300 transition-all duration-700 ease-out shadow-lg shadow-lime-500/30"
+                      style={{
+                        width: `${
+                          automationProgressStep === 5
+                            ? 100
+                            : Math.min(96, Math.max(15, automationProgressStep * 20 + Math.min(15, automationElapsedSec)))
+                        }%`,
+                      }}
+                    />
                   </div>
 
                   {/* 5 Step Indicator Badges */}
-                  <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-[11px] font-mono">
+                  <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-[11px] font-mono">
                     {[
-                      { step: 1, title: "1. Web Research", desc: "Live Sources & Claims" },
-                      { step: 2, title: "2. Fact Analysis", desc: "Source Grounding" },
+                      { step: 1, title: "1. Web Research", desc: "14-16 Live Sources & RFCs" },
+                      { step: 2, title: "2. Fact Analysis", desc: "Benchmarks & Latency Specs" },
                       { step: 3, title: "3. Bangla Drafting", desc: "~1,200 Words, Code & Tables" },
-                      { step: 4, title: "4. Quality Gate", desc: "Anti-Hallucination & SEO" },
-                      { step: 5, title: "5. Storage Ready", desc: "Draft Stored / Live" },
+                      { step: 4, title: "4. Quality Audit", desc: "1,000+ Words Quality Gate" },
+                      { step: 5, title: "5. Production Live", desc: "Stored in Neon Postgres" },
                     ].map((s) => {
-                      const isComplete = automationProgressStep > s.step || (automationProgressStep === 5 && s.step === 5);
+                      const isComplete =
+                        automationProgressStep > s.step || (automationProgressStep === 5 && s.step === 5);
                       const isCurrent = automationProgressStep === s.step && isRunningAutomation;
                       return (
                         <div
                           key={s.step}
-                          className={`p-2.5 rounded-xl border transition flex flex-col justify-between ${
+                          className={`p-3 rounded-2xl border transition flex flex-col justify-between ${
                             isComplete
-                              ? "bg-emerald-50 border-emerald-300 text-emerald-900"
+                              ? "bg-emerald-950/40 border-emerald-500/50 text-emerald-200"
                               : isCurrent
-                              ? "bg-white border-lime-500 ring-2 ring-lime-400 text-slate-900 shadow-sm"
-                              : "bg-slate-50/60 border-slate-200 text-slate-400"
+                              ? "bg-slate-800 border-lime-400 ring-2 ring-lime-400/50 text-white shadow-lg"
+                              : "bg-slate-800/40 border-slate-800 text-slate-500"
                           }`}
                         >
                           <div className="flex items-center justify-between mb-1">
-                            <span className="font-bold text-[10px]">{s.title}</span>
+                            <span className="font-bold text-[11px] text-slate-200">{s.title}</span>
                             {isComplete ? (
-                              <FaCircleCheck className="text-emerald-600 text-xs" />
+                              <FaCircleCheck className="text-emerald-400 text-xs" />
                             ) : isCurrent ? (
-                              <FaSpinner className="animate-spin text-lime-700 text-xs" />
+                              <FaSpinner className="animate-spin text-lime-400 text-xs" />
                             ) : (
-                              <span className="w-3.5 h-3.5 rounded-full border border-slate-300 inline-block text-[9px] text-center leading-3">
+                              <span className="w-3.5 h-3.5 rounded-full border border-slate-600 inline-block text-[9px] text-center leading-3 text-slate-500">
                                 {s.step}
                               </span>
                             )}
                           </div>
-                          <span className="text-[10px] text-slate-500 leading-tight">
+                          <span className="text-[10px] text-slate-400 leading-tight">
                             {s.desc}
                           </span>
                         </div>

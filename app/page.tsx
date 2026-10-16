@@ -22,7 +22,7 @@ export default function HomePage() {
   const [articles, setArticles] = useState<Article[]>(initialArticles);
   const [currentCategory, setCurrentCategory] = useState<CategoryFilter>("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedQuickTags, setSelectedQuickTags] = useState<string[]>(["UX Design"]);
+  const [selectedQuickTags, setSelectedQuickTags] = useState<string[]>([]);
   const [layoutMode, setLayoutMode] = useState<LayoutMode>("list");
   const [activeReaderArticle, setActiveReaderArticle] = useState<Article | null>(null);
 
@@ -101,14 +101,18 @@ export default function HomePage() {
 
       return true;
     });
-  }, [articles, currentCategory, searchQuery, selectedQuickTags]);
+  }, [articles, currentCategory, searchQuery, selectedQuickTags, isAdmin]);
 
   const bookmarkCount = useMemo(() => {
     return articles.filter((a) => a.bookmarked).length;
   }, [articles]);
 
   const featuredArticle = useMemo(() => {
-    return articles.find((a) => a.featured) || articles[0];
+    return (
+      articles.find((a) => a.featured && a.status !== "draft") ||
+      articles.find((a) => a.status !== "draft") ||
+      null
+    );
   }, [articles]);
 
   const handleToggleBookmark = (id: number | string, e?: React.MouseEvent) => {
@@ -154,7 +158,7 @@ export default function HomePage() {
   const handleResetFilters = () => {
     setCurrentCategory("All");
     setSearchQuery("");
-    setSelectedQuickTags(["UX Design"]);
+    setSelectedQuickTags([]);
     showToast("Reset all filters");
   };
 

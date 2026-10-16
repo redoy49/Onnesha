@@ -33,31 +33,6 @@
     "executionTimeMs": 6
   },
   {
-    "id": "job-1792160666323",
-    "timestamp": "2026-10-16T14:24:26.323Z",
-    "topic": "Test: সম্পূর্ণ প্রযুক্তিগত গাইড ও প্রডাকশন আর্কিটেকচার",
-    "slug": "test",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 722,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "Test Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=Test"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 9
-  },
-  {
     "id": "job-1792153563411",
     "timestamp": "2026-10-16T12:26:03.411Z",
     "topic": "আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও এআই আর্কিটেকচার: পর্ব 14",
