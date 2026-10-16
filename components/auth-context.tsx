@@ -17,7 +17,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const ADMIN_PASSWORDS = ["admin", "admin123", "onnesha", "onnesha2026"];
+const DEFAULT_ADMIN_SECRETS = ["onnesha@admin2026", "onnesha2026"];
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [role, setRole] = useState<UserRole>("reader");
@@ -35,15 +35,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const loginAsAdmin = (password?: string): boolean => {
-    // If no password provided (1-click demo access) or password matches
-    if (!password || ADMIN_PASSWORDS.includes(password.trim().toLowerCase())) {
+    if (!password || !password.trim()) {
+      showToast("Admin secret key is required.");
+      return false;
+    }
+
+    const inputClean = password.trim();
+    const envSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET;
+    const allowed = envSecret ? [envSecret, ...DEFAULT_ADMIN_SECRETS] : DEFAULT_ADMIN_SECRETS;
+
+    if (allowed.includes(inputClean)) {
       setRole("admin");
       localStorage.setItem("onnesha-user-role", "admin");
       setIsAdminModalOpen(false);
       showToast("Signed in as Admin. Full AI Studio unlocked!");
       return true;
     }
-    showToast("Invalid admin password. Try 'admin' or use 1-click login.");
+
+    showToast("Invalid admin secret. Access denied.");
     return false;
   };
 

@@ -208,7 +208,7 @@ export default function AdminDashboardPage() {
     setAuthError("");
     const ok = loginAsAdmin(authPasswordInput);
     if (!ok) {
-      setAuthError("Invalid credentials. Try 'admin' or use 1-click login.");
+      setAuthError("Invalid admin secret key. Access denied.");
     }
   };
 
@@ -407,13 +407,13 @@ export default function AdminDashboardPage() {
               <div>
                 <label className="block text-xs font-mono text-slate-600 mb-1 flex items-center gap-1.5">
                   <FaKey className="text-lime-700 text-[10px]" />
-                  <span>ADMIN ACCESS PASSWORD</span>
+                  <span>ADMIN ACCESS SECRET KEY</span>
                 </label>
                 <input
                   type="password"
                   value={authPasswordInput}
                   onChange={(e) => setAuthPasswordInput(e.target.value)}
-                  placeholder="Enter admin password (e.g. admin)"
+                  placeholder="Enter admin secret key"
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-lime-500 focus:ring-2 focus:ring-lime-100"
                 />
               </div>
@@ -422,21 +422,13 @@ export default function AdminDashboardPage() {
                 <p className="text-xs text-rose-500 font-mono">{authError}</p>
               )}
 
-              <div className="space-y-2 pt-2">
+              <div className="pt-2">
                 <button
                   type="submit"
                   className="w-full py-3 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition"
                 >
                   <FaLock className="text-xs" />
-                  <span>Authenticate as Admin</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => loginAsAdmin()}
-                  className="w-full py-2.5 rounded-full bg-lime-50 border border-lime-300 text-lime-900 hover:bg-lime-100 transition-all text-xs font-bold flex items-center justify-center gap-2"
-                >
-                  <span>⚡ 1-Click Demo Admin Login</span>
+                  <span>Authenticate Admin</span>
                 </button>
               </div>
             </form>

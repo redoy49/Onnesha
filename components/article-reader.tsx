@@ -480,7 +480,7 @@ export function ArticleReader({
 
   // MODE B: NATIVE PAGE FLOW (When on /blog/[slug])
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-8 text-left">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-8 text-left">
       {/* Top Reading Progress Indicator Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-200 z-50">
         <div
