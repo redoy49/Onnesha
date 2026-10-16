@@ -69,6 +69,9 @@ export default function HomePage() {
   // Filter logic
   const filteredArticles = useMemo(() => {
     return articles.filter((post) => {
+      // Hide drafts from public readers unless authenticated as admin
+      if (post.status === "draft" && !isAdmin) return false;
+
       // Saved filter
       if (currentCategory === "Saved" && !post.bookmarked) return false;
 

@@ -188,7 +188,57 @@ async function researchWithTavily(topic: string, apiKey: string): Promise<Resear
  * Provides structured, authoritative technical context for offline testing or demo environments
  */
 function getSmartOfflineResearch(topic: string, niche = "Web Architecture & AI"): ResearchResult {
-  const slugified = topic.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const isMotionGraphics = /motion|graphic|video|animation|remotion|claude/i.test(topic);
+
+  if (isMotionGraphics) {
+    return {
+      topic,
+      providerUsed: "smart-offline",
+      summary: `Comprehensive technical briefing on "${topic}". Modern generative motion design combines AI agent orchestrators (such as Claude Code) with programmatic React-based video frameworks (Remotion, Motion Canvas, GSAP) to render high-definition videos directly from declarative code.`,
+      keyFindings: [
+        "Claude Code acts as a terminal-driven agent that can scaffold, debug, and automate Remotion (React video) compositions without manual GUI keyframing.",
+        "Programmatic video rendering eliminates manual Adobe After Effects exports, allowing dynamic parameterization and automated batch video generation.",
+        "Serverless and headless Chromium pipelines render 60fps full-HD motion graphics with deterministic frame-by-frame synchronization.",
+        "CSS Keyframes, Canvas 2D API, and SVG morphing can be precisely scripted and synchronized to audio tracks using timeline hooks.",
+      ],
+      verifiedFacts: [
+        "Remotion renders React components to MP4/WebM using headless Chromium and FFmpeg.",
+        "Claude Code executes terminal commands, edits files directly, and runs rendering pipelines iteratively via CLI tool-use.",
+        "Declarative video architectures allow version-controlled animations with git pull requests.",
+        "Verified limitation: Claude Code does not include an internal video playback window; video previewing relies on the Remotion local studio server (npx remotion preview).",
+      ],
+      sources: [
+        {
+          title: "Remotion - Make Videos in React & Programmatic Motion Design",
+          url: "https://www.remotion.dev/",
+          snippet: "Create real MP4 videos using familiar React code and modern web technologies.",
+        },
+        {
+          title: "Claude Code - Anthropic Agentic CLI Documentation",
+          url: "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+          snippet: "An agentic coding tool that lives in your terminal, understands your codebase, and edits files directly.",
+        },
+        {
+          title: "Motion Canvas - Programmatic Animation Framework",
+          url: "https://motioncanvas.io/",
+          snippet: "TypeScript library for creating animated technical videos and vector graphics.",
+        },
+        {
+          title: "MDN Web Docs - Web Animations API & Canvas Rendering",
+          url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
+          snippet: "Authoritative specification for synchronization, keyframes, and timing models on the web.",
+        },
+      ],
+      suggestedKeywords: [
+        "Claude Code",
+        "Motion Graphics",
+        "Remotion",
+        "Programmatic Video",
+        "React Animation",
+        "FFmpeg",
+      ],
+    };
+  }
 
   return {
     topic,

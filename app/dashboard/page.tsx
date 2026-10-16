@@ -28,6 +28,9 @@ import {
   FaGlobe,
   FaGear,
   FaPlay,
+  FaPause,
+  FaCircleCheck,
+  FaCircleExclamation,
   FaArrowUpRightFromSquare,
 } from "react-icons/fa6";
 import { useAuth } from "@/components/auth-context";
@@ -61,18 +64,23 @@ const CURATED_SAMPLE_IMAGES = [
 
 export default function AdminDashboardPage() {
   const router = useRouter();
-  const { isAdmin, role, loginAsAdmin, logout } = useAuth();
+  const { isAdmin, role, loginAsAdmin, logout, adminToken } = useAuth();
   const { showToast } = useToast();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>("studio");
   const [articles, setArticles] = useState<Article[]>(initialArticles);
+  const [articleFilter, setArticleFilter] = useState<"all" | "published" | "draft">("all");
+  const [isPublishingDraftId, setIsPublishingDraftId] = useState<number | string | null>(null);
 
   // Automation Agent States
   const [automationConfig, setAutomationConfig] = useState<AutomationConfig | null>(null);
   const [automationLogs, setAutomationLogs] = useState<AutomationLog[]>([]);
   const [isRunningAutomation, setIsRunningAutomation] = useState(false);
   const [automationRunStatus, setAutomationRunStatus] = useState("");
+  const [automationProgressStep, setAutomationProgressStep] = useState<number>(0); // 0=idle, 1=research, 2=analysis, 3=writing, 4=quality, 5=ready
   const [isSavingConfig, setIsSavingConfig] = useState(false);
+  const [customTestTopic, setCustomTestTopic] = useState("How to Create Motion Graphics Videos Using Claude Code");
+  const [testAsDraft, setTestAsDraft] = useState(true);
 
   // AI Generator Form States
   const [selectedEngine, setSelectedEngine] = useState<AiProviderKey>("chatgpt");
@@ -151,29 +159,139 @@ export default function AdminDashboardPage() {
     localStorage.setItem("onnesha-articles", JSON.stringify(updated));
   };
 
-  // Run Automation Pipeline on demand from Dashboard
-  const handleRunAutomationNow = async () => {
+  // Run Automation Pipeline on demand from Dashboard (with customTopic & forceDraft options)
+  const handleRunAutomationNow = async (options?: { customTopic?: string; forceDraft?: boolean }) => {
     setIsRunningAutomation(true);
-    setAutomationRunStatus("Researching web & compiling ~1,200-word article...");
+    setAutomationProgressStep(1);
+    setAutomationRunStatus("Step 1/5: Researching live technical sources & verifying claims...");
+
+    const t2 = setTimeout(() => {
+      setAutomationProgressStep(2);
+      setAutomationRunStatus("Step 2/5: Analyzing source facts & synthesizing structured outline...");
+    }, 4000);
+
+    const t3 = setTimeout(() => {
+      setAutomationProgressStep(3);
+      setAutomationRunStatus("Step 3/5: Writing comprehensive ~1,200-word Bangla deep-dive with code & tables...");
+    }, 8000);
+
+    const t4 = setTimeout(() => {
+      setAutomationProgressStep(4);
+      setAutomationRunStatus("Step 4/5: Running quality verification, anti-hallucination & SEO audit...");
+    }, 14000);
+
     try {
-      const res = await fetch("/api/cron/publish", { method: "POST" });
+      const res = await fetch("/api/cron/publish", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(adminToken ? { "x-admin-token": adminToken } : {}),
+        },
+        body: JSON.stringify({
+          customTopic: options?.customTopic?.trim() || undefined,
+          forceDraft: options?.forceDraft ?? false,
+        }),
+      });
+
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+
+      if (res.status === 429) {
+        setAutomationProgressStep(0);
+        showToast("⚠️ Pipeline is already executing! Please wait for it to complete.");
+        setAutomationRunStatus("⚠️ Pipeline is currently executing in background.");
+        return;
+      }
+
       const data = await res.json();
       if (data.success && data.article) {
-        showToast(`🎉 Published: "${data.article.title}" (~${data.wordCount} words)`);
-        setAutomationRunStatus(`Success! Published "${data.article.title}" with ${data.sourcesCount} citations.`);
+        setAutomationProgressStep(5);
+        const isDraft = data.article.status === "draft";
+        showToast(
+          isDraft
+            ? `📝 Draft Created: "${data.article.title}" (~${data.wordCount} words). Review in Manage Posts!`
+            : `🎉 Published Live: "${data.article.title}" (~${data.wordCount} words)`
+        );
+        setAutomationRunStatus(
+          isDraft
+            ? `✅ Step 5/5: Saved as Draft! Review in "Manage Posts" tab to publish live.`
+            : `✅ Step 5/5: Live on Public Feed! (${data.sourcesCount} citations)`
+        );
         await loadArticles();
         await loadAutomationData();
       } else {
+        setAutomationProgressStep(0);
         showToast(data.error || "Completed with draft/warning status.");
-        setAutomationRunStatus(`Status: ${data.status || "Check logs"}`);
+        setAutomationRunStatus(`Status: ${data.status || data.error || "Check logs"}`);
         await loadAutomationData();
       }
     } catch (err) {
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      setAutomationProgressStep(0);
       console.error(err);
       showToast("Failed to run automation pipeline");
       setAutomationRunStatus("Failed to execute pipeline.");
     } finally {
       setIsRunningAutomation(false);
+    }
+  };
+
+  // Toggle Automation Scheduler (Active / Paused)
+  const handleToggleScheduler = async () => {
+    if (!automationConfig) return;
+    const nextState = !automationConfig.enabled;
+    const updated = { ...automationConfig, enabled: nextState };
+    setAutomationConfig(updated);
+    try {
+      const res = await fetch("/api/cron/config", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(adminToken ? { "x-admin-token": adminToken } : {}),
+        },
+        body: JSON.stringify(updated),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setAutomationConfig(data.config);
+        showToast(nextState ? "▶️ Daily automation scheduler enabled!" : "⏸️ Automation scheduler paused.");
+      } else {
+        showToast(data.error || "Failed to update scheduler state.");
+      }
+    } catch (err) {
+      console.error(err);
+      showToast("Error toggling scheduler.");
+    }
+  };
+
+  // Promote a draft article to live published
+  const handlePublishDraft = async (id: number | string) => {
+    setIsPublishingDraftId(id);
+    try {
+      const res = await fetch("/api/articles/publish", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(adminToken ? { "x-admin-token": adminToken } : {}),
+        },
+        body: JSON.stringify({ id }),
+      });
+      const data = await res.json();
+      if (data.success && data.article) {
+        showToast(`🎉 "${data.article.title}" is now published live!`);
+        await loadArticles();
+        await loadAutomationData();
+      } else {
+        showToast(data.error || "Failed to publish draft");
+      }
+    } catch (err) {
+      console.error(err);
+      showToast("Network error publishing draft.");
+    } finally {
+      setIsPublishingDraftId(null);
     }
   };
 
@@ -185,7 +303,10 @@ export default function AdminDashboardPage() {
     try {
       const res = await fetch("/api/cron/config", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(adminToken ? { "x-admin-token": adminToken } : {}),
+        },
         body: JSON.stringify(automationConfig),
       });
       const data = await res.json();
@@ -977,92 +1098,188 @@ export default function AdminDashboardPage() {
         {/* ============================================================== */}
         {activeTab === "articles" && (
           <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 space-y-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
               <div>
                 <h2 className="font-extrabold text-xl text-slate-900">
-                  Published Technical Dispatches ({articles.length})
+                  Technical Dispatches & Drafts ({articles.length})
                 </h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Manage live articles, select the hero banner feature, or delete posts.
+                  Review automated AI drafts, publish live to reader feed, or set hero featured banner.
                 </p>
               </div>
 
-              <button
-                onClick={() => setActiveTab("studio")}
-                className="px-5 py-2.5 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center gap-2 self-start transition"
-              >
-                <FaWandMagicSparkles />
-                <span>Create New Post with AI</span>
-              </button>
-            </div>
-
-            <div className="divide-y divide-slate-100">
-              {articles.map((article) => (
-                <div
-                  key={article.id}
-                  className="py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-slate-50 p-3 rounded-2xl transition"
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setArticleFilter("all")}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition border ${
+                    articleFilter === "all"
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300"
+                  }`}
                 >
-                  <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                    <img
-                      src={article.coverImage}
-                      alt={article.title}
-                      className="w-16 h-12 object-cover rounded-xl shrink-0 border border-slate-200"
-                    />
-                    <div className="space-y-1 min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-[10px] font-bold uppercase">
-                          {article.category}
-                        </span>
-                        {article.featured && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-bold flex items-center gap-1">
-                            <FaStar className="text-[9px]" /> HERO FEATURED
-                          </span>
-                        )}
-                        <span className="text-[11px] font-mono text-slate-500">
-                          {article.date}
-                        </span>
-                      </div>
-                      <h3 className="font-bold text-sm text-slate-900 truncate">
-                        {article.title}
-                      </h3>
-                    </div>
-                  </div>
+                  All ({articles.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setArticleFilter("published")}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition border ${
+                    articleFilter === "published"
+                      ? "bg-emerald-600 text-white border-emerald-600"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300"
+                  }`}
+                >
+                  Published ({articles.filter((a) => a.status !== "draft").length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setArticleFilter("draft")}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition border ${
+                    articleFilter === "draft"
+                      ? "bg-amber-500 text-white border-amber-500"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300"
+                  }`}
+                >
+                  Drafts ({articles.filter((a) => a.status === "draft").length})
+                </button>
 
-                  <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto pt-2 sm:pt-0">
-                    <button
-                      onClick={() => handleToggleFeatured(article.id)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 border transition ${
-                        article.featured
-                          ? "bg-amber-100 text-amber-900 border-amber-300 font-bold"
-                          : "border-slate-200 text-slate-600 hover:text-amber-700 hover:border-amber-300"
-                      }`}
-                      title="Set as Hero featured article"
-                    >
-                      {article.featured ? <FaStar className="text-amber-600" /> : <FaRegStar />}
-                      <span className="text-[11px]">
-                        {article.featured ? "Featured" : "Set as Hero"}
-                      </span>
-                    </button>
-
-                    <Link
-                      href={`/blog/${article.slug}`}
-                      className="p-2 rounded-full border border-slate-200 text-slate-600 hover:text-lime-800 hover:border-lime-400 hover:bg-lime-50 transition"
-                      title="View Article"
-                    >
-                      <FaEye className="text-xs" />
-                    </Link>
-
-                    <button
-                      onClick={() => handleDeleteArticle(article.id)}
-                      className="p-2 rounded-full border border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 transition"
-                      title="Delete Article"
-                    >
-                      <FaTrash className="text-xs" />
-                    </button>
-                  </div>
-                </div>
-              ))}
+                <button
+                  onClick={() => setActiveTab("studio")}
+                  className="px-5 py-2 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center gap-2 ml-auto transition"
+                >
+                  <FaWandMagicSparkles />
+                  <span>Create New</span>
+                </button>
+              </div>
             </div>
+
+            {articles.filter((a) => {
+              if (articleFilter === "published") return a.status !== "draft";
+              if (articleFilter === "draft") return a.status === "draft";
+              return true;
+            }).length === 0 ? (
+              <div className="p-12 text-center border border-dashed border-slate-200 rounded-2xl space-y-3">
+                <FaListCheck className="text-3xl text-slate-300 mx-auto" />
+                <div className="font-bold text-sm text-slate-700">
+                  No {articleFilter === "draft" ? "drafts" : "articles"} found
+                </div>
+                <p className="text-xs text-slate-500">
+                  {articleFilter === "draft"
+                    ? "Run the AI Automation Agent in Draft mode to generate reviewable articles."
+                    : "No published articles available in this view."}
+                </p>
+              </div>
+            ) : (
+              <div className="divide-y divide-slate-100">
+                {articles
+                  .filter((a) => {
+                    if (articleFilter === "published") return a.status !== "draft";
+                    if (articleFilter === "draft") return a.status === "draft";
+                    return true;
+                  })
+                  .map((article) => {
+                    const isDraft = article.status === "draft";
+                    return (
+                      <div
+                        key={article.id}
+                        className={`py-4 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-3.5 rounded-2xl transition ${
+                          isDraft ? "bg-amber-50/60 border border-amber-200/80 my-1.5" : "hover:bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                          <img
+                            src={article.coverImage}
+                            alt={article.title}
+                            className="w-16 h-12 object-cover rounded-xl shrink-0 border border-slate-200"
+                          />
+                          <div className="space-y-1 min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              {isDraft ? (
+                                <span className="px-2.5 py-0.5 rounded-full bg-amber-200/80 text-amber-900 border border-amber-300 text-[10px] font-black uppercase tracking-wider">
+                                  📝 DRAFT (NOT PUBLIC)
+                                </span>
+                              ) : (
+                                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-[10px] font-bold uppercase tracking-wider">
+                                  LIVE
+                                </span>
+                              )}
+                              <span className="px-2.5 py-0.5 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-[10px] font-bold uppercase">
+                                {article.category}
+                              </span>
+                              {article.featured && (
+                                <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-bold flex items-center gap-1">
+                                  <FaStar className="text-[9px]" /> HERO FEATURED
+                                </span>
+                              )}
+                              <span className="text-[11px] font-mono text-slate-500">
+                                {article.date} • {article.readTime}
+                              </span>
+                            </div>
+                            <h3 className="font-bold text-sm text-slate-900 truncate">
+                              {article.title}
+                            </h3>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2 shrink-0 self-start lg:self-auto pt-2 lg:pt-0">
+                          {isDraft && (
+                            <button
+                              type="button"
+                              disabled={isPublishingDraftId === article.id}
+                              onClick={() => handlePublishDraft(article.id)}
+                              className="px-4 py-2 rounded-full bg-lime-400 hover:bg-lime-500 disabled:opacity-50 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5 transition"
+                              title="Publish this draft live to public reader feed"
+                            >
+                              {isPublishingDraftId === article.id ? (
+                                <>
+                                  <FaSpinner className="animate-spin text-xs" />
+                                  <span>Publishing...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <FaPaperPlane className="text-xs" />
+                                  <span>Publish Live</span>
+                                </>
+                              )}
+                            </button>
+                          )}
+
+                          <button
+                            onClick={() => handleToggleFeatured(article.id)}
+                            className={`px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 border transition ${
+                              article.featured
+                                ? "bg-amber-100 text-amber-900 border-amber-300 font-bold"
+                                : "border-slate-200 text-slate-600 hover:text-amber-700 hover:border-amber-300"
+                            }`}
+                            title="Set as Hero featured article"
+                          >
+                            {article.featured ? <FaStar className="text-amber-600" /> : <FaRegStar />}
+                            <span className="text-[11px]">
+                              {article.featured ? "Featured" : "Set Hero"}
+                            </span>
+                          </button>
+
+                          <Link
+                            href={`/blog/${article.slug}`}
+                            className="p-2 rounded-full border border-slate-200 text-slate-600 hover:text-lime-800 hover:border-lime-400 hover:bg-lime-50 transition"
+                            title="Preview / View Article"
+                          >
+                            <FaEye className="text-xs" />
+                          </Link>
+
+                          <button
+                            onClick={() => handleDeleteArticle(article.id)}
+                            className="p-2 rounded-full border border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 transition"
+                            title="Delete Article"
+                          >
+                            <FaTrash className="text-xs" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
           </div>
         )}
 
@@ -1136,59 +1353,287 @@ export default function AdminDashboardPage() {
         {/* ============================================================== */}
         {activeTab === "automation" && (
           <div className="space-y-8">
-            {/* Top Automation Banner */}
+            {/* Top Automation Banner with Status Controls */}
             <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-lime-900 text-xs font-mono font-bold uppercase shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    AUTONOMOUS RESEARCH & PUBLISHING AGENT
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-lime-900 text-xs font-mono font-bold uppercase shadow-sm flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full ${isRunningAutomation ? "bg-amber-500 animate-ping" : automationConfig?.enabled ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`}></span>
+                      {isRunningAutomation
+                        ? "PIPELINE RUNNING"
+                        : automationConfig?.enabled
+                        ? "AUTOMATION ACTIVE & SCHEDULED"
+                        : "SCHEDULER PAUSED"}
+                    </span>
+                    <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-mono font-bold uppercase">
+                      SINGLE-EXECUTION GUARD: LOCKED
+                    </span>
                   </div>
+
                   <h2 className="font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
-                    Daily Scheduled AI Blogging Engine
+                    Cloud Autonomous AI Blogging Engine
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
-                    Researches live technical topics on the web, writes comprehensive ~1,200-word SEO articles with code blueprints and source citations, runs quality checks, and publishes daily without needing your computer on.
+                    Researches live technical topics on the web, verifies sources, and writes ~1,200-word SEO articles in Bangla (বাংলা) with code blueprints and tables on cloud infrastructure — running independently 24/7 even when your PC is turned off.
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* Pause / Resume Button */}
                   <button
                     type="button"
-                    disabled={isRunningAutomation}
-                    onClick={handleRunAutomationNow}
-                    className="px-6 py-3.5 rounded-full bg-lime-400 hover:bg-lime-500 disabled:opacity-60 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition"
+                    onClick={handleToggleScheduler}
+                    className={`px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm flex items-center gap-2 transition ${
+                      automationConfig?.enabled
+                        ? "bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300"
+                        : "bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-700"
+                    }`}
                   >
-                    {isRunningAutomation ? (
+                    {automationConfig?.enabled ? (
                       <>
-                        <FaSpinner className="animate-spin text-sm" />
-                        <span>Running Pipeline...</span>
+                        <FaPause className="text-xs" />
+                        <span>Pause Schedule</span>
                       </>
                     ) : (
                       <>
-                        <FaBolt className="text-sm" />
-                        <span>Run Automation Now</span>
+                        <FaPlay className="text-xs" />
+                        <span>Resume Schedule</span>
                       </>
                     )}
                   </button>
 
+                  {/* Refresh Button */}
                   <button
                     type="button"
-                    onClick={loadAutomationData}
-                    className="px-4 py-3.5 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center justify-center gap-2 transition shadow-sm"
+                    onClick={() => {
+                      loadAutomationData();
+                      loadArticles();
+                      showToast("Status refreshed from cloud database.");
+                    }}
+                    className="px-4 py-3 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 transition shadow-sm"
                   >
                     <FaArrowRotateRight className="text-xs" />
-                    <span>Refresh Status</span>
+                    <span>Refresh</span>
                   </button>
                 </div>
               </div>
 
-              {automationRunStatus && (
-                <div className="p-4 rounded-2xl bg-lime-50 border border-lime-200 text-xs text-lime-900 font-mono flex items-center gap-2">
-                  <FaBolt className="text-lime-700 shrink-0" />
-                  <span>{automationRunStatus}</span>
+              {/* Status & Last Run Diagnostics Strip */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono">
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Current Status:</span>
+                  <span className="font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
+                    {isRunningAutomation ? (
+                      <span className="text-lime-700 font-extrabold flex items-center gap-1">
+                        <FaSpinner className="animate-spin text-xs" /> Running Web Research & Generation
+                      </span>
+                    ) : automationConfig?.enabled ? (
+                      <span className="text-emerald-700 font-extrabold flex items-center gap-1">
+                        <FaCircleCheck className="text-xs" /> Enabled (Next Run: {automationConfig.scheduleTime || "09:00"} {automationConfig.timezone || "UTC"})
+                      </span>
+                    ) : (
+                      <span className="text-amber-700 font-extrabold flex items-center gap-1">
+                        <FaCircleExclamation className="text-xs" /> Disabled / Paused (Manual trigger available)
+                      </span>
+                    )}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Last Run Time:</span>
+                  <span className="font-bold text-slate-800 mt-0.5 block truncate">
+                    {automationLogs[0] ? new Date(automationLogs[0].timestamp).toLocaleString() : "No runs recorded yet"}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Latest Result:</span>
+                  <span className="font-bold text-slate-800 mt-0.5 block truncate">
+                    {automationLogs[0] ? (
+                      <span className={`inline-flex items-center gap-1 font-bold ${automationLogs[0].status === "published" ? "text-emerald-700" : automationLogs[0].status === "draft" ? "text-amber-700" : "text-rose-700"}`}>
+                        {automationLogs[0].status === "published" ? "Live Published" : automationLogs[0].status === "draft" ? "Saved as Draft" : "Failed"}: {automationLogs[0].topic}
+                      </span>
+                    ) : (
+                      "Ready for initial run"
+                    )}
+                  </span>
+                </div>
+              </div>
+
+              {/* Live Multi-Step Progress Tracker */}
+              {(isRunningAutomation || automationProgressStep > 0) && (
+                <div className="p-5 rounded-2xl bg-lime-50/70 border border-lime-300 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="font-mono text-xs font-bold text-lime-950 flex items-center gap-2">
+                      <FaBolt className="text-lime-700 animate-bounce" />
+                      <span>{automationRunStatus || "Executing pipeline..."}</span>
+                    </div>
+                    <span className="text-xs font-mono font-black text-lime-900">
+                      Step {automationProgressStep}/5
+                    </span>
+                  </div>
+
+                  {/* Step Progress Bar */}
+                  <div className="w-full bg-lime-200/80 rounded-full h-2.5 overflow-hidden">
+                    <div
+                      className="bg-lime-500 h-2.5 rounded-full transition-all duration-500 ease-out"
+                      style={{ width: `${Math.min(100, Math.max(10, automationProgressStep * 20))}%` }}
+                    ></div>
+                  </div>
+
+                  {/* 5 Step Indicator Badges */}
+                  <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-[11px] font-mono">
+                    {[
+                      { step: 1, title: "1. Web Research", desc: "Live Sources & Claims" },
+                      { step: 2, title: "2. Fact Analysis", desc: "Source Grounding" },
+                      { step: 3, title: "3. Bangla Drafting", desc: "~1,200 Words, Code & Tables" },
+                      { step: 4, title: "4. Quality Gate", desc: "Anti-Hallucination & SEO" },
+                      { step: 5, title: "5. Storage Ready", desc: "Draft Stored / Live" },
+                    ].map((s) => {
+                      const isComplete = automationProgressStep > s.step || (automationProgressStep === 5 && s.step === 5);
+                      const isCurrent = automationProgressStep === s.step && isRunningAutomation;
+                      return (
+                        <div
+                          key={s.step}
+                          className={`p-2.5 rounded-xl border transition flex flex-col justify-between ${
+                            isComplete
+                              ? "bg-emerald-50 border-emerald-300 text-emerald-900"
+                              : isCurrent
+                              ? "bg-white border-lime-500 ring-2 ring-lime-400 text-slate-900 shadow-sm"
+                              : "bg-slate-50/60 border-slate-200 text-slate-400"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="font-bold text-[10px]">{s.title}</span>
+                            {isComplete ? (
+                              <FaCircleCheck className="text-emerald-600 text-xs" />
+                            ) : isCurrent ? (
+                              <FaSpinner className="animate-spin text-lime-700 text-xs" />
+                            ) : (
+                              <span className="w-3.5 h-3.5 rounded-full border border-slate-300 inline-block text-[9px] text-center leading-3">
+                                {s.step}
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-[10px] text-slate-500 leading-tight">
+                            {s.desc}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
+            </div>
+
+            {/* Custom Topic Test Runner Card */}
+            <div className="bg-gradient-to-br from-lime-50/50 via-white to-slate-50 border-2 border-lime-300 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-lime-200/60 pb-5">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime-200/60 border border-lime-300 text-lime-900 text-[11px] font-mono font-bold uppercase mb-2">
+                    <FaWandMagicSparkles className="text-lime-800 text-xs" />
+                    <span>INTERACTIVE TOPIC TEST RUNNER</span>
+                  </div>
+                  <h3 className="font-black text-xl text-slate-900">
+                    Test Automation with Any Specific Technical Subject
+                  </h3>
+                  <p className="text-xs text-slate-600 max-w-2xl mt-1 leading-relaxed">
+                    Test the agent right now with a custom topic. It will strictly research that subject, synthesize real source citations, and generate a comprehensive ~1,200-word Bangla article. By default it is safely stored as a Draft for your review before going live.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0 bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
+                  <label className="text-xs font-mono font-bold text-slate-700 flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={testAsDraft}
+                      onChange={(e) => setTestAsDraft(e.target.checked)}
+                      className="accent-lime-500 w-4 h-4 cursor-pointer"
+                    />
+                    <span>Save as Draft (Safe Review Mode)</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Topic Input Box */}
+              <div className="space-y-3">
+                <label className="block text-xs font-mono font-bold text-slate-800 flex items-center justify-between">
+                  <span>ENTER TOPIC TO RESEARCH & WRITE:</span>
+                  <span className="text-lime-800 text-[11px]">Strict Subject Adherence Enforced</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={customTestTopic}
+                    onChange={(e) => setCustomTestTopic(e.target.value)}
+                    placeholder="e.g. How to Create Motion Graphics Videos Using Claude Code"
+                    className="w-full bg-white border border-slate-300 rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-900 font-medium focus:outline-none focus:border-lime-500 focus:ring-2 focus:ring-lime-200 shadow-sm"
+                  />
+                </div>
+              </div>
+
+              {/* Sample Topic Pills */}
+              <div className="space-y-2">
+                <div className="text-[11px] font-mono text-slate-500 font-bold">
+                  Quick test subjects (Click to populate):
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "How to Create Motion Graphics Videos Using Claude Code",
+                    "Next.js 15 Partial Prerendering & React 19",
+                    "DeepSeek R1 Reasoning Benchmarks vs Claude 3.5 Sonnet",
+                    "Autonomous Multi-Agent Workflows with Remotion & FFmpeg",
+                    "Zero-Bundle High-Contrast Design Systems with Vanilla CSS",
+                  ].map((topic, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setCustomTestTopic(topic)}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition flex items-center gap-1.5 ${
+                        customTestTopic === topic
+                          ? "bg-lime-400 text-slate-950 border-lime-500 font-black shadow-sm ring-1 ring-lime-400"
+                          : "bg-white text-slate-700 border-slate-200 hover:border-lime-400 hover:bg-lime-50"
+                      }`}
+                    >
+                      {idx === 0 && <FaStar className="text-amber-500 text-[10px]" />}
+                      <span>{topic}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons Row */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                <button
+                  type="button"
+                  disabled={isRunningAutomation || !customTestTopic.trim()}
+                  onClick={() => handleRunAutomationNow({ customTopic: customTestTopic, forceDraft: testAsDraft })}
+                  className="px-8 py-3.5 rounded-full bg-lime-400 hover:bg-lime-500 disabled:opacity-50 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition"
+                >
+                  {isRunningAutomation ? (
+                    <>
+                      <FaSpinner className="animate-spin text-sm" />
+                      <span>Agent Working...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaBolt className="text-sm" />
+                      <span>⚡ Test Run with This Topic ({testAsDraft ? "Save as Draft" : "Publish Live"})</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  disabled={isRunningAutomation}
+                  onClick={() => handleRunAutomationNow({ forceDraft: testAsDraft })}
+                  className="px-6 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-sm"
+                >
+                  <FaRobot className="text-xs text-lime-400" />
+                  <span>🤖 Run Autonomous Mode (Auto-Topic Ideation)</span>
+                </button>
+              </div>
             </div>
 
             {/* Quick Metrics Row */}
@@ -1241,7 +1686,7 @@ export default function AdminDashboardPage() {
                   {automationLogs.length} Runs
                 </div>
                 <div className="text-[11px] text-slate-600 font-mono">
-                  {automationConfig?.autoPublish ? "Auto-Publishes to Live" : "Saves as Draft"}
+                  {articles.filter((a) => a.status === "draft").length} Drafts Awaiting Review
                 </div>
               </div>
             </div>

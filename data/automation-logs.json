@@ -1,5 +1,63 @@
 [
   {
+    "id": "job-1792160694369",
+    "timestamp": "2026-10-16T14:24:54.369Z",
+    "topic": "ক্লড কোড (Claude Code) দিয়ে কীভাবে মোশন গ্রাফিক্স ভিডিও তৈরি করবেন: সম্পূর্ণ প্রডাকশন গাইড",
+    "slug": "how-to-create-motion-graphics-videos-using-claude-code",
+    "status": "draft",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 844,
+    "sourcesCount": 4,
+    "sources": [
+      {
+        "title": "Remotion - Make Videos in React & Programmatic Motion Design",
+        "url": "https://www.remotion.dev/",
+        "snippet": "Create real MP4 videos using familiar React code and modern web technologies."
+      },
+      {
+        "title": "Claude Code - Anthropic Agentic CLI Documentation",
+        "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+        "snippet": "An agentic coding tool that lives in your terminal, understands your codebase, and edits files directly."
+      },
+      {
+        "title": "Motion Canvas - Programmatic Animation Framework",
+        "url": "https://motioncanvas.io/",
+        "snippet": "TypeScript library for creating animated technical videos and vector graphics."
+      },
+      {
+        "title": "MDN Web Docs - Web Animations API & Canvas Rendering",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
+        "snippet": "Authoritative specification for synchronization, keyframes, and timing models on the web."
+      }
+    ],
+    "executionTimeMs": 6
+  },
+  {
+    "id": "job-1792160666323",
+    "timestamp": "2026-10-16T14:24:26.323Z",
+    "topic": "Test: সম্পূর্ণ প্রযুক্তিগত গাইড ও প্রডাকশন আর্কিটেকচার",
+    "slug": "test",
+    "status": "published",
+    "engine": "Gemini (smart-offline) [bn]",
+    "wordCount": 722,
+    "sourcesCount": 3,
+    "sources": [
+      {
+        "title": "Test Architecture & RFC Specifications",
+        "url": "https://github.com/trending?q=Test"
+      },
+      {
+        "title": "W3C Web Standards & Engineering Performance Guide",
+        "url": "https://www.w3.org/standards/"
+      },
+      {
+        "title": "Modern Fullstack Web Engineering Principles",
+        "url": "https://developer.mozilla.org/en-US/docs/Web"
+      }
+    ],
+    "executionTimeMs": 9
+  },
+  {
     "id": "job-1792153563411",
     "timestamp": "2026-10-16T12:26:03.411Z",
     "topic": "আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও এআই আর্কিটেকচার: পর্ব 14",

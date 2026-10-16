@@ -264,6 +264,19 @@ export async function deleteArticle(id: number | string): Promise<boolean> {
 }
 
 /**
+ * Promote a draft article to published live status
+ */
+export async function publishArticle(id: number | string): Promise<Article | null> {
+  const all = await getAllArticles();
+  const article = all.find((a) => a.id === id || String(a.id) === String(id));
+  if (!article) return null;
+
+  article.status = "published";
+  await saveArticle(article);
+  return article;
+}
+
+/**
  * Check cloud database status
  */
 export function getDatabaseStatus(): { type: "neon" | "local"; connected: boolean } {
