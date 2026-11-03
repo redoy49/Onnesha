@@ -28,18 +28,21 @@
   --color-border: #E2E8F0;
   --color-border-hover: #CBD5E1;
   --color-muted: #64748B;
-  --color-text: #0F172A;
-  --color-text-muted: #475569;
+  --color-text: #1E293B;
+  --color-text-muted: #64748B;
 
   --glass-bg: rgba(255, 255, 255, 0.92);
   --glass-border: rgba(226, 232, 240, 0.9);
 }
 
-/* Base Body Setup: Clean, Crisp Light Editorial Theme */
+/* Base Body Setup: Clean, Crisp Light Editorial Theme with Balanced Weight */
 body {
   background-color: #F8FAFC;
-  color: #0F172A;
+  color: #1E293B;
+  font-weight: 400;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom Scrollbars */
@@ -70,6 +73,28 @@ body {
     radial-gradient(circle at 12% 10%, rgba(163, 230, 53, 0.12) 0%, transparent 45%),
     radial-gradient(circle at 88% 50%, rgba(132, 204, 22, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 50% 100%, rgba(241, 245, 249, 0.8) 0%, transparent 60%);
+}
+
+/* Signature High-Voltage Electric Lime Action Button */
+.lime-cta-btn {
+  color: rgb(26, 26, 26) !important;
+  background-color: rgb(209, 254, 23) !important;
+  border: 1px solid rgb(209, 254, 23) !important;
+  text-decoration: none !important;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lime-cta-btn:hover {
+  background-color: #bef306 !important;
+  border-color: #bef306 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px -2px rgba(209, 254, 23, 0.45);
+}
+.lime-cta-btn:active {
+  transform: translateY(0px);
 }
 
 /* Signature Soft Lime Gradient Button */

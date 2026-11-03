@@ -16,7 +16,7 @@ export function PaletteModal() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-200 pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-lime-400 flex items-center justify-center text-slate-950 font-black shadow-sm">
+            <div className="w-8 h-8 rounded-full bg-lime-400 flex items-center justify-center text-slate-900 font-bold shadow-sm">
               #
             </div>
             <div>
@@ -46,7 +46,7 @@ export function PaletteModal() {
             <span className="block text-[10px] font-mono font-bold uppercase opacity-80">
               Primary Accent
             </span>
-            <span className="block text-sm font-black">{currentTheme.primary.DEFAULT}</span>
+            <span className="block text-sm font-bold">{currentTheme.primary.DEFAULT}</span>
           </div>
 
           <div
@@ -55,7 +55,7 @@ export function PaletteModal() {
             <span className="block text-[10px] font-mono font-bold uppercase opacity-80">
               Canvas Surface
             </span>
-            <span className="block text-sm font-black">#F8FAFC</span>
+            <span className="block text-sm font-bold">#F8FAFC</span>
           </div>
 
           <div
@@ -64,11 +64,11 @@ export function PaletteModal() {
             <span className="block text-[10px] font-mono font-bold uppercase opacity-80">
               Surface Card
             </span>
-            <span className="block text-sm font-black">#FFFFFF</span>
+            <span className="block text-sm font-bold">#FFFFFF</span>
           </div>
 
           <div
-            className="p-3 rounded-2xl text-slate-950 space-y-1 border border-slate-200"
+            className="p-3 rounded-2xl text-slate-900 space-y-1 border border-slate-200"
             style={{
               background: `linear-gradient(135deg, ${currentTheme.primary.gradientStart} 0%, ${currentTheme.primary.gradientEnd} 100%)`,
             }}
@@ -76,7 +76,7 @@ export function PaletteModal() {
             <span className="block text-[10px] font-mono font-bold uppercase opacity-80">
               Soft Blend
             </span>
-            <span className="block text-xs font-black">Lime Palette</span>
+            <span className="block text-xs font-bold">Lime Palette</span>
           </div>
         </div>
 
@@ -94,7 +94,7 @@ export function PaletteModal() {
                   onClick={() => setThemePreset(key)}
                   className={`px-3 py-1.5 rounded-full text-xs font-bold border flex items-center gap-1.5 transition ${
                     isSelected
-                      ? "bg-lime-400 text-slate-950 border-lime-500 shadow-sm font-black"
+                      ? "bg-lime-400 text-slate-900 border-lime-500 shadow-sm font-bold"
                       : "bg-slate-100 text-slate-700 border-slate-200 hover:border-lime-400"
                   }`}
                   type="button"

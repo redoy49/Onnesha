@@ -116,7 +116,7 @@ export function AdminLoginModal() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition"
+                  className="w-full py-3 rounded-full lime-cta-btn text-xs font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition"
                 >
                   <FaLock className="text-xs" />
                   <span>Authenticate Admin</span>

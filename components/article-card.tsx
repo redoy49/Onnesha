@@ -32,7 +32,7 @@ export function ArticleCard({
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               alt={article.title}
             />
-            <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-lime-400 text-slate-950 text-[10px] font-extrabold uppercase shadow-sm">
+            <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-lime-400 text-slate-900 text-[10px] font-bold uppercase shadow-sm">
               {article.category}
             </span>
           </div>
@@ -102,7 +102,7 @@ export function ArticleCard({
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           alt={article.title}
         />
-        <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-lime-400 text-slate-950 text-[10px] font-extrabold uppercase shadow-sm">
+        <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-lime-400 text-slate-900 text-[10px] font-bold uppercase shadow-sm">
           {article.category}
         </span>
       </div>

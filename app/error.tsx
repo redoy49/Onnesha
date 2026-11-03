@@ -34,7 +34,7 @@ export default function ErrorBoundary({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <button
             onClick={() => reset()}
-            className="px-6 py-2.5 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto shadow-sm transition"
+            className="px-6 py-2.5 rounded-full lime-cta-btn text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto shadow-sm transition"
             type="button"
           >
             <FaRotateRight className="text-xs" />

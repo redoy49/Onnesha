@@ -15,6 +15,10 @@ import {
   FaLinkedinIn,
   FaArrowRight,
   FaCheck,
+  FaArrowUpRightFromSquare,
+  FaChevronDown,
+  FaChevronUp,
+  FaShieldHalved,
 } from "react-icons/fa6";
 import { Article } from "@/types/article";
 import { useToast } from "./toast";
@@ -43,7 +47,28 @@ export function ArticleReader({
   const [claps, setClaps] = useState(article.claps || 0);
   const [isBookmarked, setIsBookmarked] = useState(article.bookmarked);
   const [copied, setCopied] = useState(false);
+  const [isSourcesExpanded, setIsSourcesExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Sanitize any legacy or duplicate citation HTML embedded directly in article.body
+  const cleanBody = React.useMemo(() => {
+    if (!article.body) return "";
+    return article.body
+      .replace(
+        /<(?:h[1-6]|section|div)[^>]*>[\s\S]*?(?:তথ্যসূত্র|External Citations|Verified Multi-Page Citations|Verified External Citations|যাচাইকৃত রেফারেন্স|সাইটেশন)[\s\S]*$/i,
+        ""
+      )
+      .trim();
+  }, [article.body]);
+
+  const getHostname = (url: string) => {
+    try {
+      const parsed = new URL(url);
+      return parsed.hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+    }
+  };
 
   const handleBack = () => {
     if (onClose) {
@@ -237,11 +262,103 @@ export function ArticleReader({
         />
       </div>
 
-      {/* Article Body Content */}
+      {/* Article Body Content (Citations safely stripped so they are never duplicated) */}
       <div
         className="prose max-w-none text-slate-800 text-base sm:text-lg leading-relaxed space-y-6 pt-2 break-words"
-        dangerouslySetInnerHTML={{ __html: article.body }}
+        dangerouslySetInnerHTML={{ __html: cleanBody }}
       />
+
+      {/* Smart Non-Intrusive Research Dossier & Citations Drawer */}
+      {article.sources && article.sources.length > 0 && (
+        <section className="pt-6 border-t border-slate-200">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5 transition shadow-sm hover:border-slate-300">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-lime-400 text-slate-900 flex items-center justify-center shrink-0 shadow-sm">
+                  <FaShieldHalved className="text-base" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-sm sm:text-base text-slate-800">
+                      গবেষণা ও যাচাইকৃত তথ্যসূত্র (Research Citations)
+                    </h3>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-mono font-bold">
+                      {article.sources.length} Sources
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 font-mono mt-0.5">
+                    TinyFish মাল্টি-পেজ ডিপ ওয়েব সার্চের মাধ্যমে ক্রস-ভেরিফাইড ও ফ্যাক্ট-চেকড
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsSourcesExpanded(!isSourcesExpanded)}
+                className={`px-4 py-2 rounded-full text-xs font-bold font-mono transition flex items-center gap-2 self-start sm:self-auto border ${
+                  isSourcesExpanded
+                    ? "bg-slate-200 text-slate-800 border-slate-300"
+                    : "lime-cta-btn"
+                }`}
+                aria-expanded={isSourcesExpanded}
+              >
+                <span>
+                  {isSourcesExpanded
+                    ? "তথ্যসূত্র লুকান (Collapse)"
+                    : `${article.sources.length}টি তথ্যসূত্র দেখুন (View Sources)`}
+                </span>
+                {isSourcesExpanded ? (
+                  <FaChevronUp className="text-[11px]" />
+                ) : (
+                  <FaChevronDown className="text-[11px]" />
+                )}
+              </button>
+            </div>
+
+            {/* Collapsible Source List (Clean 2-Column Responsive Grid) */}
+            {isSourcesExpanded && (
+              <div className="mt-5 pt-4 border-t border-slate-200 space-y-4 animate-in fade-in duration-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                  {article.sources.map((source, idx) => (
+                    <a
+                      key={idx}
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group p-3 rounded-xl bg-white border border-slate-200 hover:border-lime-400 hover:bg-lime-50/30 transition shadow-sm flex items-start gap-3"
+                    >
+                      <span className="shrink-0 w-6 h-6 rounded-lg bg-slate-100 group-hover:bg-lime-200 text-slate-700 group-hover:text-slate-900 text-[11px] font-mono font-bold flex items-center justify-center transition">
+                        {(idx + 1).toString().padStart(2, "0")}
+                      </span>
+                      <div className="flex-1 min-w-0 space-y-0.5">
+                        <div className="text-xs font-semibold text-slate-800 group-hover:text-lime-900 line-clamp-1">
+                          {source.title}
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 group-hover:text-slate-600">
+                          <span className="truncate">{getHostname(source.url)}</span>
+                          <FaArrowUpRightFromSquare className="text-[9px] shrink-0 opacity-70 group-hover:opacity-100" />
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                {article.generatedBy && (
+                  <div className="p-3 rounded-xl bg-slate-100/90 border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-600">
+                    <span>
+                      গবেষণা ও সিন্থেসিস ইঞ্জিন:{" "}
+                      <strong className="text-slate-800 font-bold">{article.generatedBy}</strong>
+                    </span>
+                    <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+                      <FaCheck className="text-[10px]" /> অটোনোমাস ফ্যাক্ট-চেকিং সম্পন্ন
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Tags Section */}
       <div className="pt-6 border-t border-slate-200 space-y-3">
@@ -342,7 +459,7 @@ export function ArticleReader({
                       alt={rel.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-lime-400 text-slate-950 text-[10px] font-black uppercase shadow-sm">
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-lime-400 text-slate-900 text-[10px] font-bold uppercase shadow-sm">
                       {rel.category}
                     </span>
                   </div>
@@ -444,7 +561,7 @@ export function ArticleReader({
         {isModal && (
           <button
             onClick={handleBack}
-            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-black transition shadow-sm ml-0.5 sm:ml-1"
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold transition shadow-sm ml-0.5 sm:ml-1"
             title="Close Reader"
             type="button"
           >

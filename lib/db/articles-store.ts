@@ -264,6 +264,25 @@ export async function deleteArticle(id: number | string): Promise<boolean> {
 }
 
 /**
+ * Delete all articles from memory, file, and Neon database
+ */
+export async function clearAllArticles(): Promise<boolean> {
+  const sql = getNeonClient();
+  if (sql) {
+    try {
+      await ensureNeonTable(sql);
+      await sql`DELETE FROM articles`;
+    } catch (err) {
+      console.warn("Failed clearing articles from Neon:", err);
+    }
+  }
+
+  memoryArticles = [];
+  writeStoredArticles([]);
+  return true;
+}
+
+/**
  * Promote a draft article to published live status
  */
 export async function publishArticle(id: number | string): Promise<Article | null> {

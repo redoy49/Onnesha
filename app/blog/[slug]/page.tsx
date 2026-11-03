@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllArticles, getArticleBySlug } from "@/lib/db/articles-store";
 import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import { ArticleReader } from "@/components/article-reader";
 
 interface Props {
@@ -72,7 +71,6 @@ export default async function BlogPostPage({ params }: Props) {
           isModal={false}
         />
       </main>
-      <Footer />
     </div>
   );
 }

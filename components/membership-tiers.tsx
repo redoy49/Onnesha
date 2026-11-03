@@ -66,7 +66,7 @@ export function MembershipTiers() {
 
           <button
             onClick={handleJoinReader}
-            className="px-6 py-2.5 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs uppercase tracking-wider font-extrabold shadow-sm w-full sm:w-auto transition-colors"
+            className="px-6 py-2.5 rounded-full lime-cta-btn text-xs uppercase tracking-wider font-bold shadow-sm w-full sm:w-auto transition"
             type="button"
           >
             Explore as Reader
@@ -110,7 +110,7 @@ export function MembershipTiers() {
 
           <button
             onClick={handleCreatorClick}
-            className="px-6 py-2.5 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-sm w-full sm:w-auto transition-colors"
+            className="px-6 py-2.5 rounded-full lime-cta-btn font-bold text-xs uppercase tracking-wider shadow-sm w-full sm:w-auto transition"
             type="button"
           >
             {isAdmin ? "Open AI Studio Dashboard" : "Admin Portal Sign In"}

@@ -244,7 +244,7 @@ export default function HomePage() {
             <div className="pt-8 text-center">
               <button
                 onClick={() => showToast("Loaded latest dispatches!")}
-                className="px-8 py-3 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs uppercase tracking-widest font-black shadow-sm hover:scale-105 transition-all inline-flex items-center gap-2"
+                className="px-8 py-3 rounded-full lime-cta-btn text-xs uppercase tracking-wider font-bold shadow-sm hover:scale-105 transition-all inline-flex items-center gap-2"
                 type="button"
               >
                 <span>See more articles</span>

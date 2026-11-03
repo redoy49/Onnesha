@@ -231,7 +231,7 @@ export function WriteModal({ onPublishArticle }: WriteModalProps) {
             </button>
             <button
               type="submit"
-              className="lime-gradient-btn px-6 py-2 rounded-full text-xs font-extrabold shadow-lime-glow"
+              className="lime-cta-btn px-6 py-2 rounded-full text-xs font-bold shadow-sm"
             >
               Publish Live
             </button>

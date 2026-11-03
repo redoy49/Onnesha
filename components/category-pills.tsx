@@ -38,12 +38,12 @@ export function CategoryPills({
               onClick={() => onSelectCategory(cat.value)}
               className={`category-btn px-4 py-2 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 ${
                 isActive
-                  ? "bg-lime-400 text-slate-950 font-extrabold shadow-sm border border-lime-500"
-                  : "bg-white border border-slate-200 text-slate-700 hover:text-slate-950 hover:border-lime-400 hover:bg-lime-50/60 font-semibold shadow-sm"
+                  ? "bg-lime-400 text-slate-900 font-bold shadow-sm border border-lime-500"
+                  : "bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:border-lime-400 hover:bg-lime-50/60 font-semibold shadow-sm"
               }`}
               type="button"
             >
-              {cat.icon && <FaBookmark className={isActive ? "text-slate-950" : "text-lime-700"} />}
+              {cat.icon && <FaBookmark className={isActive ? "text-slate-900" : "text-lime-700"} />}
               <span>{cat.label}</span>
             </button>
           );
@@ -57,7 +57,7 @@ export function CategoryPills({
           onClick={() => onToggleLayout("list")}
           className={`p-2 rounded-full transition-all ${
             layoutMode === "list"
-              ? "bg-lime-400 text-slate-950 shadow-sm"
+              ? "bg-lime-400 text-slate-900 shadow-sm"
               : "bg-white text-slate-600 border border-slate-200 hover:text-slate-900 hover:border-lime-400 shadow-sm"
           }`}
           title="List View"
@@ -69,7 +69,7 @@ export function CategoryPills({
           onClick={() => onToggleLayout("grid")}
           className={`p-2 rounded-full transition-all ${
             layoutMode === "grid"
-              ? "bg-lime-400 text-slate-950 shadow-sm"
+              ? "bg-lime-400 text-slate-900 shadow-sm"
               : "bg-white text-slate-600 border border-slate-200 hover:text-slate-900 hover:border-lime-400 shadow-sm"
           }`}
           title="Grid View"

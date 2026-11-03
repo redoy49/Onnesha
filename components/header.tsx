@@ -47,7 +47,7 @@ export function Header({
           onClick={() => handleNavClick("All")}
           className="flex items-center gap-2.5 cursor-pointer group shrink-0"
         >
-          <div className="w-8 h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-black text-xs sm:text-sm shadow-sm transition-transform group-hover:scale-105">
+          <div className="w-8 h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold text-xs sm:text-sm shadow-sm transition-transform group-hover:scale-105">
             ⚡
           </div>
           <div className="flex items-center">
@@ -104,14 +104,14 @@ export function Header({
 
           {/* Role-Based CTA: Only Admin can post/write */}
           {isAdmin ? (
-            /* Admin view: Direct Dashboard Link with AI Studio */
+            /* Admin view: Direct Dashboard Link */
             <Link
               href="/dashboard"
-              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 text-xs font-extrabold uppercase tracking-wider shadow-sm flex items-center gap-1.5 shrink-0 transition-colors"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full lime-cta-btn text-xs font-bold uppercase tracking-wider shadow-sm flex items-center gap-1.5 shrink-0"
               title="Admin Dashboard"
             >
-              <FaWandMagicSparkles className="text-xs text-slate-900" />
-              <span className="hidden sm:inline">AI Studio</span>
+              <FaWandMagicSparkles className="text-xs" />
+              <span className="hidden sm:inline">Dashboard</span>
               <span className="sm:hidden">Admin</span>
             </Link>
           ) : (
@@ -202,10 +202,10 @@ export function Header({
                 <Link
                   href="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-2.5 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 font-extrabold text-xs uppercase text-center flex items-center justify-center gap-2 shadow-sm transition"
+                  className="w-full py-2.5 rounded-full lime-cta-btn text-xs font-bold uppercase text-center flex items-center justify-center gap-2 shadow-sm"
                 >
                   <FaWandMagicSparkles />
-                  <span>Open AI Admin Studio</span>
+                  <span>Open Admin Dashboard</span>
                 </Link>
               ) : (
                 <button

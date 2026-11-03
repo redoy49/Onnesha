@@ -25,7 +25,7 @@ export default function NotFound() {
         <div className="pt-4">
           <Link
             href="/"
-            className="px-8 py-3 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-sm hover:scale-105 transition-all"
+            className="px-8 py-3 rounded-full lime-cta-btn text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-sm hover:scale-105 transition-all"
           >
             <FaHouse className="text-xs" />
             <span>Return to Homepage</span>

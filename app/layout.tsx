@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import { ToastProvider } from "@/components/toast";
-import { ThemeProvider } from "@/components/theme-context";
-import { AuthProvider } from "@/components/auth-context";
-import { AdminLoginModal } from "@/components/admin-login-modal";
-import { PaletteModal } from "@/components/palette-modal";
+import { Providers } from "@/components/providers";
 import { Footer } from "@/components/footer";
 
 const outfit = Outfit({
@@ -32,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Onnesha :: Next Generation Tech Blog",
     description: "AI-Powered Personal Blog & Systems Architecture",
-    url: "https://onnesha.vercel.app",
+    url: "https://onneshax.vercel.app",
     siteName: "Onnesha",
     images: [
       {
@@ -61,16 +57,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={outfit.variable}>
       <body className="bg-surface-canvas text-slate-800 font-sans antialiased min-h-screen flex flex-col bg-mesh-glow selection:bg-lime-200 selection:text-lime-950">
-        <ToastProvider>
-          <AuthProvider>
-            <ThemeProvider>
-              {children}
-              <AdminLoginModal />
-              <PaletteModal />
-              <Footer />
-            </ThemeProvider>
-          </AuthProvider>
-        </ToastProvider>
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

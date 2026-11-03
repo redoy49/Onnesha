@@ -327,7 +327,7 @@ export function NextPostCountdown({
               ) : !isEnabled ? (
                 <div className="flex flex-col items-center space-y-1">
                   <Pause className="w-8 h-8 text-slate-400 mb-1" />
-                  <span className="text-xl font-black tracking-widest text-slate-300">
+                  <span className="text-xl font-bold tracking-widest text-slate-300">
                     PAUSED
                   </span>
                   <span className="text-xs font-mono text-slate-400">
@@ -339,7 +339,7 @@ export function NextPostCountdown({
                   <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-semibold mb-0.5">
                     REMAINING TIME
                   </span>
-                  <span className="text-3xl sm:text-4xl font-mono font-black tracking-tight text-white">
+                  <span className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white">
                     {formattedTime}
                   </span>
                   <span className="text-xs font-medium text-slate-400 mt-1">

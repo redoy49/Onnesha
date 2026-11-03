@@ -44,3 +44,26 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get("id");
+
+    if (id) {
+      const { deleteArticle } = await import("@/lib/db/articles-store");
+      await deleteArticle(id);
+      return NextResponse.json({ success: true, message: `Article ${id} deleted` });
+    }
+
+    const { clearAllArticles } = await import("@/lib/db/articles-store");
+    await clearAllArticles();
+    return NextResponse.json({ success: true, message: "All articles cleared successfully" });
+  } catch (err) {
+    console.error("DELETE /api/articles error:", err);
+    return NextResponse.json(
+      { success: false, error: "Failed to delete articles" },
+      { status: 500 }
+    );
+  }
+}

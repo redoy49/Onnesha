@@ -100,7 +100,7 @@ export function FilterSidebar({ selectedTags, onToggleTag }: FilterSidebarProps)
 
       {/* Gradient Spotlight Card */}
       <div className="rounded-3xl p-6 bg-lime-50/80 border border-lime-300 space-y-3 shadow-sm">
-        <span className="px-3 py-1 rounded-full bg-lime-400 text-slate-950 text-[10px] font-black uppercase tracking-wider shadow-sm">
+        <span className="px-3 py-1 rounded-full bg-lime-400 text-slate-900 text-[10px] font-bold uppercase tracking-wider shadow-sm">
           DISPATCH DIGEST
         </span>
         <h4 className="font-bold text-base text-slate-900">

@@ -14,7 +14,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Tagline */}
           <div className="flex items-center gap-3 text-left">
-            <div className="w-8 h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-950 flex items-center justify-center font-black text-sm shadow-sm transition">
+            <div className="w-8 h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold text-sm shadow-sm transition">
               ⚡
             </div>
             <div>

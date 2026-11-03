@@ -3,7 +3,7 @@ import { runAutomatedPublishingPipeline } from "@/lib/ai/automation-agent";
 import { getAutomationConfig } from "@/lib/ai/automation-config";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 60; // Allow up to 60 seconds on serverless for deep research + writing
+export const maxDuration = 300; // Allow up to 300 seconds for deep research + writing
 
 // Concurrency lock to prevent duplicate concurrent runs
 let isPipelineRunning = false;
@@ -121,6 +121,7 @@ export async function POST(req: NextRequest) {
 
   let customTopic: string | undefined = undefined;
   let forceDraft = false;
+  let customApiKey: string | undefined = undefined;
   let customConfig = undefined;
 
   try {
@@ -128,10 +129,90 @@ export async function POST(req: NextRequest) {
     if (json && typeof json === "object") {
       customTopic = typeof json.customTopic === "string" ? json.customTopic : undefined;
       forceDraft = Boolean(json.forceDraft);
+      customApiKey = typeof json.apiKey === "string" ? json.apiKey : undefined;
       customConfig = json.customConfig || (json.enabled !== undefined ? json : undefined);
     }
   } catch {
     // Body is optional
+  }
+
+  const isStream =
+    req.nextUrl.searchParams.get("stream") === "true" ||
+    req.headers.get("accept")?.includes("text/event-stream");
+
+  if (isStream) {
+    const encoder = new TextEncoder();
+    let isStreamActive = true;
+    let heartbeat: NodeJS.Timeout | null = null;
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        const send = (data: any) => {
+          if (!isStreamActive) return;
+          try {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
+          } catch {
+            isStreamActive = false;
+          }
+        };
+
+        // Keep-alive heartbeat every 5s so long-running deep research doesn't drop the HTTP socket
+        heartbeat = setInterval(() => {
+          if (!isStreamActive) {
+            if (heartbeat) clearInterval(heartbeat);
+            return;
+          }
+          try {
+            controller.enqueue(encoder.encode(`: ping\n\n`));
+          } catch {
+            isStreamActive = false;
+            if (heartbeat) clearInterval(heartbeat);
+          }
+        }, 5000);
+
+        try {
+          isPipelineRunning = true;
+          const result = await runAutomatedPublishingPipeline({
+            customTopic,
+            forceDraft,
+            apiKey: customApiKey,
+            customConfig,
+            onProgress: (step, message, sourcesCount) => {
+              send({ type: "progress", step, message, sourcesCount });
+            },
+          });
+          send({ type: "completed", result });
+          if (isStreamActive) {
+            try {
+              controller.close();
+            } catch {}
+          }
+        } catch (err: any) {
+          send({ type: "error", error: err.message || "Failed execution" });
+          if (isStreamActive) {
+            try {
+              controller.close();
+            } catch {}
+          }
+        } finally {
+          isStreamActive = false;
+          if (heartbeat) clearInterval(heartbeat);
+          isPipelineRunning = false;
+        }
+      },
+      cancel() {
+        isStreamActive = false;
+        if (heartbeat) clearInterval(heartbeat);
+      },
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
   }
 
   try {
@@ -139,6 +220,7 @@ export async function POST(req: NextRequest) {
     const result = await runAutomatedPublishingPipeline({
       customTopic,
       forceDraft,
+      apiKey: customApiKey,
       customConfig,
     });
     return NextResponse.json(result);

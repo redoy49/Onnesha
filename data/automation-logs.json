@@ -1,261 +1,148 @@
 [
   {
-    "id": "job-1792160694369",
-    "timestamp": "2026-10-16T14:24:54.369Z",
-    "topic": "ক্লড কোড (Claude Code) দিয়ে কীভাবে মোশন গ্রাফিক্স ভিডিও তৈরি করবেন: সম্পূর্ণ প্রডাকশন গাইড",
-    "slug": "how-to-create-motion-graphics-videos-using-claude-code",
+    "id": "job-1793685112980",
+    "timestamp": "2026-11-03T05:51:52.980Z",
+    "topic": "top 5 programming languages in 2026: সম্পূর্ণ প্রযুক্তিগত গাইড ও প্রডাকশন আর্কিটেকচার",
+    "slug": "top-5-programming-languages-in-2026",
     "status": "draft",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 844,
-    "sourcesCount": 4,
+    "engine": "TinyFish Multi-Page + Gemini [বাংলা (Humanized)]",
+    "wordCount": 1253,
+    "sourcesCount": 17,
     "sources": [
       {
-        "title": "Remotion - Make Videos in React & Programmatic Motion Design",
-        "url": "https://www.remotion.dev/",
-        "snippet": "Create real MP4 videos using familiar React code and modern web technologies."
+        "title": "TIOBE Index",
+        "url": "https://www.tiobe.com/tiobe-index/",
+        "snippet": "Apart from Julia, two other languages are knocking on the door of the TIOBE top 20: Dart and OCaml. Dart jumps from #41 to #27 this month. Thanks to its popular ..."
       },
       {
-        "title": "Claude Code - Anthropic Agentic CLI Documentation",
-        "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
-        "snippet": "An agentic coding tool that lives in your terminal, understands your codebase, and edits files directly."
+        "title": "Most In-demand Programming Languages for 2026",
+        "url": "https://www.itransition.com/developers/in-demand-programming-languages",
+        "snippet": "Top 14 programming languages for 2026 · 1 Python · 2 JavaScript · 3 Java · 4 C# · 5 C++ · 6 Go · 7 Rust · 8 TypeScript"
       },
       {
-        "title": "Motion Canvas - Programmatic Animation Framework",
-        "url": "https://motioncanvas.io/",
-        "snippet": "TypeScript library for creating animated technical videos and vector graphics."
+        "title": "5 great programming languages to master in 2026",
+        "url": "https://www.pluralsight.com/resources/blog/upskilling/five-great-programming-languages-2026",
+        "snippet": "5 great programming languages to learn in 2026 (+ learning resources) · 1. Python · 2. SQL · 3. Java · 4. JavaScript · 5. C#."
       },
       {
-        "title": "MDN Web Docs - Web Animations API & Canvas Rendering",
-        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
-        "snippet": "Authoritative specification for synchronization, keyframes, and timing models on the web."
+        "title": "High Paying Programming Languages For 2026 | Simplilearn",
+        "url": "https://www.youtube.com/watch?v=QVjRpTa4_jc",
+        "snippet": "C# is the best multi-use programming language out there. You can use it for web apps, backend systems, videogames, mobile apps, AI apps."
+      },
+      {
+        "title": "Top Coding Languages for Computer Programming | 2026 ...",
+        "url": "https://charisma.edu.eu/insight/top-coding-languages/",
+        "snippet": "The top coding languages for computer programming in 2026 are Python, JavaScript, TypeScript, Java, C, C++, C#, Go, Rust, Kotlin, Swift, ..."
+      },
+      {
+        "title": "The Best Programming Languages to Learn in 2026",
+        "url": "https://www.reddit.com/r/techbootcamp/comments/1ssjc5n/the_best_programming_languages_to_learn_in_2026/",
+        "snippet": "Want a job fast? Python or JavaScript. · Want to work in AI/ML? Python, no debate. · Want to build websites? JavaScript first, then TypeScript ..."
+      },
+      {
+        "title": "Top 10 Future Programming Languages for 2026",
+        "url": "https://www.crossover.com/resources/future-programming-languages-for-2025",
+        "snippet": "1. Python: The Versatile Vanguard · 2. C++: The High-Performance Heavyweight · 3. Java: The Enterprise Backbone · 4. C#: The Microsoft Ecosystem VIP · 5. JavaScript ..."
+      },
+      {
+        "title": "Top 5 Programming Languages to Learn in 2026 (to Actually ...",
+        "url": "https://www.youtube.com/watch?v=naNcmnKskUE",
+        "snippet": "These are the top programming languages to learn in 2026 if you want to actually land a developer job. Based on real market data, this video ..."
+      },
+      {
+        "title": "The Most In-Demand Programming Languages for 2026 & ...",
+        "url": "https://softjourn.com/insights/in-demand-programming-languages-tips-for-selecting",
+        "snippet": "Top Programming Languages of 2026. Python; JavaScript; Typescript; Java; C#; PHP. Programming Languages On the Rise. Rust; GoLang; Swift; Kotlin."
+      },
+      {
+        "title": "Top 7 Programming Languages That Get You Hired in 2026",
+        "url": "https://www.esilv.fr/en/top-7-programming-languages-that-get-you-hired-in-2026/",
+        "snippet": "Top 7 Programming Languages That Get You Hired in 2026 · 1. Python · 2. JavaScript · 3. TypeScript · 4. SQL · 5. Java · 6. Go · 7. Rust."
+      },
+      {
+        "title": "Best language in 2026? · community · Discussion #183895",
+        "url": "https://github.com/orgs/community/discussions/183895",
+        "snippet": "In 2026, the “best” programming language is context-driven. JavaScript / TypeScript → Web, full-stack, SaaS. Python → AI/ML, automation, backend. Go ..."
+      },
+      {
+        "title": "Top Programming Languages in 2026",
+        "url": "https://www.nextgencodingcompany.com/top-programming-languages-2026",
+        "snippet": "The most in-demand programming languages in 2026 are Python, TypeScript, JavaScript, Java, C#, Go, Rust, SQL, Kotlin, and Swift. Python leads ..."
+      },
+      {
+        "title": "The 9 Best Programming Languages to Learn in 2026",
+        "url": "https://tripleten.com/blog/posts/top-9-best-programming-languages-to-learn",
+        "snippet": "Python, Java, and C++ are the main general-purpose languages for beginners in software development. They are the best programming languages to ..."
+      },
+      {
+        "title": "The Best Programming Language for 2026 (According to ...",
+        "url": "https://blog.stackademic.com/the-best-programming-language-for-2026-according-to-reality-not-twitter-df2a690a984d",
+        "snippet": "In 2026, Python dominates: AI & machine learning; Data science; Automation; “Quick scripts that became production somehow”. Python Example ( ..."
+      },
+      {
+        "title": "Top 5 Programming Languages to Learn in 2026",
+        "url": "https://www.neuronhire.com/blog/top-programming-languages-2026",
+        "snippet": "1. Python: The Safest Investment in Engineering Right Now · 2. TypeScript: The Language That Ended the \"JavaScript for Small Projects\" Era · 3."
+      },
+      {
+        "title": "Top 5 Programming Languages to learn in 2026! (Important)",
+        "url": "https://www.youtube.com/watch?v=9UNIK5wIKBU",
+        "snippet": "C Language Tutorial fo... · C++ Tutorials In Hindi · Java Tutorials For Beg... · Python Tutorial For Be... · Python for Beginners (... · Sigma ..."
+      },
+      {
+        "title": "5 Most Important Programming Languages to Learn in ...",
+        "url": "https://dev.to/hadil/5-most-important-programming-languages-to-learn-in-2026-based-on-real-industry-demand-3dc7",
+        "snippet": "5 Most Important Programming Languages to Learn in 2026 (Based on Real Industry Demand) · Python · Go · Rust · Zig · Java (plus Kotlin)."
       }
     ],
-    "executionTimeMs": 6
+    "executionTimeMs": 1546
   },
   {
-    "id": "job-1792153563411",
-    "timestamp": "2026-10-16T12:26:03.411Z",
-    "topic": "আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও এআই আর্কিটেকচার: পর্ব 14",
-    "slug": "modern-web-engineering-ai-architecture-part-14",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 836,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও এআই আর্কিটেকচার: পর্ব 14 Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=%E0%A6%86%E0%A6%A7%E0%A7%81%E0%A6%A8%E0%A6%BF%E0%A6%95%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%20%E0%A6%87%E0%A6%9E%E0%A7%8D%E0%A6%9C%E0%A6%BF%E0%A6%A8%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%82%20%E0%A6%93%20%E0%A6%8F%E0%A6%86%E0%A6%87%20%E0%A6%86%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%9F%E0%A7%87%E0%A6%95%E0%A6%9A%E0%A6%BE%E0%A6%B0%3A%20%E0%A6%AA%E0%A6%B0%E0%A7%8D%E0%A6%AC%2014"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 5
+    "id": "job-failed-1792225433641",
+    "timestamp": "2026-10-17T08:23:53.641Z",
+    "topic": "top 5 programming languages in 2026",
+    "status": "failed",
+    "engine": "gemini",
+    "wordCount": 0,
+    "sourcesCount": 0,
+    "sources": [],
+    "executionTimeMs": 348421,
+    "error": "Google Managed Agent error: 429 Rate limit exceeded for model antigravity (limit: 100000 input tokens per minute on Free Tier). Please retry in 5s or upgrade your tier at https://ai.dev/rate-limit."
   },
   {
-    "id": "job-1792153562610",
-    "timestamp": "2026-10-16T12:26:02.610Z",
-    "topic": "জিরো-রানটাইম সিএসএস এবং আধুনিক হাই-কনট্রাস্ট ইউজার ইন্টারফেস ডিজাইন",
-    "slug": "zero-runtime-css-high-contrast-ui-bangla",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 836,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "জিরো-রানটাইম সিএসএস এবং আধুনিক হাই-কনট্রাস্ট ইউজার ইন্টারফেস ডিজাইন Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=%E0%A6%9C%E0%A6%BF%E0%A6%B0%E0%A7%8B-%E0%A6%B0%E0%A6%BE%E0%A6%A8%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%AE%20%E0%A6%B8%E0%A6%BF%E0%A6%8F%E0%A6%B8%E0%A6%8F%E0%A6%B8%20%E0%A6%8F%E0%A6%AC%E0%A6%82%20%E0%A6%86%E0%A6%A7%E0%A7%81%E0%A6%A8%E0%A6%BF%E0%A6%95%20%E0%A6%B9%E0%A6%BE%E0%A6%87-%E0%A6%95%E0%A6%A8%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%87%E0%A6%89%E0%A6%9C%E0%A6%BE%E0%A6%B0%20%E0%A6%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A7%87%E0%A6%B8%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 4
+    "id": "job-failed-1792223882761",
+    "timestamp": "2026-10-17T07:58:02.761Z",
+    "topic": "Next.js 15 ও ডিস্ট্রিবিউটেড AI এজেন্টস: সার্ভার অ্যাকশন এবং স্ট্রিমিং দিয়ে আধুনিক ফুলস্ট্যাক আর্কিটেকচার",
+    "status": "failed",
+    "engine": "gemini",
+    "wordCount": 0,
+    "sourcesCount": 0,
+    "sources": [],
+    "executionTimeMs": 352731,
+    "error": "Google Managed Agent error: 429 Rate limit exceeded for model antigravity (limit: 100000 input tokens per minute on Free Tier). Please retry in 55s or upgrade your tier at https://ai.dev/rate-limit."
   },
   {
-    "id": "job-1792153561389",
-    "timestamp": "2026-10-16T12:26:01.389Z",
-    "topic": "ওয়েবঅ্যাসেম্বলি এবং WebGPU: ব্রাউজারে উচ্চগতির মেশিন লার্নিং কম্পিউটিং",
-    "slug": "webassembly-webgpu-browser-compute-bangla-guide",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 837,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "ওয়েবঅ্যাসেম্বলি এবং WebGPU: ব্রাউজারে উচ্চগতির মেশিন লার্নিং কম্পিউটিং Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%E0%A7%87%E0%A6%AE%E0%A7%8D%E0%A6%AC%E0%A6%B2%E0%A6%BF%20%E0%A6%8F%E0%A6%AC%E0%A6%82%20WebGPU%3A%20%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%89%E0%A6%9C%E0%A6%BE%E0%A6%B0%E0%A7%87%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%97%E0%A6%A4%E0%A6%BF%E0%A6%B0%20%E0%A6%AE%E0%A7%87%E0%A6%B6%E0%A6%BF%E0%A6%A8%20%E0%A6%B2%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A8%E0%A6%BF%E0%A6%82%20%E0%A6%95%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A6%BF%E0%A6%82"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 5
+    "id": "job-failed-1792216263436",
+    "timestamp": "2026-10-17T05:51:03.436Z",
+    "topic": "২০২৬ সালের কোডিংয়ের জন্য সেরা AI মডেলগুলো",
+    "status": "failed",
+    "engine": "gemini",
+    "wordCount": 0,
+    "sourcesCount": 0,
+    "sources": [],
+    "executionTimeMs": 580417,
+    "error": "Invalid state: Controller is already closed"
   },
   {
-    "id": "job-1792153556083",
-    "timestamp": "2026-10-16T12:25:56.083Z",
-    "topic": "ওয়েব প্ল্যাটফর্মে অটোনোমাস এআই এজেন্টস: ২০২৬ সালের প্রডাকশন আর্কিটেকচার",
-    "slug": "autonomous-ai-agents-production-architecture-bangla",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 844,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "ওয়েব প্ল্যাটফর্মে অটোনোমাস এআই এজেন্টস: ২০২৬ সালের প্রডাকশন আর্কিটেকচার Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%20%E0%A6%AA%E0%A7%8D%E0%A6%B2%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%9F%E0%A6%AB%E0%A6%B0%E0%A7%8D%E0%A6%AE%E0%A7%87%20%E0%A6%85%E0%A6%9F%E0%A7%8B%E0%A6%A8%E0%A7%8B%E0%A6%AE%E0%A6%BE%E0%A6%B8%20%E0%A6%8F%E0%A6%86%E0%A6%87%20%E0%A6%8F%E0%A6%9C%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%B8%3A%20%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AC%20%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A7%87%E0%A6%B0%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A1%E0%A6%BE%E0%A6%95%E0%A6%B6%E0%A6%A8%20%E0%A6%86%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%9F%E0%A7%87%E0%A6%95%E0%A6%9A%E0%A6%BE%E0%A6%B0"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 4
-  },
-  {
-    "id": "job-1792153539915",
-    "timestamp": "2026-10-16T12:25:39.915Z",
-    "topic": "ডিপসিক R1 বনাম ক্লড ৩.৫ সনেট: এন্টারপ্রাইজ রিজনিং ও পারফরম্যান্স বেঞ্চমার্ক",
-    "slug": "deepseek-r1-vs-claude-35-sonnet-reasoning-benchmarks-bangla",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 852,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "ডিপসিক R1 বনাম ক্লড ৩.৫ সনেট: এন্টারপ্রাইজ রিজনিং ও পারফরম্যান্স বেঞ্চমার্ক Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=%E0%A6%A1%E0%A6%BF%E0%A6%AA%E0%A6%B8%E0%A6%BF%E0%A6%95%20R1%20%E0%A6%AC%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%95%E0%A7%8D%E0%A6%B2%E0%A6%A1%20%E0%A7%A9.%E0%A7%AB%20%E0%A6%B8%E0%A6%A8%E0%A7%87%E0%A6%9F%3A%20%E0%A6%8F%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%87%E0%A6%9C%20%E0%A6%B0%E0%A6%BF%E0%A6%9C%E0%A6%A8%E0%A6%BF%E0%A6%82%20%E0%A6%93%20%E0%A6%AA%E0%A6%BE%E0%A6%B0%E0%A6%AB%E0%A6%B0%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%B8%20%E0%A6%AC%E0%A7%87%E0%A6%9E%E0%A7%8D%E0%A6%9A%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%95"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 5
-  },
-  {
-    "id": "job-1792152936273",
-    "timestamp": "2026-10-16T12:15:36.273Z",
-    "topic": "নেক্সট.জেএস ১৫ সার্ভার অ্যাকশন এবং ডিস্ট্রিবিউটেড স্টেট ম্যানেজমেন্ট গাইড",
-    "slug": "nextjs-15-server-actions-distributed-state-bangla",
-    "status": "published",
-    "engine": "Gemini (smart-offline) [bn]",
-    "wordCount": 843,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "নেক্সট.জেএস ১৫ সার্ভার অ্যাকশন এবং ডিস্ট্রিবিউটেড স্টেট ম্যানেজমেন্ট গাইড Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=%E0%A6%A8%E0%A7%87%E0%A6%95%E0%A7%8D%E0%A6%B8%E0%A6%9F.%E0%A6%9C%E0%A7%87%E0%A6%8F%E0%A6%B8%20%E0%A7%A7%E0%A7%AB%20%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AD%E0%A6%BE%E0%A6%B0%20%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%95%E0%A6%B6%E0%A6%A8%20%E0%A6%8F%E0%A6%AC%E0%A6%82%20%E0%A6%A1%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A7%87%E0%A6%A1%20%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%87%E0%A6%9F%20%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%87%E0%A6%9C%E0%A6%AE%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%20%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%A1"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 4
-  },
-  {
-    "id": "job-1792148425134",
-    "timestamp": "2026-10-16T11:00:25.134Z",
-    "topic": "Zero-Runtime CSS and High-Contrast Color Science for Modern Web Apps",
-    "slug": "zero-runtime-css-and-high-contrast-color-science-for-modern-web-apps",
-    "status": "published",
-    "engine": "Gemini (smart-offline)",
-    "wordCount": 864,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "Zero-Runtime CSS and High-Contrast Color Science for Modern Web Apps Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=Zero-Runtime%20CSS%20and%20High-Contrast%20Color%20Science%20for%20Modern%20Web%20Apps"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 4
-  },
-  {
-    "id": "job-1792148001382",
-    "timestamp": "2026-10-16T10:53:21.382Z",
-    "topic": "DeepSeek-R1 vs Claude 3.5 Sonnet: Enterprise Reasoning Benchmarks",
-    "slug": "deepseek-r1-vs-claude-35-sonnet-enterprise-reasoning-benchmarks",
-    "status": "published",
-    "engine": "Gemini (smart-offline)",
-    "wordCount": 854,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "DeepSeek-R1 vs Claude 3.5 Sonnet: Enterprise Reasoning Benchmarks Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=DeepSeek-R1%20vs%20Claude%203.5%20Sonnet%3A%20Enterprise%20Reasoning%20Benchmarks"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 4
-  },
-  {
-    "id": "job-1792147930394",
-    "timestamp": "2026-10-16T10:52:10.394Z",
-    "topic": "Distributed State & Server Actions in Next.js 15 App Router",
-    "slug": "distributed-state-server-actions-in-nextjs-15-app-router",
-    "status": "draft",
-    "engine": "Gemini (smart-offline)",
-    "wordCount": 665,
-    "sourcesCount": 3,
-    "sources": [
-      {
-        "title": "Distributed State & Server Actions in Next.js 15 App Router Architecture & RFC Specifications",
-        "url": "https://github.com/trending?q=Distributed%20State%20%26%20Server%20Actions%20in%20Next.js%2015%20App%20Router"
-      },
-      {
-        "title": "W3C Web Standards & Engineering Performance Guide",
-        "url": "https://www.w3.org/standards/"
-      },
-      {
-        "title": "Modern Fullstack Web Engineering Principles",
-        "url": "https://developer.mozilla.org/en-US/docs/Web"
-      }
-    ],
-    "executionTimeMs": 5,
-    "error": "Word count (665) below target threshold (minimum 800 words)."
+    "id": "job-failed-1792216261880",
+    "timestamp": "2026-10-17T05:51:01.880Z",
+    "topic": "Next.js 15 এবং ডিস্ট্রিবিউটেড সার্ভার অ্যাকশন: প্রোডাকশন-রেডি AI এজেন্ট ওয়ার্কফ্লো আর্কিটেকচার",
+    "status": "failed",
+    "engine": "gemini",
+    "wordCount": 0,
+    "sourcesCount": 0,
+    "sources": [],
+    "executionTimeMs": 274552,
+    "error": "Invalid state: Controller is already closed"
   }
 ]
