@@ -54,8 +54,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Onnesha",
+    url: "https://onneshax.vercel.app",
+    description: "AI-Powered Personal Tech Blog & Systems Architecture",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://onneshax.vercel.app/?search={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
-    <html lang="en" className={outfit.variable}>
+    <html lang="bn" className={outfit.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body className="bg-surface-canvas text-slate-800 font-sans antialiased min-h-screen flex flex-col bg-mesh-glow selection:bg-lime-200 selection:text-lime-950">
         <Providers>
           {children}
