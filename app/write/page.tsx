@@ -39,7 +39,7 @@ export default function WritePageRedirect() {
           </div>
 
           <div className="space-y-2">
-            <h1 className="font-extrabold text-2xl text-slate-900">
+            <h1 className="font-bold text-2xl text-slate-900">
               Admin Studio Protected
             </h1>
             <p className="text-xs text-slate-600 leading-relaxed">
