@@ -1,5 +1,108 @@
 [
   {
+    "id": "job-1793689327858",
+    "timestamp": "2026-11-03T07:02:07.858Z",
+    "topic": "Next.js 15 Partial Prerendering & React 19 সার্ভার অ্যাকশন প্রোডাকশন আর্কিটেকচার",
+    "slug": "nextjs-15-partial-prerendering-react-19-সরভর-অযকশন-পরডকশন-আরকটকচর",
+    "status": "draft",
+    "engine": "TinyFish Multi-Page + Gemini [বাংলা (Humanized)]",
+    "wordCount": 1068,
+    "sourcesCount": 18,
+    "sources": [
+      {
+        "title": "Next.js Explained: Partial Prerendering (PPR)",
+        "url": "https://www.youtube.com/watch?v=MTcPrTIBkpA",
+        "snippet": "What exactly is Partial Prerendering? How does it work? And most importantly, why does it matter? 00:00 Intro 00:12 What is Prerendering?"
+      },
+      {
+        "title": "Partial Prerendering",
+        "url": "https://nextjs.org/docs/15/app/getting-started/partial-prerendering",
+        "snippet": "Partial Prerendering (PPR) is a rendering strategy that allows you to combine static and dynamic content in the same route."
+      },
+      {
+        "title": "Next.js Partial Prerendering is an anti-pattern : r/nextjs",
+        "url": "https://www.reddit.com/r/nextjs/comments/1fse1qt/nextjs_partial_prerendering_is_an_antipattern/",
+        "snippet": "Next.js Partial Prerendering is an anti-pattern Discussion. PPR is actually great React can do HTTP streaming, next.js could only do either ..."
+      },
+      {
+        "title": "Partial Prerendering in Next.js 16 Explained With Real ...",
+        "url": "https://medium.com/@sureshdotariya/unlocking-the-future-of-web-performance-partial-prerendering-in-next-js-f3dc0b16bf34",
+        "snippet": "Partial Prerendering (PPR) in Next.js 16 blends static speed with dynamic power, improves Core Web Vitals, and offers real‐world examples with ..."
+      },
+      {
+        "title": "Everything You Need to Know About Next.js 15",
+        "url": "https://javascript.plainenglish.io/everything-you-need-to-know-about-next-js-15-b1d4620eb23f",
+        "snippet": "Partial Prerendering is a new experimental feature that allows parts of a page to be statically generated, while others load dynamically. Think ..."
+      },
+      {
+        "title": "Vercel's Next.js 14 Introduces Partial Pre-Rendering",
+        "url": "https://thenewstack.io/vercels-next-js-14-introduces-partial-pre-rendering/",
+        "snippet": "Next.js 14 introduces a partial pre-rendering ability, a faster TurboPack, server actions, and a revamped learning course for developers."
+      },
+      {
+        "title": "Next.js Partial Prerendering (PPR) Explained",
+        "url": "https://www.youtube.com/watch?v=SuoGpFQZ8xU",
+        "snippet": "In this video, we show how Next.js Partial Prerendering (PPR) keeps most of the page static while streaming only"
+      },
+      {
+        "title": "Instant Page Loads with Partial Prerendering (PPR) - SixtyHours",
+        "url": "https://www.sixtyhours.tech/blog/nextjs-react-partial-prerendering-instant-web-apps",
+        "snippet": "With the stabilization of React 19 and Next.js 15, Partial Prerendering (PPR) definitively eliminates this compromise. PPR merges static shells ..."
+      },
+      {
+        "title": "Building Production Systems with Next.js 15 & React 19",
+        "url": "https://codemyfyp.com/blog/nextjs-15-react-19-production-architecture-guide",
+        "snippet": "Master the architectural paradigm shifts of Next.js 15 and React 19. Learn how to implement Partial Prerendering (PPR), secure Server ..."
+      },
+      {
+        "title": "Partial Prerendering with Next.js",
+        "url": "https://vercel.com/templates/next.js/partial-prerendering-nextjs",
+        "snippet": "This is a demo of Next.js using Partial Prerendering. This template uses the new Next.js App Router. This includes support for enhanced layouts, colocation of ..."
+      },
+      {
+        "title": "Next.js 15 Partial Prerendering (PPR) and React 19 Server Actions",
+        "url": "https://squirrrrel.com/blog/case-study-nextjs-15-partial-prerendering-ppr-and-react-19-server-actions",
+        "snippet": "Discover how Next.js 15 combines static shell compilation with dynamic chunk streaming via React 19 Suspense boundaries, eliminating the trade-offs between ..."
+      },
+      {
+        "title": "Next.js 16 Features Guide – React 19, PPR, Server Actions ...",
+        "url": "https://zynfos.com/blog/nextjs-16-features-every-developer-should-know-complete-guide-to-performance-react-19-partial-prerendering",
+        "snippet": "Aug 11, 2026 · What's New in Next.js 16? · 1. Turbocharged Performance · 2. React 19 Support · 3. Improved Developer Experience · 4. Partial Prerendering (PPR)."
+      },
+      {
+        "title": "A guide to enabling partial pre-rendering in Next.js - LogRocket Blog",
+        "url": "https://blog.logrocket.com/guide-enabling-partial-pre-rendering-next-js/",
+        "snippet": "Jan 22, 2024 · Partial pre-rendering allows developers to control which part of a page is pre-rendered or rendered first. It uses the React Suspense API, so it ..."
+      },
+      {
+        "title": "Next.js 15 Partial Prerendering (PPR) Architecture - Jaipur Tech",
+        "url": "https://jaipurtech.in/blog/nextjs-15-partial-prerendering-ppr-streaming",
+        "snippet": "Aug 22, 2026 · Deep dive into Next.js 15 Partial Prerendering (PPR). Learn how to combine static CDN edge delivery with dynamic server-streamed components ..."
+      },
+      {
+        "title": "Next.js 16 Partial Prerendering (PPR): The Best of Static and ... - u11d",
+        "url": "https://u11d.com/blog/nextjs-16-ppr-static-dynamic-components/",
+        "snippet": "Feb 11, 2026 · Partial Prerendering is a rendering strategy that lets Next.js deliver a static HTML “shell” immediately, then stream in dynamic content as it ..."
+      },
+      {
+        "title": "Partial Prerendering: A Practical Guide (2026) - PageGlass",
+        "url": "https://www.pageglass.dev/blog/partial-prerendering-guide",
+        "snippet": "Apr 27, 2026 · Partial Prerendering combines static and dynamic rendering in one Next.js route. How PPR works, when it stabilised, and what to do if you're ..."
+      },
+      {
+        "title": "Next.js 15 Partial Prerendering: A Performance Guide - React Libraries",
+        "url": "https://www.reactlibraries.com/how-tos/next-js-15-partial-prerendering-a-performance-guide",
+        "snippet": "May 27, 2026 · Learn how Next.js 15's Partial Prerendering combines static and dynamic rendering to boost performance and improve Core Web Vitals metrics."
+      },
+      {
+        "title": "Next.js 15 Boosts Performance with Partial Prerendering - LinkedIn",
+        "url": "https://www.linkedin.com/posts/grandline-studio_nextjs-15-ppr-react-19-killing-loading-activity-7505287741224583168-7Itv",
+        "snippet": "Sep 14, 2026 · Our team rebuilt with Next.js 15 Partial Prerendering + React 19 streaming—cutting load times from 850ms to 180ms."
+      }
+    ],
+    "executionTimeMs": 8098
+  },
+  {
     "id": "job-1793685112980",
     "timestamp": "2026-11-03T05:51:52.980Z",
     "topic": "top 5 programming languages in 2026: সম্পূর্ণ প্রযুক্তিগত গাইড ও প্রডাকশন আর্কিটেকচার",
