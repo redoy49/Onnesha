@@ -189,7 +189,7 @@ export function ArticleReader({
       <div className="space-y-4">
         {/* Category Pill and Read Time */}
         <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-          <span className="px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-xs font-mono font-extrabold uppercase tracking-wider shadow-sm">
+          <span className="px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
             {article.category}
           </span>
           <span className="text-xs font-mono text-slate-500">
@@ -198,7 +198,7 @@ export function ArticleReader({
         </div>
 
         {/* Headline */}
-        <h1 className="hero-title font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
+        <h1 className="hero-title font-bold text-2xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
           {article.title}
         </h1>
 
@@ -227,7 +227,7 @@ export function ArticleReader({
             </span>
             <button
               onClick={shareOnTwitter}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-950 transition shadow-sm"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
               title="Share on X"
               type="button"
             >
@@ -235,7 +235,7 @@ export function ArticleReader({
             </button>
             <button
               onClick={shareOnLinkedIn}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-950 transition shadow-sm"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
               title="Share on LinkedIn"
               type="button"
             >
@@ -243,7 +243,7 @@ export function ArticleReader({
             </button>
             <button
               onClick={handleCopyLink}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-950 transition shadow-sm"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
               title="Copy Link"
               type="button"
             >
