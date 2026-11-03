@@ -18,17 +18,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onneshax.vercel.app";
+  const canonicalUrl = `${baseUrl}/blog/${encodeURIComponent(article.slug)}`;
+
   return {
     title: `${article.title} | Onnesha`,
     description: article.metaDescription || article.excerpt,
     authors: [{ name: article.author }],
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: article.title,
       description: article.metaDescription || article.excerpt,
-      images: [{ url: article.coverImage }],
+      images: [{ url: article.coverImage, alt: article.title }],
       type: "article",
       publishedTime: article.date,
       authors: [article.author],
+      locale: "bn_BD",
     },
     twitter: {
       card: "summary_large_image",
@@ -61,8 +68,71 @@ export default async function BlogPostPage({ params }: Props) {
     .sort((a, b) => (a.category === article.category ? -1 : 1))
     .slice(0, 2);
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onneshax.vercel.app";
+  const articleUrl = `${baseUrl}/blog/${encodeURIComponent(article.slug)}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: article.title,
+    description: article.metaDescription || article.excerpt,
+    image: [article.coverImage],
+    datePublished: article.date,
+    dateModified: article.date,
+    inLanguage: "bn-BD",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    author: {
+      "@type": "Person",
+      name: article.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Onnesha",
+      url: baseUrl,
+    },
+    citation: (article.sources || []).map((s) => s.url),
+    keywords: (article.tags || []).join(", "),
+    articleSection: article.category,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        name: "Home",
+        item: baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        name: article.category,
+        item: `${baseUrl}/?category=${encodeURIComponent(article.category)}`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        name: article.title,
+        item: articleUrl,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Header />
       <main className="flex-1 w-full pt-16 sm:pt-20 pb-16">
         <ArticleReader
