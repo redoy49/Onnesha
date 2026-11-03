@@ -164,11 +164,37 @@ export async function getAllArticles(): Promise<Article[]> {
 }
 
 /**
- * Find an article by its unique slug
+ * Find an article by its unique slug (supports raw, decoded, and encoded UTF-8 slugs)
  */
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const all = await getAllArticles();
-  return all.find((a) => a.slug === slug) || null;
+  if (!slug) return null;
+
+  const rawSlug = slug.trim().toLowerCase();
+  let decodedSlug = rawSlug;
+  try {
+    decodedSlug = decodeURIComponent(rawSlug);
+  } catch {
+    // ignore decode error
+  }
+
+  return (
+    all.find((a) => {
+      const aSlug = a.slug.trim().toLowerCase();
+      let aDecoded = aSlug;
+      try {
+        aDecoded = decodeURIComponent(aSlug);
+      } catch {
+        // ignore
+      }
+      return (
+        aSlug === rawSlug ||
+        aSlug === decodedSlug ||
+        aDecoded === rawSlug ||
+        aDecoded === decodedSlug
+      );
+    }) || null
+  );
 }
 
 /**
