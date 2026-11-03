@@ -550,6 +550,12 @@ export default function AdminDashboardPage() {
                                   📚 {article.sources.length} Sources
                                 </span>
                               )}
+                              {article.rigorScore && (
+                                <span className="text-[10px] font-mono text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-md flex items-center gap-1 font-bold">
+                                  <FaShieldHalved className="text-[9px] text-emerald-600" />
+                                  <span>{article.rigorScore}% Rigor</span>
+                                </span>
+                              )}
                             </div>
                             <h3 className="font-semibold text-sm text-slate-800 truncate hover:text-lime-700 transition-colors">
                               {article.title}
@@ -579,6 +585,22 @@ export default function AdminDashboardPage() {
                               )}
                             </button>
                           )}
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const text =
+                                article.socialSnippets?.linkedin ||
+                                `🚀 New Technical Deep Dive: ${article.title}\n\n${article.excerpt}\n\n👉 Read complete breakdown:\nhttps://onneshax.vercel.app/blog/${article.slug}\n\n#SoftwareEngineering #TechBlog #Onnesha`;
+                              navigator.clipboard.writeText(text);
+                              showToast("🎉 ১-ক্লিক লিঙ্কডইন পোস্ট টেক্সট কপি হয়েছে!");
+                            }}
+                            className="px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-lime-300 text-slate-700 hover:text-slate-900 text-xs font-semibold flex items-center gap-1 transition shadow-sm"
+                            title="Copy 1-Click LinkedIn & X Social Post Package"
+                          >
+                            <FaBolt className="text-[10px] text-lime-700" />
+                            <span className="text-[11px]">Social Post</span>
+                          </button>
 
                           <button
                             onClick={() => handleToggleFeatured(article.id)}

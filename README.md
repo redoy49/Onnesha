@@ -1,73 +1,104 @@
-# Onnesha :: AI-Powered Personal Editorial & Blogging Platform
+# Onnesha :: AI-Powered Autonomous Tech Editorial & Blogging Platform
 
-A production-ready personal blogging platform built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS**, converted from the original single-file publication while preserving 100% of its visual identity, typography, layout, and obsidian + electric lime aesthetic.
+[![Production Status](https://img.shields.io/badge/Production-Live%20on%20Vercel-brightgreen?style=flat-square)](https://onneshax.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-redoy49%2FOnnesha-blue?style=flat-square&logo=github)](https://github.com/redoy49/Onnesha)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
 
----
+**Onnesha** is a cutting-edge personal technology blog and autonomous AI publishing platform. It leverages **TinyFish Multi-Page Deep Web Research**, **Google Gemini 2.5**, an in-memory **Deterministic Bengali Humanizer**, and an **Adversarial Critic Agent** to produce deep, production-grade technical engineering articles in fluent Bengali (বাংলা).
 
-## 🎨 Centralized Color Palette & Theme Management
-
-**Requirement #4 Fulfillment:** You can change the entire website's color scheme from one centralized location without manually editing individual components.
-
-- **Primary Source of Truth**: [`lib/theme/config.ts`](./lib/theme/config.ts)
-- **CSS Variables**: [`app/globals.css`](./app/globals.css)
-- **Tailwind Integration**: [`tailwind.config.ts`](./tailwind.config.ts)
-
-To change the primary accent color across the entire website:
-1. Open [`lib/theme/config.ts`](./lib/theme/config.ts).
-2. Update `themeConfig.primary.DEFAULT` (e.g., from `#D1FE17` to `#00F0FF` for Cyber Cyan, or `#A855F7` for Electric Violet).
-3. Update the corresponding glow and gradient values.
-4. **Result**: Every button, link, active filter pill, reading progress bar, border glow, text selection, and card highlight updates automatically across the entire site.
-5. You can also test and preview preset palettes live in the browser by clicking the `#D1FE17` button in the header capsule!
+🌐 **Live Deployment**: [https://onneshax.vercel.app](https://onneshax.vercel.app)  
+📦 **Repository**: [https://github.com/redoy49/Onnesha](https://github.com/redoy49/Onnesha)
 
 ---
 
-## 🚀 Running & Building Locally
+## ⚡ Core Platform Capabilities
 
-This project uses `pnpm` as its opinionated package manager.
+### 1. 🔍 TinyFish Multi-Page Deep Research Engine
+- Queries Search **Page 0** and **Page 1** in parallel (`Promise.all`) using the high-speed TinyFish MCP JSON-RPC protocol.
+- Indexes 16–25+ authoritative developer documentation pages, RFC specs, SWE-bench leaderboards, and GitHub repositories in under 1.5 seconds.
+- Cross-verifies facts and architecture patterns before drafting begins.
 
-### 1. Install Dependencies
+### 2. 🇧🇩 100% Fluent Bengali Technical Publishing
+- Generates comprehensive ~1,400+ word engineering guides strictly in fluent, natural Bengali.
+- Standard English technical terms are naturally preserved in brackets (e.g., `সার্ভার অ্যাকশন (Server Actions)`, `কনটেক্সট উইন্ডো (Context Window)`).
+
+### 3. 🛡️ Adversarial Critic Agent (Engineering Rigor Scoring)
+- Audits code blueprints for strict type-safety, modern Next.js 15 App Router standards, and Zod runtime schema boundaries.
+- Replaces deprecated API patterns and ensures anti-hallucination fact checking.
+- Assigns an **Engineering Rigor Score** (e.g., `98% Rigor`) visible on article headers and the admin dashboard.
+
+### 4. 📚 Smart Collapsible Citations Drawer
+- Cleans inline raw citations from the article body.
+- Replaces cluttering links with a sleek, interactive drawer:  
+  `📚 ১৬টি তথ্যসূত্র দেখুন (View Sources) [▼]`
+- Retains full Google Search indexing (E-E-A-T score) while delivering a 100% distraction-free reading experience.
+
+### 5. 📋 1-Click Viral Social Post Package
+- Automatically curates ready-to-publish social distribution packages:
+  - **LinkedIn Post**: Hook, technical bullets, benchmark takeaway, and direct link.
+  - **5-Tweet X (Twitter) Thread**: Hook -> Problem space -> Code blueprint -> Benchmarks -> CTA.
+- 1-click copy action in both reader view and the dashboard.
+
+### 6. ⏰ GitHub Actions Automated Daily Scheduler
+- Daily automated publishing runs via [`.github/workflows/daily-blog.yml`](./.github/workflows/daily-blog.yml) triggering `/api/cron/publish` securely with bearer authorization.
+
+---
+
+## 🎨 Design System & 60-30-10 Color Architecture
+
+- **60% Primary Tone**: Clean, bright content canvas (`bg-slate-50` / `#F8FAFC`).
+- **30% Secondary Neutral**: Rich typography & card borders (`text-slate-800` / `#1E293B` and slate dividers).
+- **10% Accent High-Voltage Pop**: Electric Lime signature buttons and active elements (`rgb(209, 254, 23)` / `#D1FE17`).
+- **Centralized Palette Config**: [`lib/theme/config.ts`](./lib/theme/config.ts).
+
+---
+
+## 🚀 Running Locally
+
 ```bash
+# 1. Install dependencies
 pnpm install
-```
 
-### 2. Run the Development Server
-```bash
+# 2. Configure environment variables
+cp .env.example .env.local
+
+# 3. Start local development server
 pnpm dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 3. Type Checking
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Quality & Verification Checks
 ```bash
+# Typecheck
 pnpm typecheck
-```
 
-### 4. Build for Production
-```bash
+# Production build
 pnpm build
 ```
 
-### 5. Start Production Server
-```bash
-pnpm start
-```
-
 ---
 
-## 🤖 AI-Powered Writing Suite
+## 🔐 Environment Configuration
 
-Onnesha comes with an integrated **AI Editorial Assistant** accessible in both the quick **Write Modal** and the dedicated **`/write` Studio**:
+Create a `.env.local` file with the following variables:
 
-- 💡 **Suggest Titles**: Generates 4 high-converting, modern headlines based on topic or draft.
-- 📝 **Auto Summary**: Extracts a punchy teaser excerpt from your story content.
-- 📑 **Draft Outline**: Seeds a structured article outline with section headers.
-- ✨ **Polish Draft**: Refines tone, clarity, and authoritative phrasing.
-- 🏷️ **SEO & Tags**: Generates recommended tags and meta descriptions.
+```env
+# 1. Google Gemini API (Required for live AI generation)
+GEMINI_API_KEY=your_gemini_api_key
 
-### Modular AI Providers
-1. **Zero Setup (Smart Offline Generator)**: Works immediately out-of-the-box without requiring any API keys.
-2. **Google Gemini**: Set `GEMINI_API_KEY=your_key` in `.env.local` to enable real-time Gemini 1.5 Flash generation.
-3. **OpenAI**: Alternatively, set `OPENAI_API_KEY=your_key` in `.env.local`.
-4. **Security**: All AI processing runs server-side in [`app/api/ai/route.ts`](./app/api/ai/route.ts) with Zod validation. API keys are never exposed client-side.
+# 2. TinyFish API (Required for multi-page web research)
+TINYFISH_API_KEY=your_tinyfish_api_key
+
+# 3. Admin & Cron Security Secret
+NEXT_PUBLIC_ADMIN_SECRET=onnesha@admin2026
+CRON_SECRET=onnesha@admin2026
+
+# 4. Site URL
+NEXT_PUBLIC_SITE_URL=https://onneshax.vercel.app
+```
 
 ---
 
@@ -75,68 +106,40 @@ Onnesha comes with an integrated **AI Editorial Assistant** accessible in both t
 
 ```
 Onnesha/
+├── .github/workflows/
+│   └── daily-blog.yml          # GitHub Actions daily automated cron publisher
 ├── app/
-│   ├── layout.tsx              # Root layout with Outfit font, metadata, Header, Footer
-│   ├── page.tsx                # Homepage (Hero, Quick Filters, Posts Feed, Membership)
-│   ├── blog/
-│   │   └── [slug]/
-│   │       └── page.tsx        # Dynamic article reader page with full SEO metadata
-│   ├── about/
-│   │   └── page.tsx            # Author bio, personal journey, tech stack, contact
-│   ├── write/
-│   │   └── page.tsx            # Dedicated AI-powered article publishing studio
+│   ├── layout.tsx              # Root layout with single global Footer & Header
+│   ├── page.tsx                # Homepage (Hero, Category Filters, Feed)
+│   ├── blog/[slug]/
+│   │   └── page.tsx            # Single article reader page (SEO optimized)
+│   ├── dashboard/
+│   │   └── page.tsx            # 2-Tab Admin Dashboard (Manage Drafts & AI Publisher)
 │   ├── api/
-│   │   └── ai/
-│   │       └── route.ts        # Secure server-side AI endpoint (Zod validated)
-│   ├── globals.css             # Theme CSS variables, ambient mesh gradients, custom scrollbars
-│   ├── loading.tsx             # Skeleton loader fallback
-│   ├── error.tsx               # Segment-level error boundary
-│   ├── not-found.tsx           # Custom 404 page
-│   ├── sitemap.ts              # Dynamic sitemap generation
-│   └── robots.ts               # Robots file
+│   │   ├── articles/route.ts   # Articles store API endpoint
+│   │   └── cron/publish/       # Automated publishing pipeline API endpoint
 ├── components/
-│   ├── header.tsx              # Sticky glass pill navigation capsule
-│   ├── hero-banner.tsx         # Featured dispatch banner with author snippet
-│   ├── filter-sidebar.tsx      # Quick filters checkboxes, social links, Dispatch Digest card
-│   ├── category-pills.tsx      # Category selector buttons & list/grid view toggle
-│   ├── article-card.tsx        # Reusable card component (supports list & grid layouts)
-│   ├── article-reader.tsx      # Full-bleed reader with progress bar, claps, likes, comments
-│   ├── membership-tiers.tsx    # Reader Tier and Creator Tier callout cards
-│   ├── write-modal.tsx         # Publish Story modal with embedded AI tools
-│   ├── palette-modal.tsx       # Live color palette inspector modal
-│   ├── ai-assistant.tsx        # AI writing assistant component (title, excerpt, tone, SEO)
-│   ├── toast.tsx               # Reactive toast notifications
-│   ├── theme-context.tsx       # Dark/Light mode and theme preset state
-│   └── footer.tsx              # Editorial footer with brand links
+│   ├── article-reader.tsx      # Reader with Smart Collapsible Citations & Social Copy
+│   ├── header.tsx              # Navigation header capsule
+│   ├── footer.tsx              # Editorial footer with brand links
+│   └── toast.tsx               # Reactive toast notifications
 ├── lib/
-│   ├── theme/
-│   │   └── config.ts           # Centralized color palette configuration
-│   ├── data/
-│   │   └── articles.ts         # Articles database, authors, categories, tags
 │   ├── ai/
-│   │   ├── types.ts            # Zod validation schemas for AI actions
-│   │   ├── provider.ts         # AI provider interface (Mock/Offline + Gemini/OpenAI)
-│   │   └── service.ts          # AI service handler
-│   ├── db/
-│   │   └── schema.ts           # Drizzle ORM schema definition
-│   └── utils.ts                # cn utility, slugify, date and read-time helpers
-├── types/
-│   ├── article.ts              # Article, Author, Comment, Category interfaces
-│   └── theme.ts                # Theme tokens types
-├── tailwind.config.ts          # Tailwind theme extended with CSS variable tokens
-├── tsconfig.json               # TypeScript strict configuration
-└── next.config.ts              # Next.js config with remote image patterns (Unsplash)
+│   │   ├── researcher.ts       # TinyFish parallel multi-page search engine
+│   │   ├── automation-agent.ts # Main autonomous publishing pipeline & quality gate
+│   │   ├── critic-agent.ts     # Adversarial Critic & Fact-Verification Agent
+│   │   ├── humanizer.ts        # Fast in-memory deterministic Bengali humanizer
+│   │   └── social-curator.ts   # 1-Click LinkedIn & X thread synthesizer
+│   └── db/
+│       └── articles-store.ts   # Neon Cloud Postgres & JSON persistent store
+└── data/
+    ├── automation-config.json  # Autonomous scheduler configuration
+    ├── automation-logs.json    # Execution telemetry logs
+    └── published-articles.json # Published articles store
 ```
 
 ---
 
-## 🔑 External Integrations & Setup Requirements
+## 📄 License
 
-1. **AI Generation (Optional)**:
-   - To connect live AI models, create a `.env.local` file and add your `GEMINI_API_KEY` or `OPENAI_API_KEY`.
-   - Without an API key, the built-in Smart Offline Assistant provides realistic editorial suggestions immediately.
-2. **Database Persistence (Optional)**:
-   - Articles, bookmarks, likes, claps, and comments are persisted client-side in `localStorage`.
-   - For multi-user database persistence, [`lib/db/schema.ts`](./lib/db/schema.ts) provides a complete Drizzle ORM schema ready for PostgreSQL (e.g. Neon, Supabase).
-3. **Deployment**:
-   - Ready for one-click deployment on **Vercel**.
+MIT © [Redoy Al Hasan](https://github.com/redoy49)

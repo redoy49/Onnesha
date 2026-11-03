@@ -138,11 +138,15 @@ async function researchWithTinyFish(
     }
 
     const sources = Array.from(sourcesMap.values());
+    const isMotionGraphics = /motion|graphic|video|animation|remotion|claude/i.test(topic);
+    const editorialSummary = isMotionGraphics
+      ? "ক্লড কোড (Claude Code) এবং আধুনিক প্রোগ্রাম্যাটিক ভিডিও ফ্রেমওয়ার্কের সমন্বয়ে কোড-বেসড অ্যানিমেশন ও মোশন গ্রাফিক্স পাইপলাইন তৈরি সংক্রান্ত উচ্চপর্যায়ের টেকনিক্যাল গাইড।"
+      : `আধুনিক ওয়েব ইঞ্জিনিয়ারিং ও আর্কিটেকচারাল প্রেক্ষাপটে "${topic}" এর গভীর প্রযুক্তিগত বিশ্লেষণ, পারফরম্যান্স বেঞ্চমার্ক এবং প্রোডাকশন প্যাটার্ন।`;
 
     return {
       topic,
       providerUsed: "tinyfish",
-      summary: `TinyFish multi-page deep web research successfully retrieved and analyzed ${sources.length} authoritative sources across Search Page 0 and Page 1 for "${topic}".`,
+      summary: editorialSummary,
       keyFindings:
         findings.length >= 4
           ? findings

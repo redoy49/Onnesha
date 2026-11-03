@@ -1,5 +1,226 @@
 [
   {
+    "id": "job-1793693255656",
+    "timestamp": "2026-11-03T08:07:35.656Z",
+    "topic": "২০২৬ সালে সেরা ৫টি প্রোগ্রামিং ল্যাঙ্গুয়েজ ও প্রডাকশন আর্কিটেকচার",
+    "slug": "২০২৬-সল-সর-৫ট-পরগরম-লযঙগযজ-ও-পরডকশন-আরকটকচর",
+    "status": "draft",
+    "engine": "TinyFish Multi-Page + Gemini [বাংলা (Humanized)]",
+    "wordCount": 1081,
+    "sourcesCount": 19,
+    "sources": [
+      {
+        "title": "2026 সালে কোন প্রোগ্রামিং ল্যাঙ্গুয়েজের চাহিদা বেশি ? ...",
+        "url": "https://www.facebook.com/groups/learnwithnaemazam/posts/1400271501599849/",
+        "snippet": "২০২৬ সালে আদর্শ কম্বিনেশন হতে পারে: • একটি মেইন ল্যাঙ্গুয়েজ: যাতে আপনি ..."
+      },
+      {
+        "title": "২০২৬ সালে শেখার জন্য টপ ৫ প্রোগ্রামিং ভাষা  #programming # ...",
+        "url": "https://www.facebook.com/your.tahsinX/videos/%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AC-%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A7%87-%E0%A6%B6%E0%A7%87%E0%A6%96%E0%A6%BE%E0%A6%B0-%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AF-%E0%A6%9F%E0%A6%AA-%E0%A7%AB-%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%82-%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE-programming-top-python-javascript-gol/2019663338958699/",
+        "snippet": "২০২৬ সালে শেখার জন্য টপ ৫ প্রোগ্রামিং ভাষা #programming #top #python #javascript #Golang #cpp #rust ..."
+      },
+      {
+        "title": "Programming Language in 2026: The Game Is Changing ...",
+        "url": "https://www.youtube.com/watch?v=CbedkSxbC78",
+        "snippet": "In this video, you will discover which programming language to start in 2026. This guide gives you a goal-first approach: choose your career ..."
+      },
+      {
+        "title": "২০২৫ সালে শেখার জন্য সেরা প্রোগ্রামিং ল্যাঙ্গুয়েজ",
+        "url": "https://abcltech.com/blog/top-programming-languages.html",
+        "snippet": "নতুনদের জন্য: আপনার প্রোগ্রামিং যাত্রা শুরু করার জন্য পাইথন হলো সেরা পছন্দ।"
+      },
+      {
+        "title": "Top Coding Languages for Computer Programming | 2026 ...",
+        "url": "https://charisma.edu.eu/insight/top-coding-languages/",
+        "snippet": "The top coding languages for computer programming in 2026 are Python, JavaScript, TypeScript, Java, C, C++, C#, Go, Rust, Kotlin, Swift, PHP, ..."
+      },
+      {
+        "title": "Programming Languages Rankings Revised: 2026 and AI",
+        "url": "https://www.youtube.com/watch?v=B8GcYEfDdMc",
+        "snippet": "Eric's rankings of the best languages for employment. Will C#, Java, and SQL be dethroned? What about JavaScript and Python? Take our free ..."
+      },
+      {
+        "title": "Top Programming Languages in 2026",
+        "url": "https://www.nextgencodingcompany.com/top-programming-languages-2026",
+        "snippet": "The programming languages that actually matter in 2026, The most in-demand programming languages in 2026 are Python, TypeScript, JavaScript, ..."
+      },
+      {
+        "title": "5 great programming languages to master in 2026",
+        "url": "https://www.pluralsight.com/resources/blog/upskilling/five-great-programming-languages-2026",
+        "snippet": "5 great programming languages to master in 2026 ... Python, SQL, Java, JavaScript, and C# are all great languages to specialize in. Here's why you should learn ..."
+      },
+      {
+        "title": "Top 5 Programming Languages Dominating 2026",
+        "url": "https://dev.to/md8_habibullah/top-5-programming-languages-dominating-2026-1e6f",
+        "snippet": "According to the latest TIOBE Index, Python continues to dominate with a 23.64% market share, while TypeScript made history by becoming the #1 ..."
+      },
+      {
+        "title": "The Best Programming Language in 2026 Is…",
+        "url": "https://www.linkedin.com/pulse/best-programming-language-2026-yassine-selmi-nbuue",
+        "snippet": "Later, languages like Java, Python, and JavaScript pushed this abstraction even further. Memory management, garbage collection, and portability ..."
+      },
+      {
+        "title": "Most Popular Programming Languages in 2026",
+        "url": "https://www.coursera.org/articles/popular-programming-languages",
+        "snippet": "Most popular programming languages to learn in 2026 · JavaScript is the most popular language to learn, according to a study by Statista [2]."
+      },
+      {
+        "title": "Top 15 Programming Languages to Learn in 2026",
+        "url": "https://www.hackerearth.com/blog/programming-languages",
+        "snippet": "The top programming languages to learn in 2026 are Python, JavaScript, TypeScript, Java, and Rust — ranked by hiring demand, versatility, ..."
+      },
+      {
+        "title": "Top 6 In Demand Programming Languages in 2026",
+        "url": "https://www.youtube.com/shorts/jw-AiwXvtog",
+        "snippet": "Top Programming Languages in 2026 | Popular Programming Languages We listed out the top 6 programming languages that are in-demand in 2026."
+      },
+      {
+        "title": "The 9 Best Programming Languages to Learn in 2026",
+        "url": "https://tripleten.com/blog/posts/top-9-best-programming-languages-to-learn",
+        "snippet": "Which programming language pays the most in 2026? In 2026, Scala developers will make the most, with 38% of its specialists pulling in an ..."
+      },
+      {
+        "title": "Top Programming Languages to Learn in 2026–2027 (and ...",
+        "url": "https://www.linkedin.com/pulse/top-programming-languages-learn-20262027-what-build-each-vivek-pandey-zzojc",
+        "snippet": "How to choose a language in 2026 (simple rule) · 1) Python — Best for AI, automation, and fast backend · 2) TypeScript — Best for full-stack ..."
+      },
+      {
+        "title": "Top Programming Languages in 2026 for Modern ...",
+        "url": "https://kadders.com/blog/top-programming-languages",
+        "snippet": "1. Python. Python is a high-level interpreted programming language designed to maximize readability and developer productivity. · 2. C. C is a procedural ..."
+      },
+      {
+        "title": "Top 10 In-Demand Programming Languages for 2026 ...",
+        "url": "https://www.crossover.com/resources/top-10-in-demand-programming-languages-for-2026-updated",
+        "snippet": "Top 10 In-Demand Programming Languages for 2026 [Updated] ... C# is the language of choice for both crafting immersive games and developing enterprise software."
+      },
+      {
+        "title": "Best Programming Languages for Scalable Development in ...",
+        "url": "https://www.theflock.com/en/content/blog-and-ebook/best-programming-languages-scalable-development",
+        "snippet": "Explore the most popular programming languages for scalable product development in 2026. Compare Python, TypeScript, Rust, Go, and Java for AI, cloud, ..."
+      },
+      {
+        "title": "7 In-Demand Programming Languages of 2026",
+        "url": "https://www.scalateams.com/blog/programming-languages-2026",
+        "snippet": "programming. language. in. 2026? Python is the most popular programming language in 2026. It dominates AI, machine learning, data engineering ..."
+      }
+    ],
+    "executionTimeMs": 41869
+  },
+  {
+    "id": "job-1793690877657",
+    "timestamp": "2026-11-03T07:27:57.657Z",
+    "topic": "Top 5 Ai Model for Coding in 2026: সম্পূর্ণ প্রযুক্তিগত গাইড ও প্রডাকশন আর্কিটেকচার",
+    "slug": "top-5-ai-model-for-coding-in-2026",
+    "status": "draft",
+    "engine": "TinyFish Multi-Page + Gemini [বাংলা (Humanized)]",
+    "wordCount": 1100,
+    "sourcesCount": 20,
+    "sources": [
+      {
+        "title": "Best AI Coding Agents for 2026: Real-World Developer Reviews",
+        "url": "https://www.faros.ai/blog/best-ai-coding-agents-2026",
+        "snippet": "The best AI coding agents for 2026 include Cursor, Claude Code, Codex, GitHub Copilot, and Cline. Cursor stands out for everyday IDE workflows,"
+      },
+      {
+        "title": "Best AI for Coding 2026 - Top Coding Models - LLM Stats",
+        "url": "https://llm-stats.com/leaderboards/best-ai-for-coding",
+        "snippet": "Claude Opus 5.5 by Anthropic leads the coding leaderboard with a coding index score of 51.0, followed by Claude Sonnet 5.5 (48.7) and Gemini 4 Carbon (48.3)."
+      },
+      {
+        "title": "I Tested Every AI Coding Model - Here's the ranking for 2026",
+        "url": "https://www.youtube.com/watch?v=lYE3qrTEzW0",
+        "snippet": "After using all the major AI coding models, here is my ranking for 2026. Best Coding Model for FREE (Opus 4.6 & M2.5)"
+      },
+      {
+        "title": "Kilo - Best AI Coding Models 2026 | Live AI Leaderboard",
+        "url": "https://kilo.ai/leaderboard",
+        "snippet": "Best AI Models in Kilo · Anthropic · xAI · DeepSeek · Mistral · MiniMax · Z.ai · InclusionAI · Kwaipilot ..."
+      },
+      {
+        "title": "As of Mid August 2026. What is the best coding model - Reddit",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1vnatlk/as_of_mid_august_2026_what_is_the_best_coding/",
+        "snippet": "If you're looking for the best of the best, I suggest the Claude models - Sonnet for every day coding, Opus for the tough and complicated tasks."
+      },
+      {
+        "title": "Top AI Coding Models in 2026: Which One Should Developers ...",
+        "url": "https://medium.com/abp-community/top-ai-coding-models-in-2026-which-one-should-developers-actually-use-0b9662cd6f8c",
+        "snippet": "GPT-5 (OpenAI) GPT-5 is still the most versatile coding model right now. 🥈 2. Claude 4 (Anthropic)"
+      },
+      {
+        "title": "Which AI Model Is Best for Coding in 2026? - daily.dev",
+        "url": "https://daily.dev/blog/best-ai-model-for-coding-2026/",
+        "snippet": "I'd pick Claude Opus 4.8 for deep refactors and bug work, GPT-5.5/5.6 Sol for terminal-first agent flows, Gemini 3.1 Pro for huge repos with up ..."
+      },
+      {
+        "title": "Best AI Coding Assistants 2026 | Playcode Blog",
+        "url": "https://playcode.io/blog/best-ai-coding-assistants-2026",
+        "snippet": "I tested 10+ AI coding assistants in 2026. Compare GitHub Copilot, Claude, ChatGPT, Playcode AI, Cursor, and more. Find the best AI for ..."
+      },
+      {
+        "title": "Best LLM for Coding 2026 | Onyx AI - Onyx",
+        "url": "https://onyx.app/best-llm-for-coding",
+        "snippet": "Which AI model writes the best code? We rank every major LLM — open ... Grok 4.6 Claude Fable 5 Claude Opus 4.8 Claude Sonnet 5 ..."
+      },
+      {
+        "title": "Best AI for Coding: August 2026 Rankings & Pricing",
+        "url": "https://alphacorp.ai/blog/best-ai-for-coding-august-2026-latest-models-compared-ranked",
+        "snippet": "1. Claude Opus 5 — best overall, and it beats its pricier sibling · 2. GPT-5.6 “Sol” — the terminal specialist · 3. Claude Sonnet 5 — the one I'd ..."
+      },
+      {
+        "title": "AI dev tool power rankings & comparison [Oct. 2026]",
+        "url": "https://blog.logrocket.com/ai-dev-tool-power-rankings/",
+        "snippet": "Oct 13, 2026 — Compare the top AI development tools and models of October 2026 . View updated rankings, feature breakdowns, and find the best fit for you."
+      },
+      {
+        "title": "Best AI Coding Models for Enterprises in 2026 [Updated]",
+        "url": "https://codeconductor.ai/blog/ai-coding-models/",
+        "snippet": "Compare the best AI coding models in 2026, including GPT-5.6 Sol , Claude Fable 5.1, Claude Opus 5, and Gemini 3.8 Flash. See which models fit enterprise ... Read more"
+      },
+      {
+        "title": "Best AI Coding Models 2026 Comparison",
+        "url": "https://aizolo.com/blog/best-ai-coding-models-2026-comparison/",
+        "snippet": "Discover the best AI coding models 2026 comparison — Claude, GPT-5, Gemini, DeepSeek & more. Real benchmarks, use cases & how Aizolo helps you pick the ..."
+      },
+      {
+        "title": "Best LLM for Coding in 2026: 9 Models Ranked",
+        "url": "https://www.datacamp.com/blog/best-llm-for-coding",
+        "snippet": "Sep 25, 2026 — Best OpenAI model for coding : GPT-6 Astra (OpenAI), first on the tbench. ai Terminal-Bench 4.0 agent leaderboard at 58.2%, and level with Opus ... Read more"
+      },
+      {
+        "title": "Best AI Model for Coding 2026: Comparison",
+        "url": "https://vexp.dev/blog/best-ai-model-for-coding-in-2026-claude-gpt-5-gemini-compared",
+        "snippet": "Jun 1, 2026 — Compare the best AI models for coding in 2026: Claude, GPT-5, and Gemini . Benchmarks, pricing, and why context quality matters more than ..."
+      },
+      {
+        "title": "Best AI for Coding 2026",
+        "url": "https://www.punku.ai/blog/beste-ki-zum-programmieren",
+        "snippet": "Jun 3, 2026 — Which AI codes best in 2026? An August comparison of GPT-5.6 Sol , Claude Fable 5, Kimi K3 and more by coding index, context, availability, ..."
+      },
+      {
+        "title": "Best AI Model for Coding in 2026: Ranked + Priced",
+        "url": "https://omidsaffari.com/blog/best-ai-model-for-coding-2026",
+        "snippet": "Jun 14, 2026 — Best AI Model for Coding in 2026 (Ranked by SWE-bench and Price). GPT-5.5 , Claude Opus 4.8 and Gemini 3.1 Pro tie on the old benchmark. The ... Read more"
+      },
+      {
+        "title": "Best AI Models for Code Generation in 2026 | SkillBoss",
+        "url": "https://www.skillboss.co/blog/best-ai-models-for-code-generation-2026",
+        "snippet": "Best AI Models for Code Generation in 2026. Compare the top AI models for code generation including Claude Sonnet 4.6 , GPT-5, Gemini 3 Pro, and more. Read more"
+      },
+      {
+        "title": "Best AI Model for Coding 2026: The October Reprice",
+        "url": "https://www.multimodelchat.com/blog/best-ai-model-for-coding-2026",
+        "snippet": "Oct 4, 2026 — Short answer: For most coding work in October 2026, the value picks are GPT-6.1 Sol and Claude Sonnet 5.5 — both $2/$10, within about 1% of each ... Read more"
+      },
+      {
+        "title": "8 Best AI Models for Coding in 2026, Ranked by Benchmarks",
+        "url": "https://geodd.io/blog/best-ai-models-for-coding",
+        "snippet": "Oct 1, 2026 — 8 Best AI Models for Coding in 2026, Ranked by Benchmarks · 1. DeepSeek V4 Flash · 2. GLM-5.2 · 3. GPT-OSS-120B · 4. Claude Fable 5 · 5. GPT-5.6 Sol. Read more"
+      }
+    ],
+    "executionTimeMs": 6331
+  },
+  {
     "id": "job-1793689327858",
     "timestamp": "2026-11-03T07:02:07.858Z",
     "topic": "Next.js 15 Partial Prerendering & React 19 সার্ভার অ্যাকশন প্রোডাকশন আর্কিটেকচার",

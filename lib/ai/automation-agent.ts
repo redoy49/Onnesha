@@ -15,6 +15,8 @@ import {
 import { slugify, getFormattedToday, calculateReadingTime } from "@/lib/utils";
 import { runGoogleManagedAgent } from "./managed-agent";
 import { applyDeterministicHumanizer, getHumanizerSystemGuidelines } from "./humanizer";
+import { runAdversarialCriticReview } from "./critic-agent";
+import { generateSocialDistribution } from "./social-curator";
 
 // Curated Unsplash images for technical themes
 const COVER_IMAGE_POOL = [
@@ -450,6 +452,9 @@ Return STRICT JSON with keys: title, latinSlug, excerpt, metaDescription, catego
         /<(?:h[1-6]|section|div)[^>]*>[\s\S]*?(?:তথ্যসূত্র|External Citations|Verified Multi-Page Citations|Verified External Citations|যাচাইকৃত রেফারেন্স|সাইটেশন)[\s\S]*$/i,
         ""
       )
+      .replace(/<pre[^>]*class="[^"]*mermaid[^"]*"[^>]*>[\s\S]*?<\/pre>/gi, "")
+      .replace(/<div[^>]*class="[^"]*mermaid[^"]*"[^>]*>[\s\S]*?<\/div>/gi, "")
+      .replace(/flowchart\s+(?:TD|LR|TB|BT)[\s\S]*?(?=(?:<h[1-6]|\n\n|$))/gi, "")
       .trim();
 
     engineLabel = `TinyFish Multi-Page + ${AI_ENGINES[config.preferredEngine]?.name || config.preferredEngine} [${isBangla ? "বাংলা (Humanized)" : "English"}]`;
@@ -475,6 +480,22 @@ Return STRICT JSON with keys: title, latinSlug, excerpt, metaDescription, catego
       finalSlug = `${baseSlug}-${Date.now().toString().slice(-4)}`;
     }
 
+    // =========================================================================
+    // STEP 4: ADVERSARIAL CRITIC REVIEW & AUTO SOCIAL PACKAGE
+    // =========================================================================
+    onProgress?.(4, "Adversarial Critic Agent reviewing code blocks, RFC alignment & rigor...", finalSources.length);
+    const criticReview = runAdversarialCriticReview(articleData.body, chosenTopic, finalSources.length);
+    articleData.body = criticReview.enhancedBody;
+
+    const socialPackage = generateSocialDistribution(
+      articleData.title,
+      finalSlug,
+      articleData.excerpt,
+      articleData.tags,
+      finalSources.length,
+      criticReview.rigorScore
+    );
+
     // Build Final Article Object
     const publishedArticle: Article = {
       id: Date.now(),
@@ -499,6 +520,12 @@ Return STRICT JSON with keys: title, latinSlug, excerpt, metaDescription, catego
       sources: finalSources,
       seoKeywords: articleData.tags,
       generatedBy: engineLabel,
+      rigorScore: criticReview.rigorScore,
+      factChecked: true,
+      socialSnippets: {
+        linkedin: socialPackage.linkedinPost,
+        xThread: socialPackage.xThread,
+      },
     };
 
     // Save Article to Persistent Store (Neon Cloud Postgres or local fallback)
@@ -1009,7 +1036,9 @@ export function validateIncomingEvent(data: unknown): { ok: true; value: Ingesti
   return {
     title: banglaHeadline,
     latinSlug: latinSlug || slugify(topic) || "tech-article-bangla",
-    excerpt: research.summary.slice(0, 155),
+    excerpt: isMotionGraphics
+      ? "ক্লড কোড ও রিমোশন দিয়ে কোড-বেসড মোশন গ্রাফিক্স তৈরি এবং রেন্ডারিং অটোমেশনের সম্পূর্ণ প্রডাকশন গাইড।"
+      : `${banglaHeadline || topic} এর প্রযুক্তিগত বিশ্লেষণ, পারফরম্যান্স বেঞ্চমার্ক এবং প্রোডাকশন আর্কিটেকচার গাইড।`,
     metaDescription: `${banglaHeadline} এর গভীর প্রযুক্তিগত বিশ্লেষণ। আর্কিটেকচারাল বেঞ্চমার্ক, মেমরি প্রোফাইলিং এবং প্রোডাকশন প্যাটার্ন।`,
     category: isMotionGraphics ? "AI & Prompts" : "Coding & Tech",
     readTime: `${Math.max(6, Math.round(countWords(body) / 160))} মিনিট পড়ার সময়`,
@@ -1245,7 +1274,7 @@ export function parseIncomingTelemetry(raw: unknown) {
   return {
     title: topic,
     latinSlug: latinSlug || slugify(topic) || "tech-article",
-    excerpt: research.summary.slice(0, 155),
+    excerpt: `Technical analysis, architectural trade-offs, and production engineering benchmarks for ${topic}.`,
     metaDescription: `Deep technical analysis of ${topic}. Architectural benchmarks, trade-offs, and production engineering patterns.`,
     category: "Coding & Tech",
     readTime: `${Math.max(6, Math.round(countWords(body) / 180))} MIN READ`,

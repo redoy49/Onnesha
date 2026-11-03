@@ -36,6 +36,12 @@ export interface Article {
   seoKeywords?: string[];
   metaDescription?: string;
   generatedBy?: string;
+  rigorScore?: number;
+  factChecked?: boolean;
+  socialSnippets?: {
+    linkedin?: string;
+    xThread?: string[];
+  };
 }
 
 export type CategoryFilter = "All" | "AI & Prompts" | "Coding & Tech" | "UX Design" | "Web Development" | "Saved";

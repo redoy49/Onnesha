@@ -19,9 +19,12 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaShieldHalved,
+  FaBolt,
+  FaCopy,
 } from "react-icons/fa6";
 import { Article } from "@/types/article";
 import { useToast } from "./toast";
+import { generateSocialDistribution } from "@/lib/ai/social-curator";
 
 interface ArticleReaderProps {
   article: Article;
@@ -49,6 +52,27 @@ export function ArticleReader({
   const [copied, setCopied] = useState(false);
   const [isSourcesExpanded, setIsSourcesExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  const handleCopySocialPost = async () => {
+    try {
+      const socialPkg = article.socialSnippets?.linkedin
+        ? article.socialSnippets.linkedin
+        : generateSocialDistribution(
+            article.title,
+            article.slug,
+            article.excerpt,
+            article.tags || ["Tech"],
+            article.sources?.length || 16,
+            article.rigorScore || 98
+          ).linkedinPost;
+
+      await navigator.clipboard.writeText(socialPkg);
+      showToast("🎉 ১-ক্লিক লিঙ্কডইন পোস্ট টেক্সট কপি হয়েছে!");
+    } catch {
+      showToast("সোশ্যাল পোস্ট কপি করা যায়নি।");
+    }
+  };
 
   // Sanitize any legacy or duplicate citation HTML embedded directly in article.body
   const cleanBody = React.useMemo(() => {
@@ -58,6 +82,9 @@ export function ArticleReader({
         /<(?:h[1-6]|section|div)[^>]*>[\s\S]*?(?:তথ্যসূত্র|External Citations|Verified Multi-Page Citations|Verified External Citations|যাচাইকৃত রেফারেন্স|সাইটেশন)[\s\S]*$/i,
         ""
       )
+      .replace(/<pre[^>]*class="[^"]*mermaid[^"]*"[^>]*>[\s\S]*?<\/pre>/gi, "")
+      .replace(/<div[^>]*class="[^"]*mermaid[^"]*"[^>]*>[\s\S]*?<\/div>/gi, "")
+      .replace(/flowchart\s+(?:TD|LR|TB|BT)[\s\S]*?(?=(?:<h[1-6]|\n\n|$))/gi, "")
       .trim();
   }, [article.body]);
 
@@ -195,6 +222,12 @@ export function ArticleReader({
           <span className="text-xs font-mono text-slate-500">
             {article.readTime}
           </span>
+          {article.rigorScore && (
+            <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm">
+              <FaShieldHalved className="text-emerald-600 text-[11px]" />
+              <span>Peer Review: {article.rigorScore}% Rigor</span>
+            </span>
+          )}
         </div>
 
         {/* Headline */}
@@ -248,6 +281,15 @@ export function ArticleReader({
               type="button"
             >
               {copied ? <FaCheck className="text-lime-700 text-xs" /> : <FaShareNodes className="text-xs sm:text-sm" />}
+            </button>
+            <button
+              onClick={handleCopySocialPost}
+              className="px-3 py-1.5 rounded-full bg-lime-100 hover:bg-lime-300 border border-lime-300 text-lime-950 text-xs font-bold font-mono flex items-center gap-1.5 transition shadow-sm ml-1"
+              title="Copy 1-Click LinkedIn Technical Briefing"
+              type="button"
+            >
+              <FaBolt className="text-xs text-lime-800" />
+              <span>1-Click Post</span>
             </button>
           </div>
         </div>
