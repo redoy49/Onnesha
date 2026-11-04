@@ -1,4 +1,5 @@
 import { AiProviderKey, AI_ENGINES } from "./types";
+import { GoogleGenAI } from "@google/genai";
 
 export interface AIProvider {
   key: AiProviderKey;
@@ -108,6 +109,52 @@ export class GeminiProvider implements AIProvider {
   }
 
   async generateText(prompt: string, systemInstruction?: string): Promise<string> {
+    const fullPrompt = systemInstruction ? `${systemInstruction}\n\n${prompt}` : prompt;
+
+    // 1. Primary: Use official Google GenAI SDK (handles Antigravity agent & Interactions API seamlessly)
+    if (this.apiKey) {
+      try {
+        const client = new GoogleGenAI({ apiKey: this.apiKey });
+
+        // Try interactions API with antigravity agent
+        try {
+          const interaction = await client.interactions.create({
+            agent: "antigravity-preview-09-2026",
+            input: fullPrompt,
+            environment: "remote",
+          });
+          const out = interaction.output_text || (interaction as any).outputText;
+          if (out && typeof out === "string" && out.trim()) {
+            return out.trim();
+          }
+        } catch {
+          // Fall through to models.generateContent
+        }
+
+        // Try models.generateContent with current Google model candidates
+        const candidateModels = [this.model, "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"].filter(
+          (m, idx, arr) => m && arr.indexOf(m) === idx
+        );
+
+        for (const candidateModel of candidateModels) {
+          try {
+            const res = await client.models.generateContent({
+              model: candidateModel,
+              contents: fullPrompt,
+            });
+            if (res.text && res.text.trim()) {
+              return res.text.trim();
+            }
+          } catch {
+            // continue candidate loop
+          }
+        }
+      } catch (sdkErr) {
+        console.warn("GoogleGenAI SDK call failed, falling back to REST:", sdkErr);
+      }
+    }
+
+    // 2. Fallback: Direct REST call
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.apiKey}`;
     
     const body: Record<string, unknown> = {

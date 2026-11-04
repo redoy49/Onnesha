@@ -229,6 +229,19 @@ export default function AdminDashboardPage() {
                 setAutomationProgressStep(4);
                 setAutomationRunStatus("Complete! Article safely staged as Draft.");
                 showToast("🎉 বাংলা আর্টিকেল ড্রাফট সফলভাবে তৈরি হয়েছে!");
+                if (payload.result?.article) {
+                  const newArticle = payload.result.article;
+                  setArticles((prev) => {
+                    const filtered = prev.filter(
+                      (a) => a.id !== newArticle.id && a.slug !== newArticle.slug
+                    );
+                    const updated = [newArticle, ...filtered];
+                    try {
+                      localStorage.setItem("onnesha-articles", JSON.stringify(updated));
+                    } catch {}
+                    return updated;
+                  });
+                }
               } else if (payload.type === "error") {
                 throw new Error(payload.error);
               }

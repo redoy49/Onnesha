@@ -464,8 +464,12 @@ Return STRICT JSON with keys: title, latinSlug, excerpt, metaDescription, catego
     // =========================================================================
     const wordCount = countWords(articleData.body);
 
-    // Enforce Draft status as explicitly requested: all new AI posts stage as drafts for user review
-    const targetStatus: "published" | "draft" = "draft";
+    // Respect draft vs auto-publish settings (manual testing stages as draft, daily cron auto-publishes)
+    const targetStatus: "published" | "draft" = forceDraft
+      ? "draft"
+      : config.autoPublish
+      ? "published"
+      : "draft";
     let failureReason = "";
 
     // Quality Rule 1: Word Count Check

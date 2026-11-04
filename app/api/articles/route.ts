@@ -23,7 +23,22 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json()) as Article;
+    const json = (await req.json()) as any;
+    
+    // Support bulk sync from admin dashboard
+    if (json && Array.isArray(json.articles)) {
+      for (const a of json.articles) {
+        if (a && a.title && a.body) {
+          await saveArticle(a);
+        }
+      }
+      return NextResponse.json({
+        success: true,
+        count: json.articles.length,
+      });
+    }
+
+    const body = json as Article;
     if (!body || !body.title || !body.body) {
       return NextResponse.json(
         { success: false, error: "Missing required article title or body" },
