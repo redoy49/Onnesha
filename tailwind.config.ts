@@ -50,6 +50,8 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-outfit)", "Outfit", "system-ui", "sans-serif"],
         display: ["var(--font-outfit)", "Outfit", "system-ui", "sans-serif"],
+        serif: ["var(--font-noto-serif-bengali)", "Noto Serif Bengali", "Georgia", "serif"],
+        bengali: ["var(--font-noto-serif-bengali)", "Noto Serif Bengali", "serif"],
       },
       boxShadow: {
         "lime-soft": "0 4px 20px -2px rgba(132, 204, 22, 0.25)",

@@ -20,7 +20,7 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
           </div>
           <h1
             onClick={() => onReadArticle(featuredArticle)}
-            className="hero-title font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors"
+            className="hero-title font-extrabold font-serif text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors"
           >
             {featuredArticle.title}
           </h1>
@@ -34,7 +34,7 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
             alt={featuredArticle.author}
           />
           <div className="text-xs space-y-0.5">
-            <p className="text-slate-500 font-mono">A limited Onnesha pop up</p>
+            <p className="text-slate-500 font-mono">Editorial Dispatch</p>
             <p className="font-bold text-slate-800">
               By {featuredArticle.author} • {featuredArticle.date}
             </p>

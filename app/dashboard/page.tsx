@@ -29,6 +29,8 @@ import {
   FaCircleExclamation,
   FaArrowUpRightFromSquare,
   FaWandMagicSparkles,
+  FaFilePen,
+  FaBookOpen,
 } from "react-icons/fa6";
 import { useAuth } from "@/components/auth-context";
 import { useToast } from "@/components/toast";
@@ -145,7 +147,7 @@ export default function AdminDashboardPage() {
 
       const updated = articles.map((a) => (a.id === id ? { ...a, status: "published" as const } : a));
       await saveArticles(updated);
-      showToast("🎉 Draft successfully published live to the Onnesha feed!");
+      showToast("Draft successfully published live to the Onnesha feed!");
     } catch (err: any) {
       showToast(`Error publishing draft: ${err.message || String(err)}`);
     } finally {
@@ -170,7 +172,7 @@ export default function AdminDashboardPage() {
   };
 
   const handleClearAllArticles = async () => {
-    if (!confirm("⚠️ Are you sure you want to delete ALL articles? This gives you a completely clean blog.")) return;
+    if (!confirm("Are you sure you want to delete ALL articles? This gives you a completely clean blog.")) return;
     saveArticles([]);
     showToast("All articles cleared.");
   };
@@ -228,7 +230,7 @@ export default function AdminDashboardPage() {
               } else if (payload.type === "completed") {
                 setAutomationProgressStep(4);
                 setAutomationRunStatus("Complete! Article safely staged as Draft.");
-                showToast("🎉 বাংলা আর্টিকেল ড্রাফট সফলভাবে তৈরি হয়েছে!");
+                showToast("বাংলা আর্টিকেল ড্রাফট সফলভাবে তৈরি হয়েছে!");
                 if (payload.result?.article) {
                   const newArticle = payload.result.article;
                   setArticles((prev) => {
@@ -539,8 +541,9 @@ export default function AdminDashboardPage() {
                           <div className="space-y-1 min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
                               {isDraft ? (
-                                <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
-                                  <span>📝 DRAFT • HUMANIZED</span>
+                                <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
+                                  <FaFilePen className="text-[10px]" />
+                                  <span>DRAFT • HUMANIZED</span>
                                 </span>
                               ) : (
                                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold uppercase tracking-wider">
@@ -559,8 +562,9 @@ export default function AdminDashboardPage() {
                                 {article.date} • {article.readTime}
                               </span>
                               {article.sources && article.sources.length > 0 && (
-                                <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
-                                  📚 {article.sources.length} Sources
+                                <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                  <FaBookOpen className="text-[9px]" />
+                                  <span>{article.sources.length} Sources</span>
                                 </span>
                               )}
                               {article.rigorScore && (
@@ -604,9 +608,9 @@ export default function AdminDashboardPage() {
                             onClick={() => {
                               const text =
                                 article.socialSnippets?.linkedin ||
-                                `🚀 New Technical Deep Dive: ${article.title}\n\n${article.excerpt}\n\n👉 Read complete breakdown:\nhttps://onneshax.vercel.app/blog/${article.slug}\n\n#SoftwareEngineering #TechBlog #Onnesha`;
+                                `New Technical Deep Dive: ${article.title}\n\n${article.excerpt}\n\nRead complete breakdown:\nhttps://onneshax.vercel.app/blog/${article.slug}\n\n#SoftwareEngineering #TechBlog #Onnesha`;
                               navigator.clipboard.writeText(text);
-                              showToast("🎉 ১-ক্লিক লিঙ্কডইন পোস্ট টেক্সট কপি হয়েছে!");
+                              showToast("১-ক্লিক লিঙ্কডইন পোস্ট টেক্সট কপি হয়েছে!");
                             }}
                             className="px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-lime-300 text-slate-700 hover:text-slate-900 text-xs font-semibold flex items-center gap-1 transition shadow-sm"
                             title="Copy 1-Click LinkedIn & X Social Post Package"
@@ -679,8 +683,9 @@ export default function AdminDashboardPage() {
                     TINYFISH MULTI-PAGE RESEARCH + BANGLA WRITER + HUMANIZER
                   </span>
                 </div>
-                <h2 className="font-bold text-xl sm:text-2xl text-slate-800 tracking-tight">
-                  ⚡ ১-ক্লিক বাংলা টেকনিক্যাল আর্টিকেল জেনারেটর
+                <h2 className="font-bold text-xl sm:text-2xl text-slate-800 tracking-tight flex items-center gap-2">
+                  <FaBolt className="text-lime-600 text-lg" />
+                  <span>১-ক্লিক বাংলা টেকনিক্যাল আর্টিকেল জেনারেটর</span>
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   TinyFish দিয়ে সার্চ রেজাল্টের ১ম ও ২য় পেইজ (Page 0 & Page 1) সম্পূর্ণ রিসার্চ করে ২০+ অথরিটেটিভ সোর্স এক্সট্র্যাক্ট করবে এবং এসইও অপ্টিমাইজড মানবিক বাংলা পোস্ট ড্রাফট হিসেবে জমা করবে।
@@ -728,13 +733,13 @@ export default function AdminDashboardPage() {
                   ) : (
                     <>
                       <FaBolt className="text-sm" />
-                      <span>⚡ রিসার্চ ও বাংলা ড্রাফট তৈরি করুন</span>
+                      <span>রিসার্চ ও বাংলা ড্রাফট তৈরি করুন</span>
                     </>
                   )}
                 </button>
 
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
-                  <span className="text-emerald-700 font-bold">✓</span>
+                  <FaCheck className="text-emerald-700 text-xs" />
                   <span>স্বয়ংক্রিয়ভাবে Draft হিসেবে ড্যাশবোর্ডে সংরক্ষিত হবে</span>
                 </div>
               </div>

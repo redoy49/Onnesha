@@ -67,6 +67,20 @@ body {
   color: #1A2E05;
 }
 
+/* Blog Post Typography using Google Font Noto Serif Bengali */
+.blog-prose,
+.prose,
+.font-bengali-serif,
+article .prose,
+article p,
+article h1,
+article h2,
+article h3,
+article h4,
+article blockquote {
+  font-family: var(--font-noto-serif-bengali), "Noto Serif Bengali", Georgia, serif;
+}
+
 /* Ambient Radial Mesh Glow */
 .bg-mesh-glow {
   background: 

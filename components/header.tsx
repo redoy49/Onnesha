@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   FaMagnifyingGlass,
   FaLock,
@@ -47,8 +48,15 @@ export function Header({
           onClick={() => handleNavClick("All")}
           className="flex items-center gap-2.5 cursor-pointer group shrink-0"
         >
-          <div className="w-8 h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold text-xs sm:text-sm shadow-sm transition-transform group-hover:scale-105">
-            ⚡
+          <div className="relative w-8 h-8 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105 border border-lime-300 shrink-0">
+            <Image
+              src="/onnesha_logo.png"
+              alt="Onnesha Logo"
+              width={32}
+              height={32}
+              priority
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex items-center">
             <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900">

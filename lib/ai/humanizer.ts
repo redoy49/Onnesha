@@ -26,7 +26,7 @@ const ENGLISH_AI_PATTERNS: Array<{ pattern: RegExp; replacement: string }> = [
   { pattern: /\bplethora of\b/gi, replacement: "range of" },
 ];
 
-// Common Bengali AI clichés (রোবোটিক অনুবাদ ও কৃত্রিম ভাষা) and natural developer replacements
+// Common Bengali AI clichés (robotic translation phrases) and natural developer replacements
 const BENGALI_AI_PATTERNS: Array<{ pattern: RegExp; replacement: string }> = [
   {
     pattern: /আমরা একটি নতুন দিগন্তে প্রবেশ করছি[।,]?/gi,

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaWandMagicSparkles, FaSpinner, FaLightbulb, FaAlignLeft, FaListCheck, FaTags } from "react-icons/fa6";
+import { FaWandMagicSparkles, FaSpinner, FaLightbulb, FaAlignLeft, FaListCheck, FaTags, FaArrowRight, FaCircleInfo } from "react-icons/fa6";
 import { AiAction, AiResponse } from "@/lib/ai/types";
 import { useToast } from "./toast";
 
@@ -169,9 +169,10 @@ export function AiAssistant({
                   setSuggestedTitles([]);
                   showToast("Title applied!");
                 }}
-                className="w-full text-left text-xs p-2.5 rounded-xl bg-white hover:bg-lime-50/70 border border-slate-200 hover:border-lime-400 text-slate-800 hover:text-slate-950 transition shadow-sm"
+                className="w-full text-left text-xs p-2.5 rounded-xl bg-white hover:bg-lime-50/70 border border-slate-200 hover:border-lime-400 text-slate-800 hover:text-slate-950 transition shadow-sm flex items-center gap-2"
               >
-                👉 {t}
+                <FaArrowRight className="text-lime-700 text-[10px] shrink-0" />
+                <span>{t}</span>
               </button>
             ))}
           </div>
@@ -179,8 +180,9 @@ export function AiAssistant({
       )}
 
       {aiMessage && (
-        <p className="text-[10px] font-mono text-slate-500 pt-1 text-left">
-          ℹ️ {aiMessage}
+        <p className="text-[10px] font-mono text-slate-500 pt-1 text-left flex items-center gap-1.5">
+          <FaCircleInfo className="text-lime-700 text-xs shrink-0" />
+          <span>{aiMessage}</span>
         </p>
       )}
     </div>

@@ -88,8 +88,9 @@ export function AdminLoginModal() {
           /* Reader Login View */
           <div className="space-y-5">
             <div className="text-xs text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200">
-              <p className="font-semibold text-slate-900 mb-1">
-                🔒 Protected Publishing Controls
+              <p className="font-semibold text-slate-900 mb-1 flex items-center gap-1.5">
+                <FaLock className="text-lime-700 text-xs" />
+                <span>Protected Publishing Controls</span>
               </p>
               Only authorized Admins can generate and publish articles using the AI engines (ChatGPT, Claude, Gemini, Grok, Kimi, DeepSeek). Readers have read-only access.
             </div>

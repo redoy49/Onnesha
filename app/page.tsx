@@ -9,7 +9,6 @@ import { FilterSidebar } from "@/components/filter-sidebar";
 import { CategoryPills } from "@/components/category-pills";
 import { ArticleCard } from "@/components/article-card";
 import { ArticleReader } from "@/components/article-reader";
-import { MembershipTiers } from "@/components/membership-tiers";
 import { WriteModal } from "@/components/write-modal";
 import { useToast } from "@/components/toast";
 import { useAuth } from "@/components/auth-context";
@@ -254,9 +253,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-
-      {/* Membership Callout Banner */}
-      <MembershipTiers />
 
       {/* Write Story Modal (Admin Only) */}
       {isAdmin && <WriteModal onPublishArticle={handlePublishArticle} />}

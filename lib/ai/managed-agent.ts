@@ -101,7 +101,7 @@ TASK:
    - Include 4-5 major technical sections with <h2> in Bangla.
    - Include at least 2 production-ready code blueprints (<pre class="bg-slate-900 border border-slate-800 rounded-2xl p-5 font-mono text-xs text-lime-300 overflow-x-auto shadow-md"><code>...</code></pre>).
    - Include an in-depth latency and benchmark comparison table comparing the top models (<div class="overflow-x-auto my-8"><table class="min-w-full divide-y divide-slate-200 ...">...</table></div>).
-   - Include a Production Deployment & Verification Checklist with [✓] markers.
+   - Include a Production Deployment & Verification Checklist with [OK] markers.
    - Do NOT include any citations, external references, or source link sections inside the HTML body (citations are managed separately in structured metadata).
 
 Return ONLY a strict JSON object (NO markdown fences, NO preamble) matching this schema:

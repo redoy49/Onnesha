@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaXmark, FaCheck } from "react-icons/fa6";
+import { FaXmark, FaCheck, FaLightbulb } from "react-icons/fa6";
 import { useTheme } from "./theme-context";
 import { themePresets } from "@/lib/theme/config";
 
@@ -109,10 +109,13 @@ export function PaletteModal() {
               );
             })}
           </div>
-          <p className="text-[11px] text-slate-500 pt-1">
-            💡 <strong>Developer Note:</strong> Shared tokens are centralized in{" "}
-            <code className="text-lime-800 font-mono font-bold">lib/theme/config.ts</code> and{" "}
-            <code className="text-lime-800 font-mono font-bold">tailwind.config.ts</code>.
+          <p className="text-[11px] text-slate-500 pt-1 flex items-center gap-1.5">
+            <FaLightbulb className="text-amber-500 text-xs shrink-0" />
+            <span>
+              <strong>Developer Note:</strong> Shared tokens are centralized in{" "}
+              <code className="text-lime-800 font-mono font-bold">lib/theme/config.ts</code> and{" "}
+              <code className="text-lime-800 font-mono font-bold">tailwind.config.ts</code>.
+            </span>
           </p>
         </div>
 

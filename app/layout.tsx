@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Footer } from "@/components/footer";
@@ -7,6 +7,12 @@ import { Footer } from "@/components/footer";
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
+  display: "swap",
+});
+
+const notoSerifBengali = Noto_Serif_Bengali({
+  subsets: ["bengali"],
+  variable: "--font-noto-serif-bengali",
   display: "swap",
 });
 
@@ -24,6 +30,11 @@ export const metadata: Metadata = {
     "Onnesha",
   ],
   authors: [{ name: "Elena Rostova" }],
+  icons: {
+    icon: "/onnesha_logo.png",
+    shortcut: "/onnesha_logo.png",
+    apple: "/onnesha_logo.png",
+  },
   openGraph: {
     title: "Onnesha :: Next Generation Tech Blog",
     description: "AI-Powered Personal Blog & Systems Architecture",
@@ -37,7 +48,7 @@ export const metadata: Metadata = {
         alt: "Onnesha Blog Cover",
       },
     ],
-    locale: "en_US",
+    locale: "bn_BD",
     type: "website",
   },
   twitter: {
@@ -67,7 +78,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="bn" className={outfit.variable}>
+    <html lang="bn" className={`${outfit.variable} ${notoSerifBengali.variable}`}>
       <head>
         <script
           type="application/ld+json"

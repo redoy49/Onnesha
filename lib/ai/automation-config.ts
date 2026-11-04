@@ -6,7 +6,7 @@ export interface AutomationConfig {
   enabled: boolean;
   scheduleTime: string; // e.g. "09:00"
   timezone: string; // e.g. "UTC"
-  language: "bn" | "en"; // "bn" = বাংলা (Bangla), "en" = English
+  language: "bn" | "en"; // "bn" for Bengali, "en" for English
   niche: string;
   targetKeywords: string[];
   preferredEngine: AiProviderKey;

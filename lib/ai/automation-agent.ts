@@ -361,7 +361,7 @@ GOOGLE 1ST-PAGE RANKING SEO REQUIREMENTS:
 1. **Quick Answer Capsule (Targeting Google Featured Snippets / Position 0)**:
    Include a high-visibility summary card right after the intro:
    <div class="my-6 p-5 rounded-2xl bg-slate-900/60 border border-lime-400/30 text-slate-200">
-     <h3 class="text-lime-400 font-bold text-base mb-2">⚡ সংক্ষেপিত উত্তর (Quick Executive Summary):</h3>
+     <h3 class="text-lime-400 font-bold text-base mb-2">সংক্ষেপিত উত্তর (Quick Executive Summary):</h3>
      <p class="leading-relaxed">৩-৪ বাক্যে মূল প্রশ্নের সরাসরি, দ্ব্যর্থহীন টেকনিক্যাল উত্তর দিন।</p>
    </div>
 2. **Semantic Structure**: Single compelling Bangla H1, 4-5 major H2 sections, and H3 subheadings with clear keywords.
@@ -828,16 +828,16 @@ registerRoot(RemotionVideoRoot);</code></pre>
   </h4>
   <div class="space-y-2 text-xs font-mono text-slate-700">
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> <code>npm install remotion @remotion/cli react</code> প্যাকেজ ইনস্টল করা হয়েছে।
+      <span class="text-lime-700 font-bold">[OK]</span> <code>npm install remotion @remotion/cli react</code> প্যাকেজ ইনস্টল করা হয়েছে।
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> ক্লড কোড টার্মিনালে প্রম্পট দেওয়া: <code>claude-code "Create 60fps kinetic typography motion graphic"</code>
+      <span class="text-lime-700 font-bold">[OK]</span> ক্লড কোড টার্মিনালে প্রম্পট দেওয়া: <code>claude-code "Create 60fps kinetic typography motion graphic"</code>
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> <code>npx remotion preview</code> চালিয়ে অ্যানিমেশনের স্প্রিং ফিজিক্স ব্রাউজারে যাচাই করা হয়েছে।
+      <span class="text-lime-700 font-bold">[OK]</span> <code>npx remotion preview</code> চালিয়ে অ্যানিমেশনের স্প্রিং ফিজিক্স ব্রাউজারে যাচাই করা হয়েছে।
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> <code>npx remotion render src/index.ts ClaudeMotionGraphic out/video.mp4</code> কমান্ডে ফাইনাল MP4 এক্সপোর্ট সফল হয়েছে।
+      <span class="text-lime-700 font-bold">[OK]</span> <code>npx remotion render src/index.ts ClaudeMotionGraphic out/video.mp4</code> কমান্ডে ফাইনাল MP4 এক্সপোর্ট সফল হয়েছে।
     </div>
   </div>
 </div>
@@ -1019,19 +1019,19 @@ export function validateIncomingEvent(data: unknown): { ok: true; value: Ingesti
   </h4>
   <div class="space-y-2 text-xs font-mono text-slate-700">
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> API গেটওয়েতে Zod বা টাইপবক্সের মাধ্যমে স্কিমা ভ্যালিডেশন নিশ্চিত করা হয়েছে।
+      <span class="text-lime-700 font-bold">[OK]</span> API গেটওয়েতে Zod বা টাইপবক্সের মাধ্যমে স্কিমা ভ্যালিডেশন নিশ্চিত করা হয়েছে।
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> ডিস্ট্রিবিউটেড ট্রেসিং হেডার্স (W3C TraceContext) সর্বত্র সঠিকভাবে প্রবাহিত হচ্ছে।
+      <span class="text-lime-700 font-bold">[OK]</span> ডিস্ট্রিবিউটেড ট্রেসিং হেডার্স (W3C TraceContext) সর্বত্র সঠিকভাবে প্রবাহিত হচ্ছে।
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> জিরো-ডাউনটাইম ব্লু/গ্রিন রিলিজ সিন্থেটিক ট্রাফিকের মাধ্যমে ভেরিফাই করা হয়েছে।
+      <span class="text-lime-700 font-bold">[OK]</span> জিরো-ডাউনটাইম ব্লু/গ্রিন রিলিজ সিন্থেটিক ট্রাফিকের মাধ্যমে ভেরিফাই করা হয়েছে।
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> ড্রপড ইভেন্টের জন্য অটোমেটেড ডেড-লেটার কিউ (DLQ) সফলভাবে কনফিগার করা আছে।
+      <span class="text-lime-700 font-bold">[OK]</span> ড্রপড ইভেন্টের জন্য অটোমেটেড ডেড-লেটার কিউ (DLQ) সফলভাবে কনফিগার করা আছে।
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> মেমরি প্রোফাইলিং এবং V8 হিপ ডাম্প অ্যানালাইসিসে মেমরি লিক মুক্ত প্রমাণিত।
+      <span class="text-lime-700 font-bold">[OK]</span> মেমরি প্রোফাইলিং এবং V8 হিপ ডাম্প অ্যানালাইসিসে মেমরি লিক মুক্ত প্রমাণিত।
     </div>
   </div>
 </div>
@@ -1260,16 +1260,16 @@ export function parseIncomingTelemetry(raw: unknown) {
   </h4>
   <div class="space-y-2 text-xs font-mono text-slate-700">
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> Schema boundaries validated with Zod / TypeBox at API gateways.
+      <span class="text-lime-700 font-bold">[OK]</span> Schema boundaries validated with Zod / TypeBox at API gateways.
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> Distributed tracing headers (W3C TraceContext) propagated across microservices.
+      <span class="text-lime-700 font-bold">[OK]</span> Distributed tracing headers (W3C TraceContext) propagated across microservices.
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> Zero-downtime Blue/Green release verified under synthetic load.
+      <span class="text-lime-700 font-bold">[OK]</span> Zero-downtime Blue/Green release verified under synthetic load.
     </div>
     <div class="flex items-center gap-2">
-      <span class="text-lime-700 font-bold">[✓]</span> Automated recovery and dead-letter queues configured for dropped asynchronous events.
+      <span class="text-lime-700 font-bold">[OK]</span> Automated recovery and dead-letter queues configured for dropped asynchronous events.
     </div>
   </div>
 </div>

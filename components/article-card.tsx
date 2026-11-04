@@ -43,7 +43,7 @@ export function ArticleCard({
             </div>
             <h3
               onClick={() => onReadArticle(article)}
-              className="font-extrabold text-lg text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-2"
+              className="font-extrabold font-serif text-lg text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-2"
             >
               {article.title}
             </h3>
@@ -128,7 +128,7 @@ export function ArticleCard({
 
         <h3
           onClick={() => onReadArticle(article)}
-          className="font-extrabold text-xl text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-1"
+          className="font-extrabold font-serif text-xl text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-1"
         >
           {article.title}
         </h3>

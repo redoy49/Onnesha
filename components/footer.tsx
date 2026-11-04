@@ -2,7 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaDribbble, FaXTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
+import Image from "next/image";
+import { FaDribbble, FaXTwitter, FaLinkedinIn, FaInstagram, FaBolt } from "react-icons/fa6";
 import { useAuth } from "./auth-context";
 
 export function Footer() {
@@ -14,8 +15,14 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Tagline */}
           <div className="flex items-center gap-3 text-left">
-            <div className="w-8 h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold text-sm shadow-sm transition">
-              ⚡
+            <div className="relative w-8 h-8 rounded-full overflow-hidden shadow-sm border border-lime-300 shrink-0">
+              <Image
+                src="/onnesha_logo.png"
+                alt="Onnesha Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <span className="font-extrabold text-lg tracking-tight text-slate-900">
@@ -78,8 +85,9 @@ export function Footer() {
               About Author
             </Link>
             {isAdmin ? (
-              <Link href="/dashboard" className="text-lime-700 font-bold hover:underline transition">
-                ⚡ Admin Dashboard
+              <Link href="/dashboard" className="text-lime-700 font-bold hover:underline transition flex items-center gap-1">
+                <FaBolt className="text-xs" />
+                <span>Admin Dashboard</span>
               </Link>
             ) : (
               <button
