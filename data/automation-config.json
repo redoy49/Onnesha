@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "scheduleTime": "14:30",
   "timezone": "Asia/Dhaka",
   "language": "bn",
