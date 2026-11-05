@@ -231,7 +231,7 @@ export function ArticleReader({
         </div>
 
         {/* Headline */}
-        <h1 className="hero-title font-bold font-serif text-2xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
+        <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
           {article.title}
         </h1>
 
@@ -306,7 +306,7 @@ export function ArticleReader({
 
       {/* Article Body Content */}
       <div
-        className="prose max-w-none font-serif text-slate-800 text-base sm:text-lg leading-relaxed space-y-6 pt-2 break-words"
+        className="prose max-w-none font-serif text-slate-800 text-base leading-[1.85] font-normal space-y-6 pt-2 break-words"
         dangerouslySetInnerHTML={{ __html: cleanBody }}
       />
 

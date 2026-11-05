@@ -40,6 +40,8 @@ body {
   background-color: #F8FAFC;
   color: #1E293B;
   font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -89,13 +91,173 @@ body {
 .prose,
 .font-bengali-serif,
 article .prose,
-article p,
-article h1,
-article h2,
-article h3,
-article h4,
-article blockquote {
+article {
+  font-family: var(--font-solaiman-lipi), "SolaimanLipi", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #334155;
+}
+
+.prose p,
+article p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #334155;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+/* Headings: Consistent 700-800 Weight */
+.prose h1,
+article h1 {
   font-family: var(--font-solaiman-lipi), "SolaimanLipi", sans-serif;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2,
+article h2 {
+  font-family: var(--font-solaiman-lipi), "SolaimanLipi", sans-serif;
+  font-weight: 800;
+  font-size: 1.625rem;
+  color: #0F172A;
+  line-height: 1.35;
+  margin-top: 2.25rem;
+  margin-bottom: 0.875rem;
+  padding-bottom: 0.25rem;
+}
+
+.prose h3,
+article h3 {
+  font-family: var(--font-solaiman-lipi), "SolaimanLipi", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1E293B;
+  line-height: 1.45;
+  margin-top: 1.75rem;
+  margin-bottom: 0.625rem;
+}
+
+.prose h4,
+article h4 {
+  font-family: var(--font-solaiman-lipi), "SolaimanLipi", sans-serif;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: #334155;
+  line-height: 1.5;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* List Style: Square Bullet Markers */
+.prose ul,
+article ul {
+  list-style-type: square !important;
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.35rem;
+}
+
+.prose ul > li,
+article ul > li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.prose ul > li::marker,
+article ul > li::marker {
+  color: #84CC16;
+  font-size: 0.9em;
+}
+
+.prose ol,
+article ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.35rem;
+}
+
+.prose ol > li,
+article ol > li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.prose ol > li::marker,
+article ol > li::marker {
+  color: #84CC16;
+  font-weight: 700;
+}
+
+/* Clean Editorial Table Styling (Rounded Box, Thin Border, Light Background) */
+.prose table,
+article table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 1rem !important;
+  border: 1px solid #E2E8F0 !important;
+  background-color: #FFFFFF !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+  font-size: 0.9375rem !important;
+  margin: 2rem 0 !important;
+}
+
+.prose thead,
+article thead {
+  background-color: #F8FAFC !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+.prose th,
+article th {
+  padding: 0.875rem 1rem !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+  text-align: left !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background-color: #F8FAFC !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.025em !important;
+}
+
+.prose td,
+article td {
+  padding: 0.875rem 1rem !important;
+  font-weight: 400 !important;
+  color: #334155 !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background-color: #FFFFFF !important;
+  line-height: 1.75 !important;
+}
+
+.prose tbody tr:last-child td,
+article tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.prose tbody tr:hover td,
+article tbody tr:hover td {
+  background-color: #F8FAFC !important;
 }
 
 /* Ambient Radial Mesh Glow */

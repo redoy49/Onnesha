@@ -100,7 +100,7 @@ TASK:
    - Include a lead callout quote block (<div class="my-6 p-5 sm:p-6 rounded-2xl bg-lime-50 border-l-4 border-lime-500 shadow-sm text-slate-800 text-lg sm:text-xl font-medium leading-relaxed">...</div>).
    - Include 4-5 major technical sections with <h2> in Bangla.
    - Include at least 2 production-ready code blueprints (<pre class="bg-slate-900 border border-slate-800 rounded-2xl p-5 font-mono text-xs text-lime-300 overflow-x-auto shadow-md"><code>...</code></pre>).
-   - Include an in-depth latency and benchmark comparison table comparing the top models (<div class="overflow-x-auto my-8"><table class="min-w-full divide-y divide-slate-200 ...">...</table></div>).
+   - Include an in-depth latency and benchmark comparison table comparing the top models (<div class="overflow-x-auto my-8 rounded-2xl border border-slate-200/90 bg-white shadow-sm"><table class="min-w-full border-collapse text-left text-sm text-slate-700">...</table></div> - NEVER use black background for tables).
    - Include a Production Deployment & Verification Checklist with [OK] markers.
    - Do NOT include any citations, external references, or source link sections inside the HTML body (citations are managed separately in structured metadata).
 

@@ -368,7 +368,7 @@ GOOGLE 1ST-PAGE RANKING SEO REQUIREMENTS:
 3. **Preserve English Technical Terms**: Write natural Bangla prose with standard English terminology in brackets (e.g., সার্ভার অ্যাকশন (Server Actions), কনটেক্সট উইন্ডো (Context Window)).
 4. **Code Blueprints**: Include at least 2 production-ready code examples with clean syntax highlighting:
    <pre class="bg-slate-900 border border-slate-800 rounded-2xl p-5 font-mono text-xs text-lime-300 overflow-x-auto my-6"><code>...</code></pre>
-5. **Comparison & Benchmark Table**: Include a 2026 performance comparison table (<table class="min-w-full divide-y divide-slate-800 ...">).
+5. **Comparison & Benchmark Table**: Include a 2026 performance comparison table in a clean, light container (<div class="overflow-x-auto my-8 rounded-2xl border border-slate-200/90 bg-white shadow-sm"><table class="min-w-full border-collapse text-left text-sm text-slate-700">...</table></div> - NEVER use black background for tables).
 6. **Clean Content Flow**: Focus strictly on deep editorial content (problem space, architecture, code patterns, benchmarks, production checklist, and actionable takeaways). Do NOT write or append any citations, external references, or source links section inside the HTML body (citations are managed separately in structured metadata).
 
 RESEARCH CONTEXT & FACTS FROM TINYFISH (Page 0 + Page 1):

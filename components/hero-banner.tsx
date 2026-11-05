@@ -20,7 +20,7 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
           </div>
           <h1
             onClick={() => onReadArticle(featuredArticle)}
-            className="hero-title font-extrabold font-serif text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors"
+            className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors"
           >
             {featuredArticle.title}
           </h1>
