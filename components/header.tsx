@@ -46,16 +46,16 @@ export function Header({
         <Link
           href="/"
           onClick={() => handleNavClick("All")}
-          className="flex items-center gap-2.5 cursor-pointer group shrink-0"
+          className="flex items-center gap-2 cursor-pointer group shrink-0"
         >
-          <div className="relative w-8 h-8 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105 border border-lime-300 shrink-0">
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shadow-xs transition-transform group-hover:scale-105 bg-white shrink-0 flex items-center justify-center">
             <Image
               src="/onnesha_logo.png"
               alt="Onnesha Logo"
-              width={32}
-              height={32}
+              width={36}
+              height={36}
               priority
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain scale-125 transition-transform"
             />
           </div>
           <div className="flex items-center">

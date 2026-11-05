@@ -14,21 +14,21 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Tagline */}
-          <div className="flex items-center gap-3 text-left">
-            <div className="relative w-8 h-8 rounded-full overflow-hidden shadow-sm border border-lime-300 shrink-0">
+          <div className="flex items-center gap-2 text-left">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden shadow-xs bg-white shrink-0 flex items-center justify-center">
               <Image
                 src="/onnesha_logo.png"
                 alt="Onnesha Logo"
-                width={32}
-                height={32}
-                className="w-full h-full object-cover"
+                width={56}
+                height={56}
+                className="w-full h-full object-contain scale-125"
               />
             </div>
             <div>
-              <span className="font-extrabold text-lg tracking-tight text-slate-900">
+              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900">
                 ONNESHA
               </span>
-              <p className="text-[11px] text-slate-500 font-mono">
+              <p className="text-[11px] sm:text-xs text-slate-500 font-mono">
                 AI-Powered Personal Tech Blog & Systems Architecture
               </p>
             </div>
