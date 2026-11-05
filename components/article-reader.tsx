@@ -307,7 +307,7 @@ export function ArticleReader({
       </div>
 
       {/* Headline */}
-      <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
+      <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl leading-[1.1] text-slate-900 tracking-tight break-words">
         {article.title}
       </h1>
 

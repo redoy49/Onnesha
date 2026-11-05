@@ -676,20 +676,11 @@ export default function AdminDashboardPage() {
 
             {/* 1-Click Instant Bangla Post Generator Card */}
             <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-lime-500"></span>
-                  <span className="text-[11px] font-mono font-bold text-lime-900 uppercase">
-                    TINYFISH MULTI-PAGE RESEARCH + BANGLA WRITER + HUMANIZER
-                  </span>
-                </div>
+              <div>
                 <h2 className="font-bold text-xl sm:text-2xl text-slate-800 tracking-tight flex items-center gap-2">
                   <FaBolt className="text-lime-600 text-lg" />
                   <span>১-ক্লিক বাংলা টেকনিক্যাল আর্টিকেল জেনারেটর</span>
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  TinyFish দিয়ে সার্চ রেজাল্টের ১ম ও ২য় পেইজ (Page 0 & Page 1) সম্পূর্ণ রিসার্চ করে ২০+ অথরিটেটিভ সোর্স এক্সট্র্যাক্ট করবে এবং এসইও অপ্টিমাইজড মানবিক বাংলা পোস্ট ড্রাফট হিসেবে জমা করবে।
-                </p>
               </div>
 
               {/* Topic Input Box */}
@@ -737,11 +728,6 @@ export default function AdminDashboardPage() {
                     </>
                   )}
                 </button>
-
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
-                  <FaCheck className="text-emerald-700 text-xs" />
-                  <span>স্বয়ংক্রিয়ভাবে Draft হিসেবে ড্যাশবোর্ডে সংরক্ষিত হবে</span>
-                </div>
               </div>
 
               {/* Live Multi-Step Progress Tracker */}

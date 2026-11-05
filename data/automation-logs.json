@@ -1,5 +1,108 @@
 [
   {
+    "id": "job-1793870240199",
+    "timestamp": "2026-11-05T09:17:20.199Z",
+    "topic": "GitHub-এ ঝড় তুলছে যে ১০টি প্রজেক্ট ২০২৬: সিস্টেম আর্কিটেক্টের গভীর বিশ্লেষণ",
+    "slug": "top-10-trending-github-projects-2026-systems-deep-dive",
+    "status": "draft",
+    "engine": "TinyFish Multi-Page + Gemini [বাংলা (Humanized)]",
+    "wordCount": 1931,
+    "sourcesCount": 18,
+    "sources": [
+      {
+        "title": "Top 10 GitHub Features You MUST Use in 2026!",
+        "url": "https://www.youtube.com/watch?v=gYl3moYa4iI&vl=bn",
+        "snippet": "This video shows you how to transform any GitHub repository into a professionally organized project using built-in tools most developers don't ..."
+      },
+      {
+        "title": "Trending repositories on GitHub today",
+        "url": "https://github.com/trending",
+        "snippet": "GitHub is where people build software. More than 225 million people use GitHub to discover, fork, and contribute to over 800 million projects."
+      },
+      {
+        "title": "Top 10 Open-Source AI Projects Trending on GitHub in 2026",
+        "url": "https://shop.zimaspace.com/blogs/tech-ai-hub/top-10-open-source-ai-projects-trending-on-github-in-2026?srsltid=AYCX9vKZwh00pnYd4ps0HMucuMqAhYDVudAYOCHImVbmzmezvFbpDI7r",
+        "snippet": "What was the fastest-growing open-source AI project on GitHub in August 2026? DeepSeek Harness ranked first in GitTrend's August 2026 ..."
+      },
+      {
+        "title": "Octoverse: Commits, pushes, reach new highs in 2026 as ...",
+        "url": "https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/",
+        "snippet": "Developers pushed code to GitHub 17.9 billion times in the past 12 months, more than in 2024 and 2025 combined."
+      },
+      {
+        "title": "hackathon2026 · GitHub Topics",
+        "url": "https://github.com/topics/hackathon2026",
+        "snippet": "eGov Hackathon 2026 project: A platform that transforms student research into real-world government solutions through secure submission ..."
+      },
+      {
+        "title": "Top 20 AI Projects on GitHub to Watch in 2026: Not Just ...",
+        "url": "https://www.nocobase.com/blog/best-open-source-ai-projects-github-2026/",
+        "snippet": "20 open-source AI projects worth watching in 2026 ; 10, Generative AI for Beginners, 108k, Learning resources, Developers ; 11, ComfyUI, 106k, Multimodal ..."
+      },
+      {
+        "title": "Top 10 GitHub Repos This Month | September 2026",
+        "url": "https://www.youtube.com/watch?v=N2o9AoYt7_k",
+        "snippet": "GitHub monthly trending window captured October 1, 2026; not an independently verified calendar-month archive. ⏱️ TIMESTAMPS 0:00 — Intro ..."
+      },
+      {
+        "title": "10 Best GitHub Project Management Tools to Try in 2026",
+        "url": "https://ones.com/blog/10-best-github-project-management-tools-to-try-in-2026/",
+        "snippet": "Discover the top github project management software for 2026 that syncs repos to boards. A shortlist of 10 platforms that actually deliver."
+      },
+      {
+        "title": "What's New in GitHub Projects & Issues (2026 Q4)",
+        "url": "https://www.benday.com/blog/whats-new-github-projects-issues-2026-q4",
+        "snippet": "GitHub Projects in 2026, Part 4: Taming a Messy Backlog with Issue Types. 10/26/2026. GitHub Projects in 2026, Part 4: Taming a Messy Backlog ..."
+      },
+      {
+        "title": "Top 10 GitHub repositories for October 2026",
+        "url": "https://www.facebook.com/ajbatac0/posts/top-10-github-repositories-today-the-most-trending-open-source-projects-on-githu/3626670340834162/",
+        "snippet": "Top 10 GitHub Repositories Today The most trending open-source projects on GitHub right now: agency-agents nginx-proxy-manager ..."
+      },
+      {
+        "title": "GitHub Full Course | for Beginners 2026",
+        "url": "https://www.youtube.com/watch?v=ZbrufHI9l7o",
+        "snippet": "The Only GitHub Guide You'll Ever Need. corbin · 565K views ; Git Tutorial For Dummies. Nick White · 2.1M views ; How to Use GitHub With AI Coding ..."
+      },
+      {
+        "title": "20 Most Starred GitHub Projects Every Developer Should ...",
+        "url": "https://apidog.com/blog/top-rising-github-projects/",
+        "snippet": "Explore the 20 most-starred GitHub projects in 2026 for backend, API, and QA engineers. Discover tools for automation, API testing, code quality, and more—plus ..."
+      },
+      {
+        "title": "Top 10 GitHub Projects to Impress Recruiters in 2026",
+        "url": "https://techpaathshala.com/blog/top-github-projects-to-impress-recruiters/",
+        "snippet": "Discover 10 GitHub projects that help freshers stand out in 2026. Learn what recruiters look for and build a portfolio that boosts your ..."
+      },
+      {
+        "title": "Top 10 GitHub Projects for Beginners in 2026",
+        "url": "https://www.techwithalphonse.in/2026/05/top-10-github-projects-for-beginners-in.html",
+        "snippet": "Ready to improve your coding skills? Pick one project from this list and start building today. Create your GitHub repository, upload your code, ..."
+      },
+      {
+        "title": "Top 10 Trending AI GitHub Repositories in July 2026",
+        "url": "https://www.analyticsvidhya.com/blog/2026/07/trending-ai-github-repositories/",
+        "snippet": "Discover the top 10 trending AI GitHub repositories for July 2026. Explore the shift toward AI agent tooling, including coding harnesses, ..."
+      },
+      {
+        "title": "GitHub developers pushed more code in 2026 than in the last ...",
+        "url": "https://www.thestack.technology/github-developers-pushed-more-code-in-2026-than-in-the-last-two-years-combined/",
+        "snippet": "Developers pushed code to GitHub 17.9 billion times in the past year, which was more commits than it saw in the past two years combined and ..."
+      },
+      {
+        "title": "Top GitHub Projects Every Beginner Should Build in 2026",
+        "url": "https://www.konentrasolutions.com/post_view?slug=top-github-projects-every-beginner-should-build-in-2026",
+        "snippet": "This project demonstrates your front-end development skills while giving potential employers a central place to learn about you. 2. To-Do List ..."
+      },
+      {
+        "title": "GitHub Trending October 2026: 5 AI Agent Tools ...",
+        "url": "https://www.coddykit.com/pages/blog-detail?id=5129953&slug=github-trending-october-2026-5-ai-agent-tools-redefining-developer-workflows",
+        "snippet": "October 2026 is here, and GitHub's trending charts tell a story. AI coding agents are no longer a novelty — they are the backbone of modern ..."
+      }
+    ],
+    "executionTimeMs": 188175
+  },
+  {
     "id": "job-1793693255656",
     "timestamp": "2026-11-03T08:07:35.656Z",
     "topic": "২০২৬ সালে সেরা ৫টি প্রোগ্রামিং ল্যাঙ্গুয়েজ ও প্রডাকশন আর্কিটেকচার",

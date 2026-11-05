@@ -20,7 +20,7 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
             FEATURED TECH DISPATCH
           </div>
           <Link href={`/blog/${featuredArticle.slug}`} className="block">
-            <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors">
+            <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl leading-[1.1] text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors">
               {featuredArticle.title}
             </h1>
           </Link>
