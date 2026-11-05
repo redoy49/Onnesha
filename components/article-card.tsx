@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { FaBookmark, FaRegBookmark, FaArrowRight } from "react-icons/fa6";
 import { Article, LayoutMode } from "@/types/article";
 
@@ -23,9 +24,9 @@ export function ArticleCard({
     return (
       <div className="bg-white border border-slate-200 rounded-3xl p-5 hover:border-lime-400 hover:shadow-md transition-all flex flex-col justify-between group shadow-sm text-left">
         <div className="space-y-4">
-          <div
-            className="aspect-[16/9] rounded-2xl overflow-hidden relative cursor-pointer bg-slate-100"
-            onClick={() => onReadArticle(article)}
+          <Link
+            href={`/blog/${article.slug}`}
+            className="aspect-[16/9] rounded-2xl overflow-hidden relative cursor-pointer bg-slate-100 block"
           >
             <img
               src={article.coverImage}
@@ -35,18 +36,17 @@ export function ArticleCard({
             <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-lime-400 text-slate-900 text-[10px] font-bold uppercase shadow-sm">
               {article.category}
             </span>
-          </div>
+          </Link>
 
           <div>
             <div className="flex items-center gap-2 text-xs text-slate-500 font-mono mb-2">
               <span>{article.date}</span> • <span>{article.readTime}</span>
             </div>
-            <h3
-              onClick={() => onReadArticle(article)}
-              className="font-extrabold font-serif text-lg text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-2"
-            >
-              {article.title}
-            </h3>
+            <Link href={`/blog/${article.slug}`} className="block">
+              <h3 className="font-extrabold font-serif text-lg text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-2">
+                {article.title}
+              </h3>
+            </Link>
             <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
               {article.excerpt}
             </p>
@@ -77,13 +77,12 @@ export function ArticleCard({
                 <FaRegBookmark className="text-sm" />
               )}
             </button>
-            <button
-              onClick={() => onReadArticle(article)}
+            <Link
+              href={`/blog/${article.slug}`}
               className="text-xs font-bold text-lime-700 hover:text-lime-800 flex items-center gap-1 hover:underline"
-              type="button"
             >
               Read <FaArrowRight className="text-[10px]" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -93,9 +92,9 @@ export function ArticleCard({
   // Default: List View
   return (
     <div className="bg-white border border-slate-200 rounded-3xl p-5 hover:border-lime-400 hover:shadow-md transition-all flex flex-col sm:flex-row items-center gap-6 group shadow-sm text-left">
-      <div
-        className="w-full sm:w-48 h-36 shrink-0 rounded-2xl overflow-hidden relative cursor-pointer bg-slate-100"
-        onClick={() => onReadArticle(article)}
+      <Link
+        href={`/blog/${article.slug}`}
+        className="w-full sm:w-48 h-36 shrink-0 rounded-2xl overflow-hidden relative cursor-pointer bg-slate-100 block"
       >
         <img
           src={article.coverImage}
@@ -105,7 +104,7 @@ export function ArticleCard({
         <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-lime-400 text-slate-900 text-[10px] font-bold uppercase shadow-sm">
           {article.category}
         </span>
-      </div>
+      </Link>
 
       <div className="flex-1 space-y-2 w-full">
         <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -126,12 +125,11 @@ export function ArticleCard({
           </button>
         </div>
 
-        <h3
-          onClick={() => onReadArticle(article)}
-          className="font-extrabold font-serif text-xl text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-1"
-        >
-          {article.title}
-        </h3>
+        <Link href={`/blog/${article.slug}`} className="block">
+          <h3 className="font-extrabold font-serif text-xl text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-1">
+            {article.title}
+          </h3>
+        </Link>
         <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
           {article.excerpt}
         </p>

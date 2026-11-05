@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { initialArticles } from "@/lib/data/articles";
 import { Article, CategoryFilter, LayoutMode } from "@/types/article";
 import { Header } from "@/components/header";
@@ -8,13 +9,13 @@ import { HeroBanner } from "@/components/hero-banner";
 import { FilterSidebar } from "@/components/filter-sidebar";
 import { CategoryPills } from "@/components/category-pills";
 import { ArticleCard } from "@/components/article-card";
-import { ArticleReader } from "@/components/article-reader";
 import { WriteModal } from "@/components/write-modal";
 import { useToast } from "@/components/toast";
 import { useAuth } from "@/components/auth-context";
 import { FaFolderOpen, FaArrowDown } from "react-icons/fa6";
 
 export default function HomePage() {
+  const router = useRouter();
   const { showToast } = useToast();
   const { isAdmin } = useAuth();
 
@@ -23,7 +24,6 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedQuickTags, setSelectedQuickTags] = useState<string[]>([]);
   const [layoutMode, setLayoutMode] = useState<LayoutMode>("list");
-  const [activeReaderArticle, setActiveReaderArticle] = useState<Article | null>(null);
 
   // Sync with /api/articles on client mount & window focus, with localStorage fallback
   useEffect(() => {
@@ -125,12 +125,6 @@ export default function HomePage() {
       return a;
     });
     saveArticles(updated);
-    if (activeReaderArticle && activeReaderArticle.id === id) {
-      setActiveReaderArticle({
-        ...activeReaderArticle,
-        bookmarked: !activeReaderArticle.bookmarked,
-      });
-    }
   };
 
   const handleToggleTag = (tag: string) => {
@@ -151,7 +145,10 @@ export default function HomePage() {
       a.id === updatedArticle.id ? updatedArticle : a
     );
     saveArticles(updated);
-    setActiveReaderArticle(updatedArticle);
+  };
+
+  const handleReadArticle = (art: Article) => {
+    router.push(`/blog/${encodeURIComponent(art.slug)}`);
   };
 
   const handleResetFilters = () => {
@@ -176,7 +173,7 @@ export default function HomePage() {
       {featuredArticle && (
         <HeroBanner
           featuredArticle={featuredArticle}
-          onReadArticle={(art) => setActiveReaderArticle(art)}
+          onReadArticle={handleReadArticle}
         />
       )}
 
@@ -232,7 +229,7 @@ export default function HomePage() {
                     key={article.id}
                     article={article}
                     layoutMode={layoutMode}
-                    onReadArticle={(art) => setActiveReaderArticle(art)}
+                    onReadArticle={handleReadArticle}
                     onToggleBookmark={handleToggleBookmark}
                   />
                 ))}
@@ -256,17 +253,6 @@ export default function HomePage() {
 
       {/* Write Story Modal (Admin Only) */}
       {isAdmin && <WriteModal onPublishArticle={handlePublishArticle} />}
-
-      {/* Full-Bleed Article Reader Modal */}
-      {activeReaderArticle && (
-        <ArticleReader
-          article={activeReaderArticle}
-          isModal={true}
-          onClose={() => setActiveReaderArticle(null)}
-          onToggleBookmark={(id) => handleToggleBookmark(id)}
-          onUpdateArticle={handleUpdateArticle}
-        />
-      )}
     </>
   );
 }

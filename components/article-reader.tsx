@@ -74,10 +74,10 @@ export function ArticleReader({
     }
   };
 
-  // Sanitize any legacy or duplicate citation HTML embedded directly in article.body
+  // Sanitize and ensure responsive containers for embedded content
   const cleanBody = React.useMemo(() => {
     if (!article.body) return "";
-    return article.body
+    let body = article.body
       .replace(
         /<(?:h[1-6]|section|div)[^>]*>[\s\S]*?(?:তথ্যসূত্র|External Citations|Verified Multi-Page Citations|Verified External Citations|যাচাইকৃত রেফারেন্স|সাইটেশন)[\s\S]*$/i,
         ""
@@ -86,6 +86,8 @@ export function ArticleReader({
       .replace(/<div[^>]*class="[^"]*mermaid[^"]*"[^>]*>[\s\S]*?<\/div>/gi, "")
       .replace(/flowchart\s+(?:TD|LR|TB|BT)[\s\S]*?(?=(?:<h[1-6]|\n\n|$))/gi, "")
       .trim();
+
+    return body;
   }, [article.body]);
 
   const getHostname = (url: string) => {
@@ -222,12 +224,6 @@ export function ArticleReader({
           <span className="text-xs font-mono text-slate-500">
             {article.readTime}
           </span>
-          {article.rigorScore && (
-            <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm">
-              <FaShieldHalved className="text-emerald-600 text-[11px]" />
-              <span>Peer Review: {article.rigorScore}% Rigor</span>
-            </span>
-          )}
         </div>
 
         {/* Headline */}
@@ -329,7 +325,7 @@ export function ArticleReader({
                     </span>
                   </div>
                   <p className="text-xs text-slate-500 font-mono mt-0.5">
-                    TinyFish মাল্টি-পেজ ডিপ ওয়েব সার্চের মাধ্যমে ক্রস-ভেরিফাইড ও ফ্যাক্ট-চেকড
+                    যাচাইকৃত রেফারেন্স এবং তথ্যসূত্র তালিকা
                   </p>
                 </div>
               </div>
@@ -385,17 +381,6 @@ export function ArticleReader({
                   ))}
                 </div>
 
-                {article.generatedBy && (
-                  <div className="p-3 rounded-xl bg-slate-100/90 border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-600">
-                    <span>
-                      গবেষণা ও সিন্থেসিস ইঞ্জিন:{" "}
-                      <strong className="text-slate-800 font-bold">{article.generatedBy}</strong>
-                    </span>
-                    <span className="flex items-center gap-1 text-emerald-700 font-semibold">
-                      <FaCheck className="text-[10px]" /> অটোনোমাস ফ্যাক্ট-চেকিং সম্পন্ন
-                    </span>
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -614,32 +599,9 @@ export function ArticleReader({
     </div>
   );
 
-  // MODE A: MODAL OVERLAY (When opened from Home preview)
-  if (isModal) {
-    return (
-      <div
-        ref={containerRef}
-        className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-md overflow-y-auto transition-all p-3 sm:p-6 flex justify-center items-start text-left"
-      >
-        {/* Top Reading Progress Indicator Bar */}
-        <div className="fixed top-0 left-0 right-0 h-1 bg-slate-200 z-50">
-          <div
-            className="h-full bg-lime-500 shadow-sm transition-all duration-100 ease-out"
-            style={{ width: `${readingProgress}%` }}
-          />
-        </div>
-
-        <div className="relative w-full max-w-4xl bg-white border border-slate-200 rounded-3xl shadow-2xl p-4 sm:p-8 my-4 sm:my-8 space-y-6">
-          {stickyBar}
-          {articleContent}
-        </div>
-      </div>
-    );
-  }
-
-  // MODE B: NATIVE PAGE FLOW (When on /blog/[slug])
+  // Native Full Page View (No modal pop-up)
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-8 text-left">
+    <div className="w-full space-y-8 text-left">
       {/* Top Reading Progress Indicator Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-200 z-50">
         <div

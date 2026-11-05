@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { FaArrowRight, FaClock } from "react-icons/fa6";
 import { Article } from "@/types/article";
 
@@ -18,12 +19,11 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
             <span className="w-2 h-2 rounded-full bg-lime-600 animate-pulse"></span>
             FEATURED TECH DISPATCH
           </div>
-          <h1
-            onClick={() => onReadArticle(featuredArticle)}
-            className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors"
-          >
-            {featuredArticle.title}
-          </h1>
+          <Link href={`/blog/${featuredArticle.slug}`} className="block">
+            <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight cursor-pointer hover:text-lime-700 transition-colors">
+              {featuredArticle.title}
+            </h1>
+          </Link>
         </div>
 
         {/* Top Right Author Snippet */}
@@ -38,20 +38,20 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
             <p className="font-bold text-slate-800">
               By {featuredArticle.author} • {featuredArticle.date}
             </p>
-            <button
-              onClick={() => onReadArticle(featuredArticle)}
+            <Link
+              href={`/blog/${featuredArticle.slug}`}
               className="text-lime-700 hover:text-lime-800 font-bold text-xs hover:underline flex items-center gap-1 transition-colors"
             >
               Read full story <FaArrowRight className="text-[10px]" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Wide Curved Hero Visual Banner */}
-      <div
-        className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden group cursor-pointer border border-slate-200/90 shadow-md"
-        onClick={() => onReadArticle(featuredArticle)}
+      <Link
+        href={`/blog/${featuredArticle.slug}`}
+        className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden group cursor-pointer border border-slate-200/90 shadow-md block"
       >
         <div className="aspect-[21/9] min-h-[280px] sm:min-h-[380px] w-full bg-slate-100 relative overflow-hidden">
           <img
@@ -83,7 +83,7 @@ export function HeroBanner({ featuredArticle, onReadArticle }: HeroBannerProps) 
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </section>
   );
 }

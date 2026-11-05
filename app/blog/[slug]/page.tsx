@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-surface-canvas text-slate-800 bg-mesh-glow">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <Header />
-      <main className="flex-1 w-full pt-16 sm:pt-20 pb-16">
+      <main className="pt-6 sm:pt-8 pb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
         <ArticleReader
           article={article}
           relatedArticles={relatedArticles}
