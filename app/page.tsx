@@ -178,7 +178,11 @@ export default function HomePage() {
       )}
 
       {/* Main Content Layout */}
-      <main id="feedSection" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+      <main
+        id="feedSection"
+        suppressHydrationWarning
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left Column: Quick Filters & Sidebar */}
           <FilterSidebar

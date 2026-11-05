@@ -47,6 +47,46 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================================================
+   MOBILE-NATIVE PLATFORM ENHANCEMENTS (mobile-native skill standards)
+   ========================================================================== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+button,
+[role="button"],
+.select-none-touch {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Fluid responsive media & container containment */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose img,
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  margin: 1.5rem 0;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 7px;

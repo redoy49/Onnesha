@@ -89,6 +89,11 @@ export function ArticleReader({
       .replace(/flowchart\s+(?:TD|LR|TB|BT)[\s\S]*?(?=(?:<h[1-6]|\n\n|$))/gi, "")
       .trim();
 
+    // Responsive table auto-containment (prevents mobile page-width blowout)
+    body = body.replace(/(<table[\s\S]*?<\/table>)/gi, (match) => {
+      return `<div class="overflow-x-auto my-6 border border-slate-200 rounded-2xl shadow-sm">${match}</div>`;
+    });
+
     return body;
   }, [article.body]);
 

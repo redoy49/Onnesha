@@ -126,7 +126,7 @@ export function ArticleCard({
         </div>
 
         <Link href={`/blog/${article.slug}`} className="block">
-          <h3 className="font-extrabold font-serif text-xl text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-1">
+          <h3 className="font-extrabold font-serif text-lg sm:text-xl text-slate-900 group-hover:text-lime-700 transition-colors cursor-pointer line-clamp-2 leading-[1.25]">
             {article.title}
           </h3>
         </Link>

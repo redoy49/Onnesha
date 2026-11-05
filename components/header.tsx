@@ -42,6 +42,7 @@ export function Header({
 
   return (
     <div
+      suppressHydrationWarning
       className={`${
         stickyMobile ? "sticky" : "static sm:sticky"
       } top-3 sm:top-4 z-40 max-w-7xl mx-auto px-3 sm:px-4 w-full pointer-events-none`}
@@ -54,7 +55,10 @@ export function Header({
           onClick={() => handleNavClick("All")}
           className="flex items-center gap-2 cursor-pointer group shrink-0"
         >
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shadow-xs transition-transform group-hover:scale-105 bg-white shrink-0 flex items-center justify-center">
+          <div
+            suppressHydrationWarning
+            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shadow-xs transition-transform group-hover:scale-105 bg-white shrink-0 flex items-center justify-center"
+          >
             <Image
               src="/onnesha_logo.png"
               alt="Onnesha Logo"
@@ -109,8 +113,9 @@ export function Header({
           {/* Mobile Search Toggle Icon */}
           <button
             onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-            className="sm:hidden w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-all flex items-center justify-center"
+            className="sm:hidden w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-all flex items-center justify-center shrink-0"
             title="Search"
+            aria-label="Toggle mobile search"
             type="button"
           >
             <FaMagnifyingGlass className="text-xs" />
@@ -144,8 +149,9 @@ export function Header({
           {/* Mobile Menu Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-all flex items-center justify-center shrink-0"
+            className="md:hidden w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-all flex items-center justify-center shrink-0"
             title="Navigation Menu"
+            aria-label="Toggle mobile menu"
             type="button"
           >
             {mobileMenuOpen ? <FaXmark className="text-sm" /> : <FaBars className="text-xs" />}
@@ -164,9 +170,9 @@ export function Header({
                 value={searchQuery}
                 onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
                 placeholder="Search stories..."
-                className="w-full bg-slate-100 border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-lime-500"
+                className="w-full bg-slate-100 border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-base sm:text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-lime-500"
               />
-              <FaMagnifyingGlass className="absolute left-3 top-2.5 text-slate-400 text-xs" />
+              <FaMagnifyingGlass className="absolute left-3 top-3 text-slate-400 text-xs" />
             </div>
           </div>
         </div>

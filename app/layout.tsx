@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "@/components/providers";
@@ -20,6 +20,13 @@ const solaimanLipi = localFont({
   variable: "--font-solaiman-lipi",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Onnesha :: Next Generation AI-Powered Tech Blog",
@@ -83,14 +90,71 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="bn" className={solaimanLipi.variable}>
+    <html lang="bn" className={solaimanLipi.variable} suppressHydrationWarning>
       <head>
+        {/* Guard against browser extensions (Bitdefender, Bypass Paywalls) injecting bis_skin_checked before React hydration */}
+        <script
+          id="anti-hydration-mismatch-guard"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                try {
+                  var origSetAttr = Element.prototype.setAttribute;
+                  Element.prototype.setAttribute = function(name, val) {
+                    if (name === 'bis_skin_checked') return;
+                    return origSetAttr.apply(this, arguments);
+                  };
+
+                  var origSetAttrNS = Element.prototype.setAttributeNS;
+                  Element.prototype.setAttributeNS = function(ns, name, val) {
+                    if (name === 'bis_skin_checked') return;
+                    return origSetAttrNS.apply(this, arguments);
+                  };
+
+                  var origHasAttr = Element.prototype.hasAttribute;
+                  Element.prototype.hasAttribute = function(name) {
+                    if (name === 'bis_skin_checked') return true;
+                    return origHasAttr.apply(this, arguments);
+                  };
+
+                  try {
+                    Object.defineProperty(Element.prototype, 'bis_skin_checked', {
+                      get: function() { return '1'; },
+                      set: function() {},
+                      configurable: true
+                    });
+                  } catch (propErr) {}
+
+                  if (typeof MutationObserver !== 'undefined') {
+                    var observer = new MutationObserver(function(mutations) {
+                      for (var i = 0; i < mutations.length; i++) {
+                        var m = mutations[i];
+                        if (m.type === 'attributes' && m.attributeName === 'bis_skin_checked') {
+                          m.target.removeAttribute('bis_skin_checked');
+                        }
+                      }
+                    });
+                    observer.observe(document.documentElement, {
+                      attributes: true,
+                      subtree: true,
+                      attributeFilter: ['bis_skin_checked']
+                    });
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body className="bg-surface-canvas text-slate-800 font-sans antialiased min-h-screen flex flex-col bg-mesh-glow selection:bg-lime-200 selection:text-lime-950">
+      <body
+        className="bg-surface-canvas text-slate-800 font-sans antialiased min-h-screen flex flex-col bg-mesh-glow selection:bg-lime-200 selection:text-lime-950"
+        suppressHydrationWarning
+      >
         <Providers>
           {children}
           <Footer />
