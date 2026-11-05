@@ -21,10 +21,12 @@ import {
   FaShieldHalved,
   FaBolt,
   FaCopy,
+  FaClock,
 } from "react-icons/fa6";
 import { Article } from "@/types/article";
 import { useToast } from "./toast";
 import { generateSocialDistribution } from "@/lib/ai/social-curator";
+import { GoogleAdBanner } from "./google-ad-banner";
 
 interface ArticleReaderProps {
   article: Article;
@@ -211,94 +213,205 @@ export function ArticleReader({
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank", "noopener,noreferrer");
   };
 
-  // Reusable Article Body & Meta Content
-  const articleContent = (
-    <article className="space-y-8 text-left w-full">
-      {/* Article Header Meta */}
-      <div className="space-y-4">
-        {/* Category Pill and Read Time */}
-        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-          <span className="px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
-            {article.category}
-          </span>
-          <span className="text-xs font-mono text-slate-500">
-            {article.readTime}
-          </span>
-        </div>
+  // Companion Sticky Bar (Floating action bar for reader)
+  const stickyBar = (
+    <div className="sticky top-3 sm:top-5 z-30 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl w-full">
+      {/* Back Button */}
+      <button
+        onClick={handleBack}
+        className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-lime-700 transition-colors shrink-0"
+        type="button"
+      >
+        <FaArrowLeft className="text-xs text-slate-600" />
+        <span className="hidden sm:inline">Back to stories</span>
+        <span className="sm:hidden">Back</span>
+      </button>
 
-        {/* Headline */}
-        <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
-          {article.title}
-        </h1>
+      {/* Action Controls */}
+      <div className="flex items-center gap-1.5 sm:gap-2.5">
+        {/* Applause Clap Button */}
+        <button
+          onClick={handleClap}
+          className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-slate-100 hover:bg-lime-50 border border-slate-200 hover:border-lime-300 text-xs flex items-center gap-1.5 text-slate-800 transition shadow-sm"
+          title="Give Claps"
+          type="button"
+        >
+          <FaHandsClapping className="text-lime-700 text-xs" />
+          <span className="font-bold">{claps}</span>
+        </button>
 
-        {/* Author Info Row & Share Buttons */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-y border-slate-200">
-          <div className="flex items-center gap-3">
-            <img
-              src={article.authorAvatar}
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-lime-400 shrink-0"
-              alt={article.author}
-            />
-            <div className="flex flex-col justify-center text-left">
-              <div className="font-bold text-slate-900 text-sm leading-snug">
-                {article.author}
-              </div>
-              <div className="text-xs font-mono text-slate-500 leading-snug">
-                Published {article.date}
-              </div>
+        {/* Heart Like Button */}
+        <button
+          onClick={handleLike}
+          className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-slate-100 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 text-xs flex items-center gap-1.5 text-slate-800 transition shadow-sm"
+          title="Like Article"
+          type="button"
+        >
+          <FaHeart className="text-rose-500 text-xs" />
+          <span className="font-bold">{likes}</span>
+        </button>
+
+        {/* Bookmark Button */}
+        <button
+          onClick={handleBookmarkClick}
+          className={`p-1.5 sm:p-2 rounded-full border transition shadow-sm ${
+            isBookmarked
+              ? "bg-lime-100 border-lime-300 text-lime-800"
+              : "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-600 hover:text-slate-900"
+          }`}
+          title={isBookmarked ? "Remove Bookmark" : "Save Bookmark"}
+          type="button"
+        >
+          {isBookmarked ? (
+            <FaBookmark className="text-lime-700 text-xs" />
+          ) : (
+            <FaRegBookmark className="text-xs text-slate-600" />
+          )}
+        </button>
+
+        {/* Share Link */}
+        <button
+          onClick={handleCopyLink}
+          className="p-1.5 sm:p-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 text-xs transition shadow-sm"
+          title="Share Link"
+          type="button"
+        >
+          {copied ? <FaCheck className="text-lime-700 text-xs" /> : <FaShareNodes className="text-xs" />}
+        </button>
+
+        {/* Close Button - Only in Modal Mode */}
+        {isModal && (
+          <button
+            onClick={handleBack}
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold transition shadow-sm ml-0.5 sm:ml-1"
+            title="Close Reader"
+            type="button"
+          >
+            <FaXmark className="text-xs sm:text-sm" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+
+  // Full-Width Article Header & Hero Visual (Matching Home Page HeroBanner)
+  const headerAndCover = (
+    <div className="space-y-6 w-full text-left">
+      {/* Category Pill and Read Time */}
+      <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+        <span className="px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
+          {article.category}
+        </span>
+        <span className="text-xs font-mono text-slate-500">
+          {article.readTime}
+        </span>
+      </div>
+
+      {/* Headline */}
+      <h1 className="hero-title font-extrabold font-serif text-2xl sm:text-3xl lg:text-5xl text-slate-900 tracking-tight leading-tight sm:leading-snug break-words">
+        {article.title}
+      </h1>
+
+      {/* Author Info Row & Share Buttons */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-y border-slate-200">
+        <div className="flex items-center gap-3">
+          <img
+            src={article.authorAvatar}
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-lime-400 shrink-0"
+            alt={article.author}
+          />
+          <div className="flex flex-col justify-center text-left">
+            <div className="font-bold text-slate-900 text-sm leading-snug">
+              {article.author}
+            </div>
+            <div className="text-xs font-mono text-slate-500 leading-snug">
+              Published {article.date}
             </div>
           </div>
+        </div>
 
-          {/* Share Row */}
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            <span className="text-slate-500 text-[11px] font-mono font-bold tracking-wider mr-1">
-              SHARE:
-            </span>
-            <button
-              onClick={shareOnTwitter}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
-              title="Share on X"
-              type="button"
-            >
-              <FaXTwitter className="text-xs sm:text-sm" />
-            </button>
-            <button
-              onClick={shareOnLinkedIn}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
-              title="Share on LinkedIn"
-              type="button"
-            >
-              <FaLinkedinIn className="text-xs sm:text-sm" />
-            </button>
-            <button
-              onClick={handleCopyLink}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
-              title="Copy Link"
-              type="button"
-            >
-              {copied ? <FaCheck className="text-lime-700 text-xs" /> : <FaShareNodes className="text-xs sm:text-sm" />}
-            </button>
-            <button
-              onClick={handleCopySocialPost}
-              className="px-3 py-1.5 rounded-full bg-lime-100 hover:bg-lime-300 border border-lime-300 text-lime-950 text-xs font-bold font-mono flex items-center gap-1.5 transition shadow-sm ml-1"
-              title="Copy 1-Click LinkedIn Technical Briefing"
-              type="button"
-            >
-              <FaBolt className="text-xs text-lime-800" />
-              <span>1-Click Post</span>
-            </button>
-          </div>
+        {/* Share Row */}
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="text-slate-500 text-[11px] font-mono font-bold tracking-wider mr-1">
+            SHARE:
+          </span>
+          <button
+            onClick={shareOnTwitter}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
+            title="Share on X"
+            type="button"
+          >
+            <FaXTwitter className="text-xs sm:text-sm" />
+          </button>
+          <button
+            onClick={shareOnLinkedIn}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
+            title="Share on LinkedIn"
+            type="button"
+          >
+            <FaLinkedinIn className="text-xs sm:text-sm" />
+          </button>
+          <button
+            onClick={handleCopyLink}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-lime-400 border border-slate-200 hover:border-lime-400 flex items-center justify-center text-slate-700 hover:text-slate-900 transition shadow-sm"
+            title="Copy Link"
+            type="button"
+          >
+            {copied ? <FaCheck className="text-lime-700 text-xs" /> : <FaShareNodes className="text-xs sm:text-sm" />}
+          </button>
+          <button
+            onClick={handleCopySocialPost}
+            className="px-3 py-1.5 rounded-full bg-lime-100 hover:bg-lime-300 border border-lime-300 text-lime-950 text-xs font-bold font-mono flex items-center gap-1.5 transition shadow-sm ml-1"
+            title="Copy 1-Click LinkedIn Technical Briefing"
+            type="button"
+          >
+            <FaBolt className="text-xs text-lime-800" />
+            <span>1-Click Post</span>
+          </button>
         </div>
       </div>
 
-      {/* Featured Cover Image */}
-      <div className="rounded-2xl sm:rounded-3xl overflow-hidden aspect-[16/9] w-full bg-slate-100 relative shadow-sm border border-slate-200">
-        <img
-          src={article.coverImage}
-          className="w-full h-full object-cover"
-          alt={article.title}
-        />
+      {/* Wide Curved Hero Visual Banner (Exact Match to Home Page HeroBanner) */}
+      <div className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden group border border-slate-200/90 shadow-md block">
+        <div className="aspect-[21/9] min-h-[280px] sm:min-h-[380px] w-full bg-slate-100 relative overflow-hidden">
+          <img
+            src={article.coverImage}
+            alt={article.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+          {/* Subtle Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent pointer-events-none" />
+
+          {/* Floating Glass Overlay Bar on Image */}
+          <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-4 pointer-events-none">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-4 py-1.5 rounded-full bg-lime-400 text-slate-950 text-xs font-bold uppercase tracking-wider shadow-sm">
+                {article.category}
+              </span>
+              {article.tags.slice(0, 3).map((tag, i) => (
+                <span
+                  key={i}
+                  className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-medium border border-white/30"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="hidden sm:flex items-center gap-2 text-white text-xs font-mono bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+              <FaClock className="text-lime-400" /> {article.readTime}
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  );
+
+  // Reusable Article Body & Reading Content Column
+  const readingColumn = (
+    <article className="space-y-8 text-left w-full">
+      {/* Sticky Companion Action Capsule */}
+      {stickyBar}
 
       {/* Article Body Content */}
       <div
@@ -518,90 +631,23 @@ export function ArticleReader({
     </article>
   );
 
-  // Companion Sticky Bar (Used in both modal and page)
-  const stickyBar = (
-    <div className="sticky top-3 sm:top-5 z-30 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl w-full">
-      {/* Back Button */}
-      <button
-        onClick={handleBack}
-        className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-lime-700 transition-colors shrink-0"
-        type="button"
+  if (isModal) {
+    return (
+      <div
+        ref={containerRef}
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-center items-start overflow-y-auto p-4 sm:p-6"
       >
-        <FaArrowLeft className="text-xs text-slate-600" />
-        <span className="hidden sm:inline">Back to stories</span>
-        <span className="sm:hidden">Back</span>
-      </button>
-
-      {/* Action Controls */}
-      <div className="flex items-center gap-1.5 sm:gap-2.5">
-        {/* Applause Clap Button */}
-        <button
-          onClick={handleClap}
-          className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-slate-100 hover:bg-lime-50 border border-slate-200 hover:border-lime-300 text-xs flex items-center gap-1.5 text-slate-800 transition shadow-sm"
-          title="Give Claps"
-          type="button"
-        >
-          <FaHandsClapping className="text-lime-700 text-xs" />
-          <span className="font-bold">{claps}</span>
-        </button>
-
-        {/* Heart Like Button */}
-        <button
-          onClick={handleLike}
-          className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-slate-100 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 text-xs flex items-center gap-1.5 text-slate-800 transition shadow-sm"
-          title="Like Article"
-          type="button"
-        >
-          <FaHeart className="text-rose-500 text-xs" />
-          <span className="font-bold">{likes}</span>
-        </button>
-
-        {/* Bookmark Button */}
-        <button
-          onClick={handleBookmarkClick}
-          className={`p-1.5 sm:p-2 rounded-full border transition shadow-sm ${
-            isBookmarked
-              ? "bg-lime-100 border-lime-300 text-lime-800"
-              : "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-600 hover:text-slate-900"
-          }`}
-          title={isBookmarked ? "Remove Bookmark" : "Save Bookmark"}
-          type="button"
-        >
-          {isBookmarked ? (
-            <FaBookmark className="text-lime-700 text-xs" />
-          ) : (
-            <FaRegBookmark className="text-xs text-slate-600" />
-          )}
-        </button>
-
-        {/* Share Link */}
-        <button
-          onClick={handleCopyLink}
-          className="p-1.5 sm:p-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 text-xs transition shadow-sm"
-          title="Share Link"
-          type="button"
-        >
-          {copied ? <FaCheck className="text-lime-700 text-xs" /> : <FaShareNodes className="text-xs" />}
-        </button>
-
-        {/* Close Button - Only in Modal Mode */}
-        {isModal && (
-          <button
-            onClick={handleBack}
-            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-lime-400 hover:bg-lime-500 text-slate-900 flex items-center justify-center font-bold transition shadow-sm ml-0.5 sm:ml-1"
-            title="Close Reader"
-            type="button"
-          >
-            <FaXmark className="text-xs sm:text-sm" />
-          </button>
-        )}
+        <div className="bg-white rounded-3xl max-w-4xl w-full p-6 sm:p-10 relative my-8 shadow-2xl border border-slate-200 space-y-8 text-left">
+          {headerAndCover}
+          {readingColumn}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
-  // Native Full Page View (No modal pop-up) - Optimized reading measure (max-w-3xl mx-auto)
+  // Native Full Page View (No modal pop-up) - 2-Column Grid Layout Matching Home Page
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-8 text-left">
+    <div className="w-full max-w-7xl mx-auto space-y-8 text-left">
       {/* Top Reading Progress Indicator Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-200 z-50">
         <div
@@ -623,11 +669,21 @@ export function ArticleReader({
         <span className="text-slate-900 font-bold">{article.category}</span>
       </nav>
 
-      {/* Sticky Companion Action Capsule */}
-      {stickyBar}
+      {/* Top Full-Width Article Header & 21:9 Hero Image (Same width & format as Home Hero) */}
+      {headerAndCover}
 
-      {/* Full Article Content */}
-      {articleContent}
+      {/* Main 2-Column Content Layout: Left Column Google Ads, Right Column Article Reading */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full pt-4">
+        {/* Left Column: Google Ads Trial Demo (Exact location of Quick Filter on Home Page) */}
+        <div className="lg:col-span-3">
+          <GoogleAdBanner slotId="onnesha-blog-sidebar" />
+        </div>
+
+        {/* Right Column: Article Reading Experience */}
+        <div className="lg:col-span-9 space-y-8 min-w-0">
+          {readingColumn}
+        </div>
+      </div>
     </div>
   );
 }

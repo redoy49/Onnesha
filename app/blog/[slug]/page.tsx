@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: Props) {
           backgroundImage: `
             radial-gradient(
               circle at top center,
-              rgba(163, 230, 53, 0.20),
+              rgba(204, 235, 155, 0.2),
               transparent 70%
             )
           `,
