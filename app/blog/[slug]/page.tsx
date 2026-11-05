@@ -124,23 +124,42 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-canvas text-slate-800 bg-mesh-glow">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    <div className="min-h-screen w-full relative bg-white flex flex-col text-slate-800 overflow-x-hidden">
+      {/* Soft Ambient Brand Mesh Glow Top */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background: "#ffffff",
+          backgroundImage: `
+            radial-gradient(
+              circle at top center,
+              rgba(163, 230, 53, 0.20),
+              transparent 70%
+            )
+          `,
+          filter: "blur(80px)",
+          backgroundRepeat: "no-repeat",
+        }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <Header />
-      <main className="pt-6 sm:pt-8 pb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
-        <ArticleReader
-          article={article}
-          relatedArticles={relatedArticles}
-          isModal={false}
+
+      <div className="relative z-10 flex flex-col flex-1">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        />
+        <Header />
+        <main className="pt-6 sm:pt-8 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
+          <ArticleReader
+            article={article}
+            relatedArticles={relatedArticles}
+            isModal={false}
+          />
+        </main>
+      </div>
     </div>
   );
 }

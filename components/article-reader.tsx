@@ -599,9 +599,9 @@ export function ArticleReader({
     </div>
   );
 
-  // Native Full Page View (No modal pop-up)
+  // Native Full Page View (No modal pop-up) - Optimized reading measure (max-w-3xl mx-auto)
   return (
-    <div className="w-full space-y-8 text-left">
+    <div className="w-full max-w-3xl mx-auto space-y-8 text-left">
       {/* Top Reading Progress Indicator Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-200 z-50">
         <div
