@@ -367,6 +367,26 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const handleClearAutomationLogs = async () => {
+    if (!confirm("Are you sure you want to clear all automation execution history and research logs?")) return;
+    setAutomationLogs([]);
+    try {
+      const res = await fetch("/api/cron/config", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${adminToken || ""}`,
+        },
+      });
+      if (res.ok) {
+        showToast("Automation history logs cleared.");
+      } else {
+        showToast("Failed to clear automation history.");
+      }
+    } catch {
+      showToast("Error clearing automation history.");
+    }
+  };
+
   if (!isAdmin) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center px-4">
@@ -979,17 +999,30 @@ export default function AdminDashboardPage() {
                     </p>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => {
-                      loadAutomationData();
-                      showToast("Logs refreshed.");
-                    }}
-                    className="p-2 rounded-full border border-slate-200 text-slate-600 hover:text-slate-900 transition"
-                    title="Refresh logs"
-                  >
-                    <FaArrowRotateRight className="text-xs" />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {automationLogs.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleClearAutomationLogs}
+                        className="px-3 py-1.5 rounded-full border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold flex items-center gap-1.5 transition"
+                        title="Clear execution history"
+                      >
+                        <FaTrash className="text-xs" />
+                        <span>Clear History</span>
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        loadAutomationData();
+                        showToast("Logs refreshed.");
+                      }}
+                      className="p-2 rounded-full border border-slate-200 text-slate-600 hover:text-slate-900 transition"
+                      title="Refresh logs"
+                    >
+                      <FaArrowRotateRight className="text-xs" />
+                    </button>
+                  </div>
                 </div>
 
                 {automationLogs.length === 0 ? (

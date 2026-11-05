@@ -126,3 +126,14 @@ export async function appendAutomationLog(log: AutomationLog): Promise<void> {
     console.warn("Error writing automation-logs.json:", err);
   }
 }
+
+export async function clearAutomationLogs(): Promise<void> {
+  memoryLogs = [];
+
+  try {
+    ensureDataDir();
+    fs.writeFileSync(LOGS_FILE, JSON.stringify([], null, 2), "utf-8");
+  } catch (err) {
+    console.warn("Error clearing automation-logs.json:", err);
+  }
+}

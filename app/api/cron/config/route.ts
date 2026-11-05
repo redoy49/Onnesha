@@ -3,6 +3,7 @@ import {
   getAutomationConfig,
   updateAutomationConfig,
   getAutomationLogs,
+  clearAutomationLogs,
   AutomationConfig,
 } from "@/lib/ai/automation-config";
 
@@ -78,6 +79,29 @@ export async function POST(req: NextRequest) {
     console.error("POST /api/cron/config error:", err);
     return NextResponse.json(
       { success: false, error: "Failed to update automation config" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  if (!isAuthorized(req)) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized: Admin privileges required." },
+      { status: 401 }
+    );
+  }
+
+  try {
+    await clearAutomationLogs();
+    return NextResponse.json({
+      success: true,
+      message: "Automation history cleared successfully.",
+    });
+  } catch (err) {
+    console.error("DELETE /api/cron/config error:", err);
+    return NextResponse.json(
+      { success: false, error: "Failed to clear automation history" },
       { status: 500 }
     );
   }
