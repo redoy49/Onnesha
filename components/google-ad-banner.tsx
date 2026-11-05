@@ -15,9 +15,9 @@ export function GoogleAdBanner({
   className = "",
 }: GoogleAdBannerProps) {
   return (
-    <aside className={`space-y-4 ${className}`}>
+    <aside className={`w-full space-y-4 ${className}`}>
       {/* Google Ads Container Wrapper */}
-      <div className="bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-5 shadow-sm space-y-4 sticky top-20 transition-all hover:border-slate-300">
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-5 shadow-sm space-y-4 transition-all hover:border-slate-300">
         {/* Google Ads Badge & Attribution Header */}
         <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 border-b border-slate-100 pb-2.5">
           <div className="flex items-center gap-1.5 font-bold tracking-wider uppercase text-slate-500">

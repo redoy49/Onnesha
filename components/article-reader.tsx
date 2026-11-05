@@ -215,7 +215,7 @@ export function ArticleReader({
 
   // Companion Sticky Bar (Floating action bar for reader)
   const stickyBar = (
-    <div className="sticky top-3 sm:top-5 z-30 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl w-full">
+    <div className="sticky top-3 sm:top-5 z-40 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl w-full">
       {/* Back Button */}
       <button
         onClick={handleBack}
@@ -223,8 +223,7 @@ export function ArticleReader({
         type="button"
       >
         <FaArrowLeft className="text-xs text-slate-600" />
-        <span className="hidden sm:inline">Back to stories</span>
-        <span className="sm:hidden">Back</span>
+        <span className="inline font-bold">Back to stories</span>
       </button>
 
       {/* Action Controls */}
@@ -674,8 +673,8 @@ export function ArticleReader({
 
       {/* Main 2-Column Content Layout: Left Column Google Ads, Right Column Article Reading */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full pt-4">
-        {/* Left Column: Google Ads Trial Demo (Exact location of Quick Filter on Home Page) */}
-        <div className="lg:col-span-3">
+        {/* Left Column: Google Ads Trial Demo (Sticky on Desktop, Natural Flow on Mobile) */}
+        <div className="lg:col-span-3 lg:self-start lg:sticky lg:top-24">
           <GoogleAdBanner slotId="onnesha-blog-sidebar" />
         </div>
 

@@ -124,23 +124,25 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen w-full relative bg-white flex flex-col text-slate-800 overflow-x-hidden">
-      {/* Soft Ambient Brand Mesh Glow Top */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background: "#ffffff",
-          backgroundImage: `
-            radial-gradient(
-              circle at top center,
-              rgba(204, 235, 155, 0.2),
-              transparent 70%
-            )
-          `,
-          filter: "blur(80px)",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+    <div className="min-h-screen w-full relative bg-white flex flex-col text-slate-800">
+      {/* Soft Ambient Brand Mesh Glow Top (Contained in dedicated wrapper so window sticky is never broken) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[650px] overflow-hidden z-0">
+        <div
+          className="w-full h-full"
+          style={{
+            background: "#ffffff",
+            backgroundImage: `
+              radial-gradient(
+                circle at top center,
+                rgba(204, 235, 155, 0.2),
+                transparent 70%
+              )
+            `,
+            filter: "blur(80px)",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      </div>
 
       <div className="relative z-10 flex flex-col flex-1">
         <script
