@@ -19,12 +19,14 @@ interface HeaderProps {
   bookmarkCount?: number;
   onBookmarkClick?: () => void;
   onCategorySelect?: (category: string) => void;
+  stickyMobile?: boolean;
 }
 
 export function Header({
   searchQuery = "",
   onSearchChange,
   onCategorySelect,
+  stickyMobile = true,
 }: HeaderProps) {
   const { isAdmin, openAdminModal } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,7 +41,11 @@ export function Header({
   };
 
   return (
-    <div className="sticky top-3 sm:top-4 z-40 max-w-7xl mx-auto px-3 sm:px-4 w-full pointer-events-none">
+    <div
+      className={`${
+        stickyMobile ? "sticky" : "static sm:sticky"
+      } top-3 sm:top-4 z-40 max-w-7xl mx-auto px-3 sm:px-4 w-full pointer-events-none`}
+    >
       {/* Main Pill Navbar */}
       <header className="glass-pill rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl pointer-events-auto transition-all">
         {/* Brand Logo */}

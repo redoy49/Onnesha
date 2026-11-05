@@ -269,22 +269,42 @@ export async function saveArticle(article: Article): Promise<Article> {
 }
 
 /**
- * Delete an article by ID
+ * Delete an article by ID or slug
  */
 export async function deleteArticle(id: number | string): Promise<boolean> {
   const sql = getNeonClient();
+  const strId = String(id);
   if (sql) {
     try {
       await ensureNeonTable(sql);
-      const strId = String(id);
-      await sql`DELETE FROM articles WHERE id = ${strId}`;
+      await sql`DELETE FROM articles WHERE id = ${strId} OR slug = ${strId}`;
     } catch (err) {
       console.warn("Failed deleting from Neon:", err);
     }
   }
 
   const stored = readStoredArticles();
-  const filtered = stored.filter((a) => a.id !== id);
+  const filtered = stored.filter((a) => String(a.id) !== strId && a.slug !== strId);
+  writeStoredArticles(filtered);
+  return true;
+}
+
+/**
+ * Delete all draft articles from memory, file, and Neon database
+ */
+export async function deleteDraftArticles(): Promise<boolean> {
+  const sql = getNeonClient();
+  if (sql) {
+    try {
+      await ensureNeonTable(sql);
+      await sql`DELETE FROM articles WHERE status = 'draft'`;
+    } catch (err) {
+      console.warn("Failed deleting drafts from Neon:", err);
+    }
+  }
+
+  const stored = readStoredArticles();
+  const filtered = stored.filter((a) => a.status !== "draft");
   writeStoredArticles(filtered);
   return true;
 }

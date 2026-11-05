@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
         />
-        <Header />
+        <Header stickyMobile={false} />
         <main className="pt-6 sm:pt-8 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
           <ArticleReader
             article={article}

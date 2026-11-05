@@ -164,17 +164,79 @@ export default function AdminDashboardPage() {
     showToast("Hero featured article updated!");
   };
 
-  const handleDeleteArticle = (id: number | string) => {
+  const handleDeleteArticle = async (id: number | string) => {
     if (!confirm("Are you sure you want to delete this dispatch?")) return;
-    const updated = articles.filter((a) => a.id !== id);
-    saveArticles(updated);
-    showToast("Dispatch deleted.");
+    const strId = String(id);
+    const updated = articles.filter((a) => String(a.id) !== strId && a.slug !== strId);
+    setArticles(updated);
+    try {
+      localStorage.setItem("onnesha-articles", JSON.stringify(updated));
+    } catch {}
+
+    try {
+      const res = await fetch(`/api/articles?id=${encodeURIComponent(strId)}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${adminToken || ""}`,
+        },
+      });
+      if (res.ok) {
+        showToast("Dispatch deleted permanently.");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        showToast(`Deletion issue: ${data.error || "Could not remove from database"}`);
+      }
+    } catch (err) {
+      console.error("Failed to delete article from database:", err);
+      showToast("Error deleting article from database.");
+    }
   };
 
   const handleClearAllArticles = async () => {
     if (!confirm("Are you sure you want to delete ALL articles? This gives you a completely clean blog.")) return;
-    saveArticles([]);
-    showToast("All articles cleared.");
+    setArticles([]);
+    try {
+      localStorage.setItem("onnesha-articles", JSON.stringify([]));
+    } catch {}
+
+    try {
+      const res = await fetch("/api/articles", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${adminToken || ""}`,
+        },
+      });
+      if (res.ok) {
+        showToast("All articles cleared permanently.");
+      }
+    } catch (err) {
+      console.error("Failed to clear articles:", err);
+      showToast("Error clearing articles from database.");
+    }
+  };
+
+  const handleClearDrafts = async () => {
+    if (!confirm("Are you sure you want to delete all drafts?")) return;
+    const updated = articles.filter((a) => a.status !== "draft");
+    setArticles(updated);
+    try {
+      localStorage.setItem("onnesha-articles", JSON.stringify(updated));
+    } catch {}
+
+    try {
+      const res = await fetch("/api/articles?status=draft", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${adminToken || ""}`,
+        },
+      });
+      if (res.ok) {
+        showToast("All drafts removed permanently.");
+      }
+    } catch (err) {
+      console.error("Failed to delete drafts:", err);
+      showToast("Error deleting drafts from database.");
+    }
   };
 
   const handleRunAutomationNow = async (options?: { customTopic?: string; forceDraft?: boolean }) => {
@@ -496,6 +558,18 @@ export default function AdminDashboardPage() {
                   <FaTrash className="text-xs" />
                   <span>Clear All</span>
                 </button>
+
+                {articleFilter === "draft" && draftsCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearDrafts}
+                    className="px-3.5 py-2 rounded-full border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-semibold flex items-center gap-1.5 transition"
+                    title="Delete all drafts and keep only published posts"
+                  >
+                    <FaTrash className="text-xs" />
+                    <span>Clear Drafts</span>
+                  </button>
+                )}
               </div>
             </div>
 

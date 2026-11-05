@@ -64,11 +64,18 @@ export async function DELETE(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const id = url.searchParams.get("id");
+    const status = url.searchParams.get("status");
 
     if (id) {
       const { deleteArticle } = await import("@/lib/db/articles-store");
       await deleteArticle(id);
       return NextResponse.json({ success: true, message: `Article ${id} deleted` });
+    }
+
+    if (status === "draft") {
+      const { deleteDraftArticles } = await import("@/lib/db/articles-store");
+      await deleteDraftArticles();
+      return NextResponse.json({ success: true, message: "All drafts deleted successfully" });
     }
 
     const { clearAllArticles } = await import("@/lib/db/articles-store");

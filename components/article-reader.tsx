@@ -213,9 +213,9 @@ export function ArticleReader({
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank", "noopener,noreferrer");
   };
 
-  // Companion Sticky Bar (Floating action bar for reader)
+  // Companion Sticky Bar (Floating action bar for reader: sticky on mobile for effortless back navigation, static on desktop)
   const stickyBar = (
-    <div className="sticky top-3 sm:top-5 z-40 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl w-full">
+    <div className="sticky top-2.5 z-40 lg:static rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between shadow-sm border border-slate-200/90 bg-white/95 backdrop-blur-xl w-full">
       {/* Back Button */}
       <button
         onClick={handleBack}
