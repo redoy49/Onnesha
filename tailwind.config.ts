@@ -48,10 +48,34 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-outfit)", "Outfit", "system-ui", "sans-serif"],
-        display: ["var(--font-outfit)", "Outfit", "system-ui", "sans-serif"],
-        serif: ["var(--font-noto-serif-bengali)", "Noto Serif Bengali", "Georgia", "serif"],
-        bengali: ["var(--font-noto-serif-bengali)", "Noto Serif Bengali", "serif"],
+        sans: [
+          "var(--font-solaiman-lipi)",
+          "SolaimanLipi",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "'Segoe UI'",
+          "Roboto",
+          "sans-serif",
+        ],
+        display: [
+          "var(--font-solaiman-lipi)",
+          "SolaimanLipi",
+          "system-ui",
+          "-apple-system",
+          "sans-serif",
+        ],
+        serif: [
+          "var(--font-solaiman-lipi)",
+          "SolaimanLipi",
+          "Georgia",
+          "serif",
+        ],
+        bengali: [
+          "var(--font-solaiman-lipi)",
+          "SolaimanLipi",
+          "sans-serif",
+        ],
       },
       boxShadow: {
         "lime-soft": "0 4px 20px -2px rgba(132, 204, 22, 0.25)",

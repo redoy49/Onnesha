@@ -106,7 +106,7 @@ export default function AboutPage() {
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
               <span className="font-mono text-lime-800 font-bold">Typography</span>
-              <p className="text-slate-800 font-semibold">Outfit (Google Fonts via next/font)</p>
+              <p className="text-slate-800 font-semibold">SolaimanLipi (Self-Hosted Local Font)</p>
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
               <span className="font-mono text-lime-800 font-bold">Role Access & Security</span>

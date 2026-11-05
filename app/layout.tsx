@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Outfit, Noto_Serif_Bengali } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Footer } from "@/components/footer";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  display: "swap",
-});
-
-const notoSerifBengali = Noto_Serif_Bengali({
-  subsets: ["bengali"],
-  variable: "--font-noto-serif-bengali",
+const solaimanLipi = localFont({
+  src: [
+    {
+      path: "./fonts/SolaimanLipi_22-02-2012.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/SolaimanLipi_Bold_10-03-12.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-solaiman-lipi",
   display: "swap",
 });
 
@@ -78,7 +83,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="bn" className={`${outfit.variable} ${notoSerifBengali.variable}`}>
+    <html lang="bn" className={solaimanLipi.variable}>
       <head>
         <script
           type="application/ld+json"
